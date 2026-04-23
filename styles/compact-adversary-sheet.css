@@ -22,10 +22,11 @@
   --dhca-radius-lg: 14px;
   --dhca-radius-md: 10px;
   --dhca-radius-sm: 999px;
+  --dhca-font-family: "Noto Sans", "Noto Sans Fallback", sans-serif;
   background: var(--dhca-bg) !important;
   color: var(--dhca-text);
   container-type: inline-size;
-  font-family: "Signika", sans-serif;
+  font-family: var(--dhca-font-family);
 }
 
 .adversary.dh-compact-adversary,
@@ -124,12 +125,11 @@
 }
 
 .adversary.dh-compact-adversary .dhca-header__ribbon {
-  min-width: 78px;
-  padding: 0.1em 0.5em 0.1em 2.5em;
+  padding: 0.5em 0.5em 0.5em 3em;
   background: var(--dhca-ribbon);
   letter-spacing: 0.06em;
   line-height: 1;
-  text-align: center;
+  text-align: right;
   text-transform: uppercase;
   clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 35px 100%);
   box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.12);
@@ -139,16 +139,19 @@
 }
 
 .adversary.dh-compact-adversary .dhca-header__tier {
+  margin-top: 4px;
+  margin-right: 8px;
   display: grid;
   place-items: center;
-  width: 31px;
-  height: 35px;
+  width: 1.5em;
+  height: 1.5em;
   background: linear-gradient(180deg, #f4c65d 0%, #e0aa35 100%);
   color: #222;
-  font-size: 1.2rem;
   font-weight: 900;
+  font-size: 1.4em;
+  padding-top: 0.1em;
   line-height: 1;
-  clip-path: polygon(50% 0, 92% 16%, 80% 100%, 20% 100%, 8% 16%);
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
   border: 1px solid rgba(112, 78, 20, 0.34);
 }
 
@@ -164,10 +167,12 @@
   padding: 0 !important;
   border: 0 !important;
   outline: 0 !important;
+  background-color: var(--dhca-bg) !important;
   color: var(--dhca-text) !important;
-  font-size: 1.75rem !important;
-  font-weight: 800 !important;
-  line-height: 1.05 !important;
+  font-family: var(--dhca-font-family);
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   overflow-wrap: anywhere;
@@ -179,9 +184,10 @@
 }
 
 .adversary.dh-compact-adversary .dhca-header__description {
-  margin: 0 104px 12px 0;
+  margin: 0 26px 12px 0;
   color: var(--dhca-muted);
-  font-size: 0.9rem !important;
+  font-size: 14px !important;
+  font-family: var(--dhca-font-family);
   font-style: italic;
   line-height: 1.35;
 }
@@ -191,19 +197,21 @@
   margin: 0;
   color: inherit;
   font-size: inherit !important;
+  font-family: var(--dhca-font-family);
   line-height: inherit;
 }
 
 .adversary.dh-compact-adversary .dhca-header__stats {
   display: grid;
   gap: 2px;
-  margin: 0 0 10px;
+  margin: 0 0 2px;
 }
 
 .adversary.dh-compact-adversary .dhca-summary__line,
 .adversary.dh-compact-adversary .dhca-summary__line span {
   color: var(--dhca-text) !important;
-  font-size: 0.96rem !important;
+  font-size: 14px !important;
+  font-family: var(--dhca-font-family);
   line-height: 1.45 !important;
 }
 
@@ -212,7 +220,7 @@
 }
 
 .adversary.dh-compact-adversary .dhca-header__attack {
-  margin: 0 0 12px !important;
+  margin: 0 0 8px !important;
 }
 
 .adversary.dh-compact-adversary .dhca-header__attack-list {
@@ -242,7 +250,8 @@
   flex: 0 0 auto;
   margin: 0;
   color: var(--dhca-text) !important;
-  font-size: 0.96rem !important;
+  font-size: 14px !important;
+  font-family: var(--dhca-font-family);
   font-weight: 800 !important;
   line-height: 1.45 !important;
   white-space: nowrap;
@@ -263,7 +272,8 @@
 .adversary.dh-compact-adversary .dhca-header__attack .label,
 .adversary.dh-compact-adversary .dhca-header__attack .label span {
   color: #404040 !important;
-  font-size: 0.96rem !important;
+  font-size: 14px !important;
+  font-family: var(--dhca-font-family);
   line-height: 1.45 !important;
 }
 
@@ -298,12 +308,14 @@
   flex: 0 0 auto;
   align-self: center;
   margin-left: auto;
+  display: none;
 }
 
 .adversary.dh-compact-adversary .dhca-header__attack .controls a,
 .adversary.dh-compact-adversary .dhca-tab-panel .controls a,
 .adversary.dh-compact-adversary .dhca-inline-action {
   color: #525252;
+  display: none;
 }
 
 .adversary.dh-compact-adversary .dhca-header__details {
@@ -324,11 +336,12 @@
 .adversary.dh-compact-adversary .dhca-detail-panel__title {
   margin: 0 0 4px !important;
   color: var(--dhca-text) !important;
-  font-size: 0.95rem !important;
+  font-size: 14px !important;
   font-weight: 800 !important;
   line-height: 1.3 !important;
   text-transform: none !important;
   text-align: left !important;
+  font-family: var(--dhca-font-family) !important;
 }
 
 .adversary.dh-compact-adversary .dhca-experience-list {
@@ -339,7 +352,7 @@
 .adversary.dh-compact-adversary .dhca-experience-row,
 .adversary.dh-compact-adversary .dhca-rich-text,
 .adversary.dh-compact-adversary .dhca-rich-text p {
-  font-size: 0.95rem !important;
+  font-size: 14px !important;
   line-height: 1.45 !important;
 }
 
@@ -364,6 +377,8 @@
   margin: 0;
   color: #333;
   font-style: italic;
+  font-family: var(--dhca-font-family);
+
 }
 
 .adversary.dh-compact-adversary .dhca-header__toolbar {
@@ -490,8 +505,9 @@
   width: 100%;
   margin: 0 0 12px;
   color: #55524a;
-  font-size: 0.78rem !important;
+  font-size: 14px !important;
   font-weight: 800 !important;
+  font-family: var(--dhca-font-family);
   letter-spacing: 0.1em;
   line-height: 1;
   text-transform: uppercase;
@@ -581,9 +597,10 @@
   display: inline;
   margin: 0;
   color: var(--dhca-text);
-  font-size: 1rem !important;
+  font-size: 14px !important;
   font-weight: 800 !important;
   line-height: 1.35;
+  font-family: var(--dhca-font-family);
 }
 
 .adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .feature-form,
@@ -594,8 +611,9 @@
   border: 0;
   background: transparent;
   color: #444;
-  font-size: 1rem !important;
+  font-size: 14px !important;
   font-weight: 500 !important;
+  font-family: var(--dhca-font-family);
 }
 
 .adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .feature-form::before {
@@ -618,6 +636,7 @@
 .adversary.dh-compact-adversary .dhca-tab-panel--features .inventory-item .feature-form,
 .adversary.dh-compact-adversary .dhca-tab-panel--features .inventory-item .feature-form span {
   white-space: nowrap;
+  font-family: var(--dhca-font-family);
 }
 
 .adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .controls {
@@ -639,7 +658,7 @@
 .adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .invetory-description p {
   margin: 0;
   color: #363636;
-  font-size: 0.97rem !important;
+  font-size: 14px !important;
   line-height: 1.5;
 }
 
@@ -675,8 +694,9 @@
   border-radius: 10px;
   background: #fff;
   color: var(--dhca-text);
-  font-size: 0.86rem;
+  font-size: 14px;
   font-weight: 700;
+  font-family: var(--dhca-font-family);
 }
 
 .adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .item-button .action-uses-button {
@@ -695,8 +715,9 @@
   display: block;
   margin-top: 10px;
   color: var(--dhca-muted);
-  font-size: 0.72rem;
+  font-size: 14px;
   text-align: center;
+  font-family: var(--dhca-font-family);
 }
 
 .adversary.dh-compact-adversary .dhca-section--footer {
@@ -723,18 +744,13 @@
   display: inline-grid;
   justify-items: center;
   gap: 1px;
-  min-height: 32px;
-  padding: 4px 10px;
-  background: var(--dhca-threshold-chip);
-  color: #fff;
-  clip-path: polygon(0 18%, 89% 18%, 100% 50%, 89% 82%, 0 82%, 6% 50%);
-  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.12);
+  color: #000;
 }
 
 .adversary.dh-compact-adversary .dhca-thresholds__name {
-  color: #fff;
-  font-size: 0.62rem !important;
-  font-weight: 800 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  font-family: var(--dhca-font-family);
   letter-spacing: 0.07em;
   line-height: 1;
   text-transform: uppercase;
@@ -743,8 +759,9 @@
 
 .adversary.dh-compact-adversary .dhca-thresholds__effect {
   color: rgba(255, 255, 255, 0.95);
-  font-size: 0.58rem !important;
+  font-size: 14px !important;
   font-weight: 700 !important;
+  font-family: var(--dhca-font-family);
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
@@ -753,8 +770,9 @@
 .adversary.dh-compact-adversary .dhca-thresholds__value {
   min-width: 28px;
   color: var(--dhca-text);
-  font-size: 1.5rem !important;
+  font-size: 14px !important;
   font-weight: 900 !important;
+  font-family: var(--dhca-font-family);
   line-height: 1;
   text-align: center;
 }
@@ -785,11 +803,12 @@
 
 .adversary.dh-compact-adversary .dhca-resource-row__label {
   color: #6d6a63;
-  font-size: 0.72rem !important;
+  font-size: 14px !important;
   font-weight: 800 !important;
   letter-spacing: 0.06em;
   line-height: 1.2;
   text-transform: uppercase;
+  font-family: var(--dhca-font-family);
   white-space: nowrap;
 }
 
@@ -803,7 +822,7 @@
   border-radius: 999px;
   background: #f5f5f4;
   color: #70757c;
-  font-size: 1.05rem !important;
+  font-size: 14px !important;
   font-weight: 800 !important;
   line-height: 1;
 }
@@ -873,8 +892,9 @@
   align-items: center;
   gap: 6px;
   color: var(--dhca-text);
-  font-size: 0.88rem;
+  font-size: 14px !important;
   font-weight: 800;
+  font-family: var(--dhca-font-family);
 }
 
 .adversary.dh-compact-adversary .dhca-resource-field input {
@@ -887,10 +907,12 @@
   color: var(--dhca-text);
   text-align: center;
   font-weight: 800;
+  font-family: var(--dhca-font-family);
 }
 
 .adversary.dh-compact-adversary .dhca-resource-field__max {
   color: var(--dhca-muted);
+  font-family: var(--dhca-font-family);
 }
 
 .adversary.dh-compact-adversary .dhca-resource-field__max::before {
@@ -900,63 +922,7 @@
 
 .adversary.dh-compact-adversary .dhca-footer__meta {
   color: var(--dhca-muted);
-  font-size: 0.78rem;
+  font-size: 14px;
   font-weight: 700;
   text-align: center;
-}
-
-@container (max-width: 380px) {
-  .adversary.dh-compact-adversary .dhca-section--header,
-  .adversary.dh-compact-adversary .dhca-tab-panel__scroll,
-  .adversary.dh-compact-adversary .dhca-section--footer {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  .adversary.dh-compact-adversary .dhca-header__name {
-    font-size: 1.55rem !important;
-  }
-
-  .adversary.dh-compact-adversary .dhca-header__identity,
-  .adversary.dh-compact-adversary .dhca-header__description {
-    margin-right: 96px;
-  }
-
-  .adversary.dh-compact-adversary .dhca-thresholds {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-
-@container (max-width: 330px) {
-  .adversary.dh-compact-adversary .dhca-header__details,
-  .adversary.dh-compact-adversary .dhca-resource-row {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .adversary.dh-compact-adversary .dhca-header__toolbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .adversary.dh-compact-adversary .dhca-tab-nav nav,
-  .adversary.dh-compact-adversary .dhca-header-actions {
-    justify-content: center;
-  }
-
-  .adversary.dh-compact-adversary .dhca-resource-row__track {
-    padding-inline: 4px;
-  }
-}
-
-@container (min-width: 700px) {
-  .adversary.dh-compact-adversary .dhca-feature-list {
-    column-width: 320px;
-    column-gap: 18px;
-  }
-
-  .adversary.dh-compact-adversary .dhca-feature-list > .inventory-item {
-    break-inside: avoid;
-  }
 }
