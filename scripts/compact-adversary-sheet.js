@@ -52,14 +52,25 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
           filled: value >= index + 1
         }));
       };
+      const groupSlots = (slots, size = 3) => {
+        const groups = [];
+        for (let index = 0; index < slots.length; index += size) {
+          groups.push(slots.slice(index, index + size));
+        }
+        return groups;
+      };
+      const hitPointSlots = makeSlots(hitPoints);
+      const stressSlots = makeSlots(stress);
 
       context.compact = {
         thresholdMajor: this.document.system.damageThresholds?.major ?? 0,
         thresholdSevere: this.document.system.damageThresholds?.severe ?? 0,
         hitPoints,
         stress,
-        hitPointSlots: makeSlots(hitPoints),
-        stressSlots: makeSlots(stress),
+        hitPointSlots,
+        stressSlots,
+        hitPointSlotGroups: groupSlots(hitPointSlots),
+        stressSlotGroups: groupSlots(stressSlots),
         attackBonus: this.document.system.attack?.roll?.bonus,
         criticalThreshold: this.document.system.criticalThreshold,
         hasExperiences: !foundry.utils.isEmpty(this.document.system.experiences)
