@@ -6,6 +6,8 @@ import {
 } from "./constants.js";
 import { buildCompactContext, clampNumber } from "./utils.js";
 
+const ART_EDIT_SELECTOR = ".dhca-header__art-edit";
+
 export function createCompactAdversarySheetClass(BaseAdversarySheet) {
   return class CompactAdversarySheet extends BaseAdversarySheet {
     #renderController = null;
@@ -59,6 +61,7 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
       this.#refreshRenderBindings();
       this.#expandFeatureDescriptions();
       this.#bindResourceStepButtons();
+      this.#bindImageEditButton();
     }
 
     async close(options = {}) {
@@ -87,6 +90,16 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
 
       for (const button of this.element.querySelectorAll(RESOURCE_STEP_SELECTOR)) {
         button.addEventListener("click", this.#onCompactResourceStep, { signal });
+      }
+    }
+
+    #bindImageEditButton() {
+      if (!this.element || !this.#renderController) return;
+
+      const { signal } = this.#renderController;
+
+      for (const button of this.element.querySelectorAll(ART_EDIT_SELECTOR)) {
+        button.addEventListener("click", this.#onCompactImageEdit, { signal });
       }
     }
 
@@ -120,6 +133,31 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
       } finally {
         button.disabled = !this.#isSheetEditable();
       }
+    };
+
+    #onCompactImageEdit = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!this.#isSheetEditable()) return;
+
+      const target = event.currentTarget;
+      const attr = target.dataset.edit ?? "img";
+      const current = foundry.utils.getProperty(this.document, attr);
+      const { img } = this.document.constructor.getDefaultArtwork?.(this.document.toObject()) ?? {};
+
+      const picker = new foundry.applications.apps.FilePicker.implementation({
+        current,
+        type: "image",
+        redirectToRoot: img ? [img] : [],
+        callback: async (path) => {
+          await this.document.update({ [attr]: path });
+        },
+        top: this.position.top + 40,
+        left: this.position.left + 10
+      });
+
+      return picker.browse();
     };
   };
 }

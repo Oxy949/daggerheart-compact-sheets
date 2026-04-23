@@ -4,6 +4,24 @@
     <div class="dhca-header__tier">{{source.system.tier}}</div>
   </div>
 
+  {{#if document.img}}
+    <div class="dhca-header__art{{#if compact.canEditImage}} dhca-header__art--editable{{/if}}">
+      <img class="dhca-header__art-image" src="{{document.img}}" alt="" aria-hidden="true" />
+    </div>
+    {{#if compact.canEditImage}}
+      <button
+        type="button"
+        class="dhca-header__art-edit"
+        data-action="editImage"
+        data-edit="img"
+        data-tooltip-text="{{localize 'FILES.Edit'}}"
+        aria-label="{{localize 'FILES.Edit'}}"
+      >
+        <i class="fa-solid fa-image"></i>
+      </button>
+    {{/if}}
+  {{/if}}
+
   <div class="dhca-header__identity">
     <h1
       class="input actor-name dhca-header__name"

@@ -7,6 +7,7 @@ export function buildCompactContext(document) {
 
   return {
     attackBonus: toOptionalNumber(document.system.attack?.roll?.bonus),
+    canEditImage: document.isOwner ?? false,
     criticalThreshold: toNumber(document.system.criticalThreshold, 20),
     hasExperiences: !foundry.utils.isEmpty(document.system.experiences),
     hitPoints: pickResourceSummary(hitPoints),

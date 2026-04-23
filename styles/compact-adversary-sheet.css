@@ -110,7 +110,97 @@
 
 .adversary.dh-compact-adversary .dhca-section--header {
   position: relative;
-  padding: 12px 12px 0 12px
+  padding: 12px 12px 0 12px;
+  isolation: isolate;
+}
+
+.adversary.dh-compact-adversary .dhca-header__identity,
+.adversary.dh-compact-adversary .dhca-header__description,
+.adversary.dh-compact-adversary .dhca-header__stats,
+.adversary.dh-compact-adversary .dhca-header__attack,
+.adversary.dh-compact-adversary .dhca-header__details {
+  position: relative;
+  z-index: 1;
+}
+
+.adversary.dh-compact-adversary .dhca-header__art {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  z-index: 0;
+  width: 50%;
+  pointer-events: none;
+  opacity: 0.52;
+}
+
+.adversary.dh-compact-adversary .dhca-header__art--editable {
+  pointer-events: auto;
+}
+
+.adversary.dh-compact-adversary .dhca-header__art::before,
+.adversary.dh-compact-adversary .dhca-header__art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.adversary.dh-compact-adversary .dhca-header__art::before {
+  background:
+    radial-gradient(circle at 64% 20%, rgba(233, 166, 71, 0.5) 0%, rgba(206, 116, 41, 0.22) 32%, rgba(92, 41, 20, 0) 74%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0) 16%, rgba(241, 223, 191, 0.3) 100%);
+  filter: blur(6px);
+}
+
+.adversary.dh-compact-adversary .dhca-header__art::after {
+  background:
+    linear-gradient(90deg, var(--dhca-surface) 0%, rgba(255, 255, 255, 0.94) 20%, rgba(255, 255, 255, 0.32) 46%, rgba(255, 255, 255, 0) 72%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 54%, var(--dhca-surface) 100%);
+}
+
+.adversary.dh-compact-adversary .dhca-header__art-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: saturate(0.86) contrast(1.08) brightness(1.02);
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle at 72% 20%, #000 0%, rgba(0, 0, 0, 0.96) 30%, rgba(0, 0, 0, 0.5) 58%, transparent 84%);
+  mask-image: radial-gradient(circle at 72% 20%, #000 0%, rgba(0, 0, 0, 0.96) 30%, rgba(0, 0, 0, 0.5) 58%, transparent 84%);
+}
+
+.adversary.dh-compact-adversary .dhca-header__art-edit {
+  position: absolute;
+  top: 52px;
+  right: 18px;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--dhca-control-bg);
+  color: var(--dhca-control-fg);
+  box-shadow: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0);
+  transition:
+    opacity 140ms ease,
+    background-color 140ms ease;
+}
+
+.adversary.dh-compact-adversary:has(.adversary-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover, .dhca-header__art-edit:hover, .dhca-header__art-edit:focus-visible) .dhca-header__art-edit {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.adversary.dh-compact-adversary .dhca-header__art-edit:hover,
+.adversary.dh-compact-adversary .dhca-header__art-edit:focus-visible {
+  background: rgba(125, 102, 79, 0.96);
 }
 
 .adversary.dh-compact-adversary .dhca-header__adornment {
@@ -167,7 +257,9 @@
   padding: 0 !important;
   border: 0 !important;
   outline: 0 !important;
-  background-color: var(--dhca-bg) !important;
+  backdrop-filter: none;
+  background: unset;
+  box-shadow: none;
   color: var(--dhca-text) !important;
   font-family: var(--dhca-font-family) !important;
   font-size: 20px !important;
@@ -184,7 +276,7 @@
 }
 
 .adversary.dh-compact-adversary .dhca-header__description {
-  margin: 0 26px 4px 0;
+  margin: 0 30% 4px 0;
   color: var(--dhca-muted);
   font-size: 14px !important;
   font-family: var(--dhca-font-family);
