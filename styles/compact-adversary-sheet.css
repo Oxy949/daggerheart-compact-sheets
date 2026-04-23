@@ -2366,6 +2366,10 @@
   display: none !important;
 }
 
+.application.sheet.daggerheart.actor.dh-style.adversary.dh-compact-adversary .window-content section.tab.active {
+  --scroll-margin: 0 !important;
+}
+
 .application.sheet.daggerheart.actor.dh-style.adversary.dh-compact-adversary .window-header .header-button,
 .application.sheet.daggerheart.actor.dh-style.adversary.dh-compact-adversary .window-header button,
 .application.sheet.daggerheart.actor.dh-style.adversary.dh-compact-adversary .window-header a {
