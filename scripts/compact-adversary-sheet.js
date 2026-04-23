@@ -7,10 +7,12 @@ import {
 import { buildCompactContext, clampNumber } from "./utils.js";
 
 const ART_EDIT_SELECTOR = ".dhca-header__art-edit";
+const RESOURCE_ROW_SELECTOR = ".dhca-resource-row:not(.dhca-resource-row--fallback)";
 
 export function createCompactAdversarySheetClass(BaseAdversarySheet) {
   return class CompactAdversarySheet extends BaseAdversarySheet {
     #renderController = null;
+    #resourceTrackResizeObserver = null;
 
     static DEFAULT_OPTIONS = foundry.utils.mergeObject(
       foundry.utils.deepClone(BaseAdversarySheet.DEFAULT_OPTIONS),
@@ -62,11 +64,14 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
       this.#expandFeatureDescriptions();
       this.#bindResourceStepButtons();
       this.#bindImageEditButton();
+      this.#bindResponsiveResourceTracks();
     }
 
     async close(options = {}) {
       this.#renderController?.abort();
       this.#renderController = null;
+      this.#resourceTrackResizeObserver?.disconnect();
+      this.#resourceTrackResizeObserver = null;
       return super.close(options);
     }
 
@@ -100,6 +105,40 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
 
       for (const button of this.element.querySelectorAll(ART_EDIT_SELECTOR)) {
         button.addEventListener("click", this.#onCompactImageEdit, { signal });
+      }
+    }
+
+    #bindResponsiveResourceTracks() {
+      if (!this.element) return;
+
+      this.#resourceTrackResizeObserver?.disconnect();
+
+      const updateSizing = () => this.#updateResponsiveResourceTracks();
+      this.#resourceTrackResizeObserver = new ResizeObserver(() => updateSizing());
+
+      for (const row of this.element.querySelectorAll(RESOURCE_ROW_SELECTOR)) {
+        this.#resourceTrackResizeObserver.observe(row);
+      }
+
+      requestAnimationFrame(() => updateSizing());
+    }
+
+    #updateResponsiveResourceTracks() {
+      if (!this.element) return;
+
+      for (const row of this.element.querySelectorAll(RESOURCE_ROW_SELECTOR)) {
+        const track = row.querySelector(".dhca-resource-row__track");
+        if (!track) continue;
+
+        row.style.setProperty("--dhca-resource-scale", "1");
+
+        const availableWidth = track.clientWidth;
+        const contentWidth = track.scrollWidth;
+
+        if (!availableWidth || !contentWidth || contentWidth <= availableWidth) continue;
+
+        const scale = Math.max(Math.min(availableWidth / contentWidth, 1), 0.6);
+        row.style.setProperty("--dhca-resource-scale", scale.toFixed(3));
       }
     }
 

@@ -1008,6 +1008,12 @@ body.theme-dark .adversary.dh-compact-adversary,
   --dhca-row-empty: var(--dhca-resource-empty);
   --dhca-row-empty-border: var(--dhca-resource-empty-border);
   --dhca-row-rail: var(--dhca-resource-rail);
+  --dhca-resource-scale: 1;
+  --dhca-resource-track-gap: calc(10px * var(--dhca-resource-scale));
+  --dhca-resource-group-gap: calc(2px * var(--dhca-resource-scale));
+  --dhca-resource-track-padding: calc(10px * var(--dhca-resource-scale));
+  --dhca-resource-pip-size: calc(16px * var(--dhca-resource-scale));
+  --dhca-resource-pip-radius: calc(2px * var(--dhca-resource-scale));
   display: grid;
   grid-template-columns: 78px 30px minmax(0, 1fr) 30px;
   align-items: center;
@@ -1026,7 +1032,7 @@ body.theme-dark .adversary.dh-compact-adversary,
 .adversary.dh-compact-adversary .dhca-resource-row__label {
   color: var(--dhca-resource-label);
   font-size: 12px !important;
-  font-weight: 700 !important;
+  font-weight: 900 !important;
   letter-spacing: 0.08em;
   line-height: 1.2;
   text-transform: uppercase;
@@ -1062,12 +1068,12 @@ body.theme-dark .adversary.dh-compact-adversary,
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--dhca-resource-track-gap);
   min-width: 0;
   min-height: 28px;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 0 10px;
+  padding: 0 var(--dhca-resource-track-padding);
   scrollbar-width: none;
   margin-left: -2px;
 }
@@ -1090,18 +1096,18 @@ body.theme-dark .adversary.dh-compact-adversary,
   position: relative;
   z-index: 1;
   display: inline-flex;
-  gap: 2px;
+  gap: var(--dhca-resource-group-gap);
   flex: 0 0 auto;
 }
 
 .adversary.dh-compact-adversary .dhca-resource-row__pip {
-  width: 16px;
-  height: 16px;
-  min-width: 16px;
-  min-height: 16px;
+  width: var(--dhca-resource-pip-size);
+  height: var(--dhca-resource-pip-size);
+  min-width: var(--dhca-resource-pip-size);
+  min-height: var(--dhca-resource-pip-size);
   padding: 0;
   border: 1px solid var(--dhca-row-empty-border);
-  border-radius: 2px;
+  border-radius: var(--dhca-resource-pip-radius);
   background: var(--dhca-row-empty);
   box-shadow: none;
 }
