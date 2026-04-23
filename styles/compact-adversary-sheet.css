@@ -15,10 +15,10 @@
   --dhca-threshold-chip-shadow: #616975;
   --dhca-control-bg: rgba(93, 77, 60, 0.92);
   --dhca-control-fg: #ffffff;
-  --dhca-hp: #7f8893;
-  --dhca-hp-border: #67717b;
-  --dhca-stress: #7f8893;
-  --dhca-stress-border: #67717b;
+  --dhca-hp: #c93c58;
+  --dhca-hp-border: #9d2d43;
+  --dhca-stress: #e3a63a;
+  --dhca-stress-border: #b37a1d;
   --dhca-radius-lg: 14px;
   --dhca-radius-md: 10px;
   --dhca-radius-sm: 999px;
@@ -110,7 +110,7 @@
 
 .adversary.dh-compact-adversary .dhca-section--header {
   position: relative;
-  padding: 14px 16px 12px;
+  padding: 14px 16px 0 12px
 }
 
 .adversary.dh-compact-adversary .dhca-header__adornment {
@@ -729,7 +729,6 @@
 
 .adversary.dh-compact-adversary .dhca-footer__inner {
   display: grid;
-  gap: 12px;
 }
 
 .adversary.dh-compact-adversary .dhca-thresholds {
@@ -738,6 +737,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px 10px;
+  margin-bottom: 10px;
 }
 
 .adversary.dh-compact-adversary .dhca-thresholds__label {
@@ -779,15 +779,17 @@
 
 .adversary.dh-compact-adversary .dhca-resources {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .adversary.dh-compact-adversary .dhca-resource-row {
   --dhca-row-fill: #7f8893;
   --dhca-row-border: #67717b;
+  --dhca-row-empty: #f1f0ec;
+  --dhca-row-empty-border: #949ba4;
+  --dhca-row-rail: #8c939d;
   display: grid;
-  grid-template-columns: 84px 32px minmax(0, 1fr) 32px;
-  gap: 8px;
+  grid-template-columns: 78px 30px minmax(0, 1fr) 30px;
   align-items: center;
 }
 
@@ -803,9 +805,9 @@
 
 .adversary.dh-compact-adversary .dhca-resource-row__label {
   color: #6d6a63;
-  font-size: 14px !important;
+  font-size: 12px !important;
   font-weight: 800 !important;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   line-height: 1.2;
   text-transform: uppercase;
   font-family: var(--dhca-font-family);
@@ -815,16 +817,21 @@
 .adversary.dh-compact-adversary .dhca-resource-step {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  position: relative;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  min-width: 16px;
+  min-height: 16px;
   padding: 0;
-  border: 1px solid #c4c8ce;
+  border: 1px solid var(--dhca-row-rail);
   border-radius: 999px;
-  background: #f5f5f4;
-  color: #70757c;
-  font-size: 14px !important;
+  background: #fbfbf9;
+  color: #646a72;
+  font-size: 16px !important;
   font-weight: 800 !important;
   line-height: 1;
+  box-shadow: none;
 }
 
 .adversary.dh-compact-adversary .dhca-resource-step:disabled {
@@ -840,8 +847,9 @@
   min-height: 28px;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 0 6px;
+  padding: 0 10px;
   scrollbar-width: none;
+  margin-left: -2px;
 }
 
 .adversary.dh-compact-adversary .dhca-resource-row__track::-webkit-scrollbar {
@@ -854,7 +862,7 @@
   top: 50%;
   left: 0;
   right: 0;
-  border-top: 2px solid #b8b7b0;
+  border-top: 2px solid var(--dhca-row-rail);
   transform: translateY(-50%);
 }
 
@@ -862,22 +870,26 @@
   position: relative;
   z-index: 1;
   display: inline-flex;
-  gap: 4px;
+  gap: 2px;
   flex: 0 0 auto;
 }
 
 .adversary.dh-compact-adversary .dhca-resource-row__pip {
-  width: 17px;
-  height: 17px;
-  border: 1px solid #8d95a0;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  padding: 0;
+  border: 1px solid var(--dhca-row-empty-border);
   border-radius: 2px;
-  background: #f7f7f5;
+  background: var(--dhca-row-empty);
+  box-shadow: none;
 }
 
 .adversary.dh-compact-adversary .dhca-resource-row__pip.filled {
   background: var(--dhca-row-fill);
   border-color: var(--dhca-row-border);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .adversary.dh-compact-adversary .dhca-resource-row--fallback {
