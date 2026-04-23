@@ -4,8 +4,8 @@
   data-group="{{tabs.features.group}}"
 >
   <div class="compact-tab-scroll compact-feature-scroll">
-    <fieldset class="compact-features-fieldset compact-features-fieldset-v2 drop-section">
-      <legend>{{localize tabs.features.label}}</legend>
+    <div class="compact-features-fieldset compact-features-fieldset-v2 drop-section">
+      <div class="compact-section-heading">{{localize tabs.features.label}}</div>
       {{#if @root.editable}}
         <a
           class="compact-create-feature"
@@ -29,6 +29,6 @@
           }}
         {{/each}}
       </ul>
-    </fieldset>
+    </div>
   </div>
 </section>
