@@ -566,6 +566,7 @@
 }
 
 .adversary.dh-compact-adversary .dhca-section--footer {
+  width: 100%;
   padding: 12px 18px 16px;
   border-top: 1px solid var(--dhca-line);
   background: linear-gradient(180deg, rgba(255, 253, 248, 0.34) 0%, rgba(255, 250, 241, 0.72) 100%);
@@ -759,7 +760,7 @@
   text-align: center;
 }
 
-@container (max-width: 560px) {
+@container (max-width: 340px) {
   .adversary.dh-compact-adversary .dhca-header__details,
   .adversary.dh-compact-adversary .dhca-resource-row {
     grid-template-columns: minmax(0, 1fr);
