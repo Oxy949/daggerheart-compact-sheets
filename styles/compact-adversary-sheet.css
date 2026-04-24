@@ -6,7 +6,6 @@
   --dhca-text: var(--color-text-primary, #262626);
   --dhca-text-strong: var(--color-text-emphatic, #191813);
   --dhca-text-soft: var(--color-text-secondary, #4b4a44);
-  --dhca-muted: var(--color-text-subtle, #6a6a67);
   --dhca-line: #c9c6bf;
   --dhca-line-strong: #9c998f;
   --dhca-accent: #d1922f;
@@ -67,7 +66,7 @@
   max-height: calc(100vh - 24px);
 }
 
-body.theme-dark .adversary.dh-compact-adversary,
+body.theme-dark .adversary.dh-compact-adversary:not(.theme-light),
 .adversary.dh-compact-adversary.theme-dark {
   --dhca-bg: var(--color-cool-5, #0b0a13);
   --dhca-bg-soft: var(--color-cool-4, #302831);
@@ -76,7 +75,6 @@ body.theme-dark .adversary.dh-compact-adversary,
   --dhca-text: var(--color-text-primary, #efe6d8);
   --dhca-text-strong: var(--color-text-emphatic, #f7f3e8);
   --dhca-text-soft: var(--color-text-secondary, #e7d1b1);
-  --dhca-muted: var(--color-text-subtle, #9f8475);
   --dhca-line: var(--color-cool-3, #584a75);
   --dhca-line-strong: var(--color-light-6, #816b66);
   --dhca-accent: var(--color-warm-1, #ee9b3a);
@@ -95,7 +93,7 @@ body.theme-dark .adversary.dh-compact-adversary,
   --dhca-button-text-soft: var(--color-light-4, #d0b8a3);
   --dhca-inline-text: var(--color-light-4, #d0b8a3);
   --dhca-attack-meta: var(--color-light-4, #d0b8a3);
-  --dhca-content-text: var(--color-light-3, #e7d1b1);
+  --dhca-content-text: var(--color-text-primary, #e7d1b1);
   --dhca-content-text-fade: var(--color-light-4, #e7d1b122);
   --dhca-content-text-soft: var(--color-light-4, #d0b8a3);
   --dhca-panel-title: var(--color-light-5, #9f8475);
@@ -325,20 +323,41 @@ body.theme-dark .adversary.dh-compact-adversary,
 }
 
 .adversary.dh-compact-adversary .dhca-header__tier {
+  --dhca-tier-fill: linear-gradient(180deg, #f4c65d 0%, #e0aa35 100%);
   margin-top: 4px;
   margin-right: 8px;
+  position: relative;
+  z-index: 0;
   display: grid;
   place-items: center;
   width: 1.5em;
   height: 1.5em;
-  background: linear-gradient(180deg, #f4c65d 0%, #e0aa35 100%);
+  background: transparent;
   color: var(--dhca-tier-text);
   font-weight: 900;
   font-size: 1.4em;
   padding-top: 0.1em;
   line-height: 1;
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-  border: 1px solid var(--dhca-tier-border);
+  border: 0;
+}
+
+.adversary.dh-compact-adversary .dhca-header__tier::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--dhca-tier-border);
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+.adversary.dh-compact-adversary .dhca-header__tier::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  background: var(--dhca-tier-fill);
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 }
 
 .adversary.dh-compact-adversary .dhca-header__identity {
@@ -373,7 +392,7 @@ body.theme-dark .adversary.dh-compact-adversary,
 
 .adversary.dh-compact-adversary .dhca-header__description {
   margin: 0 30% 4px 0;
-  color: var(--dhca-muted);
+  color: var( --dhca-text-soft);
   font-size: 14px !important;
   font-family: var(--dhca-font-family);
   font-style: italic;
@@ -802,6 +821,7 @@ body.theme-dark .adversary.dh-compact-adversary,
 
 .adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .img-portait,
 .adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .expanded-icon,
+.adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .inventory-item-header .item-resource,
 .adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .tag:not(.feature-form),
 .adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .simple-tag {
   display: none !important;
@@ -841,7 +861,7 @@ body.theme-dark .adversary.dh-compact-adversary,
 }
 
 .adversary.dh-compact-adversary .dhca-tab-panel--features {
-  padding-right: 0px !important;
+  padding: 10px 10px !important;
 }
 
 .adversary.dh-compact-adversary .dhca-tab-panel--features .inventory-item .item-label {
@@ -942,7 +962,7 @@ body.theme-dark .adversary.dh-compact-adversary,
 .adversary.dh-compact-adversary .dhca-footer__attribution {
   display: block;
   margin-top: 10px;
-  color: var(--dhca-muted);
+  color: var( --dhca-text-soft);
   font-size: 14px;
   text-align: center;
   font-family: var(--dhca-font-family);
@@ -1193,7 +1213,7 @@ body.theme-dark .adversary.dh-compact-adversary,
 }
 
 .adversary.dh-compact-adversary .dhca-resource-field__max {
-  color: var(--dhca-muted);
+  color: var( --dhca-text-soft);
   font-family: var(--dhca-font-family);
 }
 
@@ -1203,7 +1223,7 @@ body.theme-dark .adversary.dh-compact-adversary,
 }
 
 .adversary.dh-compact-adversary .dhca-footer__meta {
-  color: var(--dhca-muted);
+  color: var( --dhca-text-soft);
   font-size: 14px;
   font-weight: 700;
   text-align: center;
@@ -1221,7 +1241,6 @@ body.theme-dark .adversary.dh-compact-adversary,
   --dhca-text: var(--color-text-primary, #262626);
   --dhca-text-strong: var(--color-text-emphatic, #191813);
   --dhca-text-soft: var(--color-text-secondary, #4b4a44);
-  --dhca-muted: var(--color-text-subtle, #6a6a67);
   --dhca-line: #c9c6bf;
   --dhca-line-strong: #9c998f;
   --dhca-accent: #d1922f;
@@ -1281,7 +1300,7 @@ body.theme-dark .adversary.dh-compact-adversary,
   max-height: calc(100vh - 24px);
 }
 
-body.theme-dark .environment.dh-compact-environment,
+body.theme-dark .environment.dh-compact-environment:not(.theme-light),
 .environment.dh-compact-environment.theme-dark {
   --dhca-bg: var(--color-cool-5, #0b0a13);
   --dhca-bg-soft: var(--color-cool-4, #302831);
@@ -1290,7 +1309,6 @@ body.theme-dark .environment.dh-compact-environment,
   --dhca-text: var(--color-text-primary, #efe6d8);
   --dhca-text-strong: var(--color-text-emphatic, #f7f3e8);
   --dhca-text-soft: var(--color-text-secondary, #e7d1b1);
-  --dhca-muted: var(--color-text-subtle, #9f8475);
   --dhca-line: var(--color-cool-3, #584a75);
   --dhca-line-strong: var(--color-light-6, #816b66);
   --dhca-accent: var(--color-warm-1, #ee9b3a);
@@ -1533,20 +1551,41 @@ body.theme-dark .environment.dh-compact-environment,
 }
 
 .environment.dh-compact-environment .dhca-header__tier {
+  --dhca-tier-fill: linear-gradient(180deg, #f4c65d 0%, #e0aa35 100%);
   margin-top: 4px;
   margin-right: 8px;
+  position: relative;
+  z-index: 0;
   display: grid;
   place-items: center;
   width: 1.5em;
   height: 1.5em;
-  background: linear-gradient(180deg, #f4c65d 0%, #e0aa35 100%);
+  background: transparent;
   color: var(--dhca-tier-text);
   font-weight: 900;
   font-size: 1.4em;
   padding-top: 0.1em;
   line-height: 1;
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-  border: 1px solid var(--dhca-tier-border);
+  border: 0;
+}
+
+.environment.dh-compact-environment .dhca-header__tier::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--dhca-tier-border);
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+.environment.dh-compact-environment .dhca-header__tier::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  background: var(--dhca-tier-fill);
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 }
 
 .environment.dh-compact-environment .dhca-header__identity {
@@ -1578,7 +1617,7 @@ body.theme-dark .environment.dh-compact-environment,
 
 .environment.dh-compact-environment .dhca-header__description {
   margin: 0 30% 4px 0;
-  color: var(--dhca-muted);
+  color: var( --dhca-text-soft);
   font-size: 14px !important;
   font-family: var(--dhca-font-family);
   font-style: italic;
@@ -1597,7 +1636,7 @@ body.theme-dark .environment.dh-compact-environment,
 
 .environment.dh-compact-environment .dhca-header__attribution {
   margin: 0 0 8px;
-  color: var(--dhca-muted);
+  color: var( --dhca-text-soft);
   font-size: 12px;
   line-height: 1.3;
   font-family: var(--dhca-font-family);
@@ -1749,7 +1788,7 @@ body.theme-dark .environment.dh-compact-environment,
 
 .environment.dh-compact-environment .dhca-tab-panel.active {
   display: block;
-  padding-right: 0 !important;
+  padding: 10px 10px !important;
 }
 
 .environment.dh-compact-environment .dhca-tab-panel__scroll {
@@ -1882,6 +1921,7 @@ body.theme-dark .environment.dh-compact-environment,
 
 .environment.dh-compact-environment .dhca-tab-panel .inventory-item .img-portait,
 .environment.dh-compact-environment .dhca-tab-panel .inventory-item .expanded-icon,
+.environment.dh-compact-environment .dhca-tab-panel .inventory-item .inventory-item-header .item-resource,
 .environment.dh-compact-environment .dhca-tab-panel .inventory-item .tag:not(.feature-form),
 .environment.dh-compact-environment .dhca-tab-panel .inventory-item .simple-tag {
   display: none !important;
@@ -2093,7 +2133,7 @@ body.theme-dark .environment.dh-compact-environment,
 .environment.dh-compact-environment .dhca-notes__attribution {
   display: block;
   margin-top: 10px;
-  color: var(--dhca-muted);
+  color: var( --dhca-text-soft);
   font-size: 14px;
   text-align: center;
   font-family: var(--dhca-font-family);
