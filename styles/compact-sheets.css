@@ -1,5 +1,4 @@
-.adversary.dh-compact-adversary,
-.environment.dh-compact-environment {
+sheet.dh-compact {
   --dhca-bg: var(--color-light-2, #efe6d8);
   --dhca-surface: var(--color-light-1, #f7f3e8);
   --dhca-surface-alt: var(--color-light-2, #efe6d8);
@@ -62,10 +61,8 @@
   border: none;
 }
 
-body.theme-dark .adversary.dh-compact-adversary:not(.theme-light),
-body.theme-dark .environment.dh-compact-environment:not(.theme-light),
-.adversary.dh-compact-adversary.theme-dark,
-.environment.dh-compact-environment.theme-dark {
+body.theme-dark sheet.dh-compact:not(.theme-light),
+sheet.dh-compact.theme-dark {
   --dhca-bg: var(--color-cool-5, #0b0a13);
   --dhca-surface: var(--color-cool-5-90, rgba(11, 10, 19, 0.9));
   --dhca-surface-alt: var(--color-cool-4, #302831);
@@ -101,14 +98,12 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   color-scheme: dark;
 }
 
-.adversary.dh-compact-adversary,
-.adversary.dh-compact-adversary *,
-.environment.dh-compact-environment,
-.environment.dh-compact-environment * {
+sheet.dh-compact,
+sheet.dh-compact * {
   box-sizing: border-box;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .window-header {
+sheet.dh-compact .window-header {
   position: absolute !important;
   inset: 0 0 auto 0 !important;
   z-index: 6;
@@ -125,15 +120,15 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   transition: opacity 140ms ease;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .window-header .window-title,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .window-header .window-icon,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .window-header .attribution-header-label {
+sheet.dh-compact .window-header .window-title,
+sheet.dh-compact .window-header .window-icon,
+sheet.dh-compact .window-header .attribution-header-label {
   display: none !important;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .window-header .header-button,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .window-header button,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .window-header a {
+sheet.dh-compact .window-header .header-button,
+sheet.dh-compact .window-header button,
+sheet.dh-compact .window-header a {
   width: 24px !important;
   height: 24px !important;
   margin-left: 6px !important;
@@ -144,13 +139,13 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   box-shadow: none !important;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment).minimized .window-content,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment).minimizing .window-content,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment).maximizing .window-content {
+sheet.dh-compact.minimized .window-content,
+sheet.dh-compact.minimizing .window-content,
+sheet.dh-compact.maximizing .window-content {
   display: none !important;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment).minimized .window-header {
+sheet.dh-compact.minimized .window-header {
   position: relative !important;
   inset: auto !important;
   align-items: center !important;
@@ -165,7 +160,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   pointer-events: auto;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment).minimized .window-header .window-title {
+sheet.dh-compact.minimized .window-header .window-title {
   display: block !important;
   flex: 1 1 auto;
   min-width: 0;
@@ -181,7 +176,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   white-space: nowrap;
 }
 
-.adversary.dh-compact-adversary .window-content {
+sheet.dh-compact.adversary .window-content {
   position: relative;
   isolation: isolate;
   display: grid !important;
@@ -198,13 +193,13 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   color: var(--dhca-text) !important;
 }
 
-.adversary.dh-compact-adversary .adversary-header-sheet {
+sheet.dh-compact.adversary .adversary-header-sheet {
   position: relative;
   z-index: 1;
   grid-area: header;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .tab {
+sheet.dh-compact .tab {
   position: relative;
   z-index: 1;
   grid-area: body;
@@ -212,15 +207,15 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   margin: 0;
 }
 
-.adversary.dh-compact-adversary .adversary-sidebar-sheet {
+sheet.dh-compact.adversary .adversary-sidebar-sheet {
   position: relative;
   z-index: 1;
   grid-area: footer;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-section--header,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-section--footer,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel fieldset {
+sheet.dh-compact .dhca-section--header,
+sheet.dh-compact .dhca-section--footer,
+sheet.dh-compact .dhca-tab-panel fieldset {
   background: transparent !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -228,26 +223,26 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   margin: 0;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-section--header {
+sheet.dh-compact .dhca-section--header {
   position: relative;
   padding: 12px 12px 0 12px;
   isolation: isolate;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__art-layer {
+sheet.dh-compact .dhca-header__art-layer {
   display: contents;
 }
 
-.adversary.dh-compact-adversary .dhca-header__identity,
-.adversary.dh-compact-adversary .dhca-header__description,
-.adversary.dh-compact-adversary .dhca-header__stats,
-.adversary.dh-compact-adversary .dhca-header__attack,
-.adversary.dh-compact-adversary .dhca-header__details {
+sheet.dh-compact.adversary .dhca-header__identity,
+sheet.dh-compact.adversary .dhca-header__description,
+sheet.dh-compact.adversary .dhca-header__stats,
+sheet.dh-compact.adversary .dhca-header__attack,
+sheet.dh-compact.adversary .dhca-header__details {
   position: relative;
   z-index: 1;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__art {
+sheet.dh-compact .dhca-header__art {
   position: absolute;
   top: 0;
   right: -10px;
@@ -258,8 +253,8 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   opacity: 0.52;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__art::before,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__art::after {
+sheet.dh-compact .dhca-header__art::before,
+sheet.dh-compact .dhca-header__art::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -267,21 +262,21 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   pointer-events: none;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__art::before {
+sheet.dh-compact .dhca-header__art::before {
   background:
     var(--dhca-art-glow),
     var(--dhca-art-wash);
   filter: blur(6px);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__art::after {
+sheet.dh-compact .dhca-header__art::after {
   background:
     var(--dhca-art-fade-horizontal),
     var(--dhca-art-fade-vertical);
   inset: -10%;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__art-image {
+sheet.dh-compact .dhca-header__art-image {
   position: relative;
   z-index: 0;
   display: block;
@@ -295,7 +290,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   mask-image: radial-gradient(circle at 72% 20%, #000 0%, rgba(0, 0, 0, 0.96) 30%, rgba(0, 0, 0, 0.5) 58%, transparent 84%);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__art-edit {
+sheet.dh-compact .dhca-header__art-edit {
   position: absolute;
   top: 52px;
   right: 18px;
@@ -318,17 +313,17 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
     background-color 140ms ease;
 }
 
-.adversary.dh-compact-adversary:has(.adversary-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover, .dhca-header__art-edit:hover, .dhca-header__art-edit:focus-visible) .dhca-header__art-edit {
+sheet.dh-compact.adversary:has(.adversary-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover, .dhca-header__art-edit:hover, .dhca-header__art-edit:focus-visible) .dhca-header__art-edit {
   opacity: 1;
   pointer-events: auto;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__art-edit:hover,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__art-edit:focus-visible {
+sheet.dh-compact .dhca-header__art-edit:hover,
+sheet.dh-compact .dhca-header__art-edit:focus-visible {
   background: var(--dhca-control-bg-hover);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__adornment {
+sheet.dh-compact .dhca-header__adornment {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -339,7 +334,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   pointer-events: none;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__ribbon {
+sheet.dh-compact .dhca-header__ribbon {
   padding: 0.5em 0.5em 0.5em 3em;
   background: var(--dhca-ribbon);
   letter-spacing: 0.06em;
@@ -353,8 +348,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   color: var(--dhca-control-fg);
 }
 
-.adversary.dh-compact-adversary .dhca-header__tier,
-.environment.dh-compact-environment .dhca-header__tier {
+sheet.dh-compact .dhca-header__tier {
   --dhca-tier-fill: linear-gradient(180deg, var(--color-warm-1, #ee9b3a) 0%, var(--color-warm-2, #c9593f) 100%);
   margin-top: 4px;
   margin-right: 8px;
@@ -374,8 +368,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   border: 0;
 }
 
-.adversary.dh-compact-adversary .dhca-header__tier::before,
-.environment.dh-compact-environment .dhca-header__tier::before {
+sheet.dh-compact .dhca-header__tier::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -384,8 +377,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 }
 
-.adversary.dh-compact-adversary .dhca-header__tier::after,
-.environment.dh-compact-environment .dhca-header__tier::after {
+sheet.dh-compact .dhca-header__tier::after {
   content: "";
   position: absolute;
   inset: 1px;
@@ -394,13 +386,13 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__identity {
+sheet.dh-compact .dhca-header__identity {
   display: block;
   min-width: 0;
   margin: 0 104px 6px 0;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__name {
+sheet.dh-compact .dhca-header__name {
   min-width: 0;
   display: block;
   margin: 0 !important;
@@ -421,12 +413,12 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   overflow-wrap: anywhere;
 }
 
-.adversary.dh-compact-adversary .dhca-header__separator,
-.adversary.dh-compact-adversary .dhca-header__meta {
+sheet.dh-compact.adversary .dhca-header__separator,
+sheet.dh-compact.adversary .dhca-header__meta {
   display: none;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__description {
+sheet.dh-compact .dhca-header__description {
   margin: 0 30% 4px 0;
   color: var(--dhca-text-soft);
   font-size: 14px !important;
@@ -436,7 +428,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   text-align: left;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__description p {
+sheet.dh-compact .dhca-header__description p {
   display: inline;
   margin: 0;
   color: inherit;
@@ -445,14 +437,14 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   line-height: inherit;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__stats {
+sheet.dh-compact .dhca-header__stats {
   display: grid;
   gap: 2px;
   margin: 0 0 2px;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-summary__line,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-summary__line span {
+sheet.dh-compact .dhca-summary__line,
+sheet.dh-compact .dhca-summary__line span {
   color: var(--dhca-text) !important;
   font-size: 14px !important;
   font-family: var(--dhca-font-family);
@@ -460,25 +452,25 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   text-align: left !important;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-summary__label {
+sheet.dh-compact .dhca-summary__label {
   font-weight: 700 !important;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-summary__line .dhca-summary__value {
+sheet.dh-compact .dhca-summary__line .dhca-summary__value {
   color: var(--dhca-content-text-soft) !important;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack {
+sheet.dh-compact.adversary .dhca-header__attack {
   margin: 0 0 8px !important;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack-list {
+sheet.dh-compact.adversary .dhca-header__attack-list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .inventory-item-compact {
+sheet.dh-compact.adversary .dhca-header__attack .inventory-item-compact {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -490,11 +482,11 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   min-width: 0;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .img-portait {
+sheet.dh-compact.adversary .dhca-header__attack .img-portait {
   display: none !important;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .item-name {
+sheet.dh-compact.adversary .dhca-header__attack .item-name {
   display: inline;
   flex: 0 0 auto;
   margin: 0;
@@ -506,11 +498,11 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   line-height: 1.45 !important;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .item-name::after {
+sheet.dh-compact.adversary .dhca-header__attack .item-name::after {
   content: ":";
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .item-labels {
+sheet.dh-compact.adversary .dhca-header__attack .item-labels {
   flex: 1 1 auto;
   display: inline-flex;
   align-items: center;
@@ -518,15 +510,15 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   white-space: nowrap;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .label,
-.adversary.dh-compact-adversary .dhca-header__attack .label span {
+sheet.dh-compact.adversary .dhca-header__attack .label,
+sheet.dh-compact.adversary .dhca-header__attack .label span {
   color: var(--dhca-attack-meta) !important;
   font-size: 14px !important;
   font-family: var(--dhca-font-family);
   line-height: 1.45 !important;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .label {
+sheet.dh-compact.adversary .dhca-header__attack .label {
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
@@ -535,54 +527,54 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   white-space: nowrap;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .label > * {
+sheet.dh-compact.adversary .dhca-header__attack .label > * {
   white-space: nowrap;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .label i,
-.adversary.dh-compact-adversary .dhca-header__attack .label .fa-solid,
-.adversary.dh-compact-adversary .dhca-header__attack .label .fa-regular {
+sheet.dh-compact.adversary .dhca-header__attack .label i,
+sheet.dh-compact.adversary .dhca-header__attack .label .fa-solid,
+sheet.dh-compact.adversary .dhca-header__attack .label .fa-regular {
   display: inline-block;
   vertical-align: middle;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .controls,
-.adversary.dh-compact-adversary .dhca-tab-panel .controls {
+sheet.dh-compact.adversary .dhca-header__attack .controls,
+sheet.dh-compact.adversary .dhca-tab-panel .controls {
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .controls {
+sheet.dh-compact.adversary .dhca-header__attack .controls {
   flex: 0 0 auto;
   align-self: center;
   margin-left: auto;
   display: none;
 }
 
-.adversary.dh-compact-adversary .dhca-header__attack .controls a,
-.adversary.dh-compact-adversary .dhca-tab-panel .controls a,
-.adversary.dh-compact-adversary .dhca-inline-action {
+sheet.dh-compact.adversary .dhca-header__attack .controls a,
+sheet.dh-compact.adversary .dhca-tab-panel .controls a,
+sheet.dh-compact.adversary .dhca-inline-action {
   color: var(--dhca-inline-text);
   display: none;
 }
 
-.adversary.dh-compact-adversary .dhca-header__details {
+sheet.dh-compact.adversary .dhca-header__details {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: 18px;
   margin: 0 0;
 }
 
-.adversary.dh-compact-adversary .dhca-header__details--single {
+sheet.dh-compact.adversary .dhca-header__details--single {
   grid-template-columns: minmax(0, 1fr);
 }
 
-.adversary.dh-compact-adversary .dhca-detail-panel {
+sheet.dh-compact.adversary .dhca-detail-panel {
   min-width: 0;
 }
 
-.adversary.dh-compact-adversary .dhca-detail-panel__title {
+sheet.dh-compact.adversary .dhca-detail-panel__title {
   margin: 0 0 4px !important;
   color: var(--dhca-text) !important;
   font-size: 14px !important;
@@ -593,39 +585,39 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   font-family: var(--dhca-font-family) !important;
 }
 
-.adversary.dh-compact-adversary .dhca-experience-list {
+sheet.dh-compact.adversary .dhca-experience-list {
   display: grid;
   gap: 2px;
 }
 
-.adversary.dh-compact-adversary .dhca-experience-row,
-.adversary.dh-compact-adversary .dhca-experience-row *,
-.adversary.dh-compact-adversary .dhca-rich-text,
-.adversary.dh-compact-adversary .dhca-rich-text p {
+sheet.dh-compact.adversary .dhca-experience-row,
+sheet.dh-compact.adversary .dhca-experience-row *,
+sheet.dh-compact.adversary .dhca-rich-text,
+sheet.dh-compact.adversary .dhca-rich-text p {
   color: var(--dhca-content-text-soft);
   font-size: 14px !important;
   font-family: var(--dhca-font-family) !important;
   line-height: 1.45 !important;
 }
 
-.adversary.dh-compact-adversary .dhca-experience-row {
+sheet.dh-compact.adversary .dhca-experience-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
   gap: 6px;
   align-items: start;
 }
 
-.adversary.dh-compact-adversary .dhca-experience-name {
+sheet.dh-compact.adversary .dhca-experience-name {
   min-width: 0;
 }
 
-.adversary.dh-compact-adversary .dhca-experience-value {
+sheet.dh-compact.adversary .dhca-experience-value {
   font-weight: 700;
 }
 
-.adversary.dh-compact-adversary .dhca-rich-text,
-.adversary.dh-compact-adversary .dhca-rich-text p,
-.adversary.dh-compact-adversary .dhca-rich-text--motives {
+sheet.dh-compact.adversary .dhca-rich-text,
+sheet.dh-compact.adversary .dhca-rich-text p,
+sheet.dh-compact.adversary .dhca-rich-text--motives {
   margin: 0;
   color: var(--dhca-content-text-soft);
   font-style: italic;
@@ -633,7 +625,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
 
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header__toolbar {
+sheet.dh-compact .dhca-header__toolbar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -648,7 +640,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   pointer-events: none;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-nav {
+sheet.dh-compact .dhca-tab-nav {
   height: 0;
   max-height: 0;
   overflow: hidden;
@@ -661,7 +653,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
     transform 140ms ease;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-nav nav {
+sheet.dh-compact .dhca-tab-nav nav {
   display: flex;
   flex-wrap: nowrap;
   gap: 6px;
@@ -670,7 +662,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   justify-content: center;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-nav [data-action="tab"] {
+sheet.dh-compact .dhca-tab-nav [data-action="tab"] {
   min-width: 72px;
   padding: 3px 9px;
   border: 1px solid var(--dhca-line);
@@ -686,8 +678,8 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   transition: border-color 120ms ease, color 120ms ease, background-color 120ms ease, backdrop-filter 120ms ease, box-shadow 120ms ease;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-nav [data-action="tab"].active,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-nav [data-action="tab"]:hover {
+sheet.dh-compact .dhca-tab-nav [data-action="tab"].active,
+sheet.dh-compact .dhca-tab-nav [data-action="tab"]:hover {
   border-color: var(--dhca-accent);
   background: var(--dhca-button-bg-hover);
   color: var(--dhca-accent-strong);
@@ -695,7 +687,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   box-shadow: 0 4px 16px rgb(0 0 0 / 10%);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header-actions {
+sheet.dh-compact .dhca-header-actions {
   position: absolute;
   top: 2px;
   right: 0px;
@@ -703,7 +695,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   gap: 2px;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-header-actions button {
+sheet.dh-compact .dhca-header-actions button {
   width: 28px;
   height: 28px;
   border: 1px solid var(--dhca-line);
@@ -713,16 +705,16 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   box-shadow: none;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel {
+sheet.dh-compact .dhca-tab-panel {
   display: none;
   min-height: 0;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel.active {
+sheet.dh-compact .dhca-tab-panel.active {
   display: block;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel__scroll {
+sheet.dh-compact .dhca-tab-panel__scroll {
   height: 100%;
   min-height: 0;
   overflow: auto;
@@ -730,16 +722,16 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   scrollbar-color: var(--dhca-scrollbar) transparent;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel__scroll::-webkit-scrollbar {
+sheet.dh-compact .dhca-tab-panel__scroll::-webkit-scrollbar {
   width: 6px;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel__scroll::-webkit-scrollbar-thumb {
+sheet.dh-compact .dhca-tab-panel__scroll::-webkit-scrollbar-thumb {
   background: var(--dhca-scrollbar);
   border-radius: 999px;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-panel {
+sheet.dh-compact .dhca-panel {
   position: relative;
   padding: 0;
   border: 0;
@@ -748,7 +740,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   box-shadow: none;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel fieldset:not(.dhca-panel) {
+sheet.dh-compact .dhca-tab-panel fieldset:not(.dhca-panel) {
   padding: 12px 0 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
@@ -756,12 +748,12 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   box-shadow: none !important;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel fieldset:not(.dhca-panel) + fieldset:not(.dhca-panel) {
+sheet.dh-compact .dhca-tab-panel fieldset:not(.dhca-panel) + fieldset:not(.dhca-panel) {
   margin-top: 12px;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-panel__title,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-footer__title {
+sheet.dh-compact .dhca-panel__title,
+sheet.dh-compact .dhca-footer__title {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -776,36 +768,36 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   text-transform: uppercase;
 }
 
-.adversary.dh-compact-adversary:has(.adversary-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover) .window-header {
+sheet.dh-compact.adversary:has(.adversary-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover) .window-header {
   opacity: 1;
   pointer-events: auto;
 }
 
-.adversary.dh-compact-adversary:has(.adversary-header-sheet:hover, .dhca-header__toolbar:hover) .dhca-header__toolbar {
+sheet.dh-compact.adversary:has(.adversary-header-sheet:hover, .dhca-header__toolbar:hover) .dhca-header__toolbar {
   pointer-events: auto;
 }
 
-.adversary.dh-compact-adversary:has(.adversary-header-sheet:hover, .dhca-header__toolbar:hover) .dhca-tab-nav {
+sheet.dh-compact.adversary:has(.adversary-header-sheet:hover, .dhca-header__toolbar:hover) .dhca-tab-nav {
   height: 32px;
   max-height: 32px;
   opacity: 1;
   transform: translateY(0);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-panel__title::before,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-panel__title::after,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-footer__title::before,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-footer__title::after {
+sheet.dh-compact .dhca-panel__title::before,
+sheet.dh-compact .dhca-panel__title::after,
+sheet.dh-compact .dhca-footer__title::before,
+sheet.dh-compact .dhca-footer__title::after {
   content: "";
   flex: 1 1 auto;
   border-top: 1px dashed var(--dhca-line);
 }
 
-.adversary.dh-compact-adversary .dhca-panel {
+sheet.dh-compact.adversary .dhca-panel {
   padding-top: 0;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-panel__create {
+sheet.dh-compact .dhca-panel__create {
   position: absolute;
   top: 14px;
   right: 2px;
@@ -825,35 +817,35 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
     transform 140ms ease;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-panel__create .icon-button {
+sheet.dh-compact .dhca-panel__create .icon-button {
   font-size: 12px;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-panel--features:hover .dhca-panel__create,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-panel--features:focus-within .dhca-panel__create,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-panel__create:hover {
+sheet.dh-compact .dhca-panel--features:hover .dhca-panel__create,
+sheet.dh-compact .dhca-panel--features:focus-within .dhca-panel__create,
+sheet.dh-compact .dhca-panel__create:hover {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-feature-list,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel ul.items-list,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel ul.card-list,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel ul.items-sidebar-list {
+sheet.dh-compact .dhca-feature-list,
+sheet.dh-compact .dhca-tab-panel ul.items-list,
+sheet.dh-compact .dhca-tab-panel ul.card-list,
+sheet.dh-compact .dhca-tab-panel ul.items-sidebar-list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-feature-list {
+sheet.dh-compact .dhca-feature-list {
   display: block !important;
   column-fill: balance;
   column-gap: var(--dhca-feature-column-gap);
   column-width: var(--dhca-feature-column-width);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-feature-list > .inventory-item {
+sheet.dh-compact .dhca-feature-list > .inventory-item {
   display: inline-block;
   margin: 0 0 14px !important;
   width: 100%;
@@ -862,11 +854,11 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   -webkit-column-break-inside: avoid;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-feature-list button.reveal {
+sheet.dh-compact .dhca-feature-list button.reveal {
   display: none !important;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item {
+sheet.dh-compact .dhca-tab-panel .inventory-item {
   margin: 0 0 14px;
   padding: 0;
   border: 0;
@@ -874,11 +866,11 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   box-shadow: none;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item:last-child {
+sheet.dh-compact .dhca-tab-panel .inventory-item:last-child {
   margin-bottom: 0;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .inventory-item-header {
+sheet.dh-compact .dhca-tab-panel .inventory-item .inventory-item-header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
@@ -887,20 +879,20 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   background: transparent;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .img-portait,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .expanded-icon,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .inventory-item-header .item-resource,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .tag:not(.feature-form),
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .simple-tag {
+sheet.dh-compact .dhca-tab-panel .inventory-item .img-portait,
+sheet.dh-compact .dhca-tab-panel .inventory-item .expanded-icon,
+sheet.dh-compact .dhca-tab-panel .inventory-item .inventory-item-header .item-resource,
+sheet.dh-compact .dhca-tab-panel .inventory-item .tag:not(.feature-form),
+sheet.dh-compact .dhca-tab-panel .inventory-item .simple-tag {
   display: none !important;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .item-label,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .item-labels {
+sheet.dh-compact .dhca-tab-panel .inventory-item .item-label,
+sheet.dh-compact .dhca-tab-panel .inventory-item .item-labels {
   min-width: 0;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .item-name {
+sheet.dh-compact .dhca-tab-panel .inventory-item .item-name {
   display: inline;
   margin: 0;
   color: var(--dhca-text);
@@ -910,8 +902,8 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   font-family: var(--dhca-font-family);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .feature-form,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .feature-form span {
+sheet.dh-compact .dhca-tab-panel .inventory-item .feature-form,
+sheet.dh-compact .dhca-tab-panel .inventory-item .feature-form span {
   display: inline;
   padding: 0;
   margin: 0;
@@ -923,47 +915,47 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   font-family: var(--dhca-font-family);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .feature-form::before {
+sheet.dh-compact .dhca-tab-panel .inventory-item .feature-form::before {
   content: " - ";
   font-weight: 400;
 }
 
-.adversary.dh-compact-adversary .dhca-tab-panel {
+sheet.dh-compact.adversary .dhca-tab-panel {
   padding: 10px 10px !important;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .item-label {
+sheet.dh-compact .dhca-tab-panel .inventory-item .item-label {
   display: inline-flex;
   align-items: baseline;
   flex-wrap: wrap;
   gap: 0 4px;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .item-labels {
+sheet.dh-compact .dhca-tab-panel .inventory-item .item-labels {
   display: inline;
   min-width: 0;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .feature-form,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .feature-form span {
+sheet.dh-compact .dhca-tab-panel .inventory-item .feature-form,
+sheet.dh-compact .dhca-tab-panel .inventory-item .feature-form span {
   white-space: nowrap;
   font-family: var(--dhca-font-family);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .controls {
+sheet.dh-compact .dhca-tab-panel .inventory-item .controls {
   opacity: 1;
   color: var(--dhca-inline-text);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item-content.extensible,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item-content.extensible.extended {
+sheet.dh-compact .dhca-tab-panel .inventory-item-content.extensible,
+sheet.dh-compact .dhca-tab-panel .inventory-item-content.extensible.extended {
   max-height: none;
   overflow: visible;
   padding-top: 0;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .invetory-description,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .invetory-description p {
+sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description,
+sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description p {
   margin: 0;
   color: var(--dhca-content-text);
   font-size: 14px !important;
@@ -971,12 +963,12 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   line-height: 1.5;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .invetory-description p + p {
+sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description p + p {
   margin-top: 6px;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .invetory-description .content-link,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .invetory-description .inline-roll {
+sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description .content-link,
+sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description .inline-roll {
   font-weight: bold;
   border: none;
   border-radius: 0px;
@@ -987,20 +979,20 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
 }
 
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .invetory-description strong,
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .invetory-description b {
+sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description strong,
+sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description b {
   font-style: italic;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .item-buttons {
+sheet.dh-compact .dhca-tab-panel .inventory-item .item-buttons {
   display: none;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .item-button .spacer {
+sheet.dh-compact .dhca-tab-panel .inventory-item .item-button .spacer {
   display: none;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .item-button button {
+sheet.dh-compact .dhca-tab-panel .inventory-item .item-button button {
   min-height: 32px;
   border: 1px solid var(--dhca-line);
   border-radius: 10px;
@@ -1011,23 +1003,23 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   font-family: var(--dhca-font-family);
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) .dhca-tab-panel .inventory-item .item-button .action-uses-button {
+sheet.dh-compact .dhca-tab-panel .inventory-item .item-button .action-uses-button {
   min-width: 56px;
   padding-inline: 10px;
 }
 
-.adversary.dh-compact-adversary .dhca-panel--notes {
+sheet.dh-compact.adversary .dhca-panel--notes {
   margin-top: 0;
 }
 
-.adversary.dh-compact-adversary .dhca-panel--notes .editor,
-.adversary.dh-compact-adversary .dhca-panel--notes .prosemirror,
-.adversary.dh-compact-adversary .dhca-panel--notes textarea {
+sheet.dh-compact.adversary .dhca-panel--notes .editor,
+sheet.dh-compact.adversary .dhca-panel--notes .prosemirror,
+sheet.dh-compact.adversary .dhca-panel--notes textarea {
   min-height: 240px;
 }
 
-.adversary.dh-compact-adversary .dhca-notes__attribution,
-.adversary.dh-compact-adversary .dhca-footer__attribution {
+sheet.dh-compact.adversary .dhca-notes__attribution,
+sheet.dh-compact.adversary .dhca-footer__attribution {
   display: block;
   margin-top: 10px;
   color: var(--dhca-text-soft);
@@ -1036,17 +1028,17 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   font-family: var(--dhca-font-family);
 }
 
-.adversary.dh-compact-adversary .dhca-section--footer {
+sheet.dh-compact.adversary .dhca-section--footer {
   width: 100%;
   padding: 10px 16px 14px;
   border-top: 1px dashed var(--dhca-line);
 }
 
-.adversary.dh-compact-adversary .dhca-footer__inner {
+sheet.dh-compact.adversary .dhca-footer__inner {
   display: grid;
 }
 
-.adversary.dh-compact-adversary .dhca-thresholds {
+sheet.dh-compact.adversary .dhca-thresholds {
   display: grid;
   grid-template-columns: max-content auto max-content auto max-content;
   align-items: center;
@@ -1055,14 +1047,14 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   margin-bottom: 10px;
 }
 
-.adversary.dh-compact-adversary .dhca-thresholds__label {
+sheet.dh-compact.adversary .dhca-thresholds__label {
   display: inline-grid;
   justify-items: center;
   gap: 1px;
   color: var(--dhca-threshold-label);
 }
 
-.adversary.dh-compact-adversary .dhca-thresholds__name {
+sheet.dh-compact.adversary .dhca-thresholds__name {
   font-size: 12px !important;
   font-weight: 400 !important;
   font-family: var(--dhca-font-family);
@@ -1072,7 +1064,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   white-space: nowrap;
 }
 
-.adversary.dh-compact-adversary .dhca-thresholds__effect {
+sheet.dh-compact.adversary .dhca-thresholds__effect {
   color: var(--dhca-threshold-effect);
   font-size: 14px !important;
   font-weight: 700 !important;
@@ -1082,7 +1074,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   white-space: nowrap;
 }
 
-.adversary.dh-compact-adversary .dhca-thresholds__value {
+sheet.dh-compact.adversary .dhca-thresholds__value {
   min-width: 28px;
   color: var(--dhca-text);
   font-size: 14px !important;
@@ -1092,12 +1084,12 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   text-align: center;
 }
 
-.adversary.dh-compact-adversary .dhca-resources {
+sheet.dh-compact.adversary .dhca-resources {
   display: grid;
   gap: 10px;
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row {
+sheet.dh-compact.adversary .dhca-resource-row {
   --dhca-row-fill: var(--dhca-resource-neutral-fill);
   --dhca-row-border: var(--dhca-resource-neutral-border);
   --dhca-row-empty: var(--dhca-resource-empty);
@@ -1117,18 +1109,18 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   align-items: center;
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row--hp {
+sheet.dh-compact.adversary .dhca-resource-row--hp {
   --dhca-row-fill: var(--dhca-hp);
   --dhca-row-border: var(--dhca-hp-border);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row--stress {
+sheet.dh-compact.adversary .dhca-resource-row--stress {
   --dhca-row-fill: var(--dhca-stress);
   --dhca-row-border: var(--dhca-stress-border);
   --dhca-resource-chip-text: var(--dhca-tier-text);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row__label {
+sheet.dh-compact.adversary .dhca-resource-row__label {
   display: inline-flex;
   align-items: center;
   align-content: center;
@@ -1143,14 +1135,14 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   font-family: var(--dhca-font-family);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row__label-name {
+sheet.dh-compact.adversary .dhca-resource-row__label-name {
   min-width: 0;
   max-width: 100%;
   overflow-wrap: anywhere;
   color: var(--dhca-text);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row__label-max {
+sheet.dh-compact.adversary .dhca-resource-row__label-max {
   display: inline-grid;
   place-items: center;
   min-width: 42px;
@@ -1167,7 +1159,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   line-height: 1;
 }
 
-.adversary.dh-compact-adversary .dhca-resource-step {
+sheet.dh-compact.adversary .dhca-resource-step {
   display: grid;
   place-items: center;
   position: relative;
@@ -1187,11 +1179,11 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-step:disabled {
+sheet.dh-compact.adversary .dhca-resource-step:disabled {
   opacity: 0.5;
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row__track {
+sheet.dh-compact.adversary .dhca-resource-row__track {
   position: relative;
   display: flex;
   align-items: center;
@@ -1205,11 +1197,11 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   margin-left: -2px;
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row__track::-webkit-scrollbar {
+sheet.dh-compact.adversary .dhca-resource-row__track::-webkit-scrollbar {
   display: none;
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row__track::before {
+sheet.dh-compact.adversary .dhca-resource-row__track::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -1219,7 +1211,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   transform: translateY(-50%);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row__group {
+sheet.dh-compact.adversary .dhca-resource-row__group {
   position: relative;
   z-index: 1;
   display: inline-flex;
@@ -1227,7 +1219,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   flex: 0 0 auto;
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row__pip {
+sheet.dh-compact.adversary .dhca-resource-row__pip {
   width: var(--dhca-resource-pip-size);
   height: var(--dhca-resource-pip-size);
   min-width: var(--dhca-resource-pip-size);
@@ -1241,7 +1233,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row__pip.filled {
+sheet.dh-compact.adversary .dhca-resource-row__pip.filled {
   background: var(--dhca-row-fill);
   border-color: var(--dhca-row-border);
   box-shadow:
@@ -1249,14 +1241,14 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-row--fallback {
+sheet.dh-compact.adversary .dhca-resource-row--fallback {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
 }
 
-.adversary.dh-compact-adversary .dhca-resource-field {
+sheet.dh-compact.adversary .dhca-resource-field {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1266,7 +1258,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   font-family: var(--dhca-font-family);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-field input {
+sheet.dh-compact.adversary .dhca-resource-field input {
   width: 48px;
   height: 30px;
   padding: 0 6px;
@@ -1279,28 +1271,28 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   font-family: var(--dhca-font-family);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-field__max {
+sheet.dh-compact.adversary .dhca-resource-field__max {
   color: var(--dhca-text-soft);
   font-family: var(--dhca-font-family);
 }
 
-.adversary.dh-compact-adversary .dhca-resource-field__max::before {
+sheet.dh-compact.adversary .dhca-resource-field__max::before {
   content: "/";
   margin-right: 4px;
 }
 
-.adversary.dh-compact-adversary .dhca-footer__meta {
+sheet.dh-compact.adversary .dhca-footer__meta {
   color: var(--dhca-text-soft);
   font-size: 14px;
   font-weight: 700;
   text-align: center;
 }
 
-:is(.adversary.dh-compact-adversary, .environment.dh-compact-environment) p:has(button.measured-template-button) {
+sheet.dh-compact p:has(button.measured-template-button) {
   display: none;
 }
 
-.environment.dh-compact-environment .window-content {
+sheet.dh-compact.environment .window-content {
   position: relative;
   isolation: isolate;
   display: grid !important;
@@ -1316,32 +1308,32 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   color: var(--dhca-text) !important;
 }
 
-.environment.dh-compact-environment .environment-header-sheet {
+sheet.dh-compact.environment .environment-header-sheet {
   position: relative;
   z-index: 1;
   grid-area: header;
 }
 
-.environment.dh-compact-environment .dhca-header__identity,
-.environment.dh-compact-environment .dhca-header__description,
-.environment.dh-compact-environment .dhca-header__attribution,
-.environment.dh-compact-environment .dhca-header__stats,
-.environment.dh-compact-environment .dhca-detail-panel {
+sheet.dh-compact.environment .dhca-header__identity,
+sheet.dh-compact.environment .dhca-header__description,
+sheet.dh-compact.environment .dhca-header__attribution,
+sheet.dh-compact.environment .dhca-header__stats,
+sheet.dh-compact.environment .dhca-detail-panel {
   position: relative;
   z-index: 1;
   text-align: left;
 }
 
-.environment.dh-compact-environment:has(.environment-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover, .dhca-header__art-edit:hover, .dhca-header__art-edit:focus-visible) .dhca-header__art-edit {
+sheet.dh-compact.environment:has(.environment-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover, .dhca-header__art-edit:hover, .dhca-header__art-edit:focus-visible) .dhca-header__art-edit {
   opacity: 1;
   pointer-events: auto;
 }
 
-.environment.dh-compact-environment .dhca-header__ribbon {
+sheet.dh-compact.environment .dhca-header__ribbon {
   font-size: 0.82em;
 }
 
-.environment.dh-compact-environment .dhca-header__attribution {
+sheet.dh-compact.environment .dhca-header__attribution {
   margin: 0 0 8px;
   color: var(--dhca-text-soft);
   font-size: 12px;
@@ -1349,38 +1341,38 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   font-family: var(--dhca-font-family);
 }
 
-.environment.dh-compact-environment .dhca-header__stats {
+sheet.dh-compact.environment .dhca-header__stats {
   margin: 0 0 8px;
   justify-items: start;
 }
 
-.environment.dh-compact-environment .dhca-summary__line {
+sheet.dh-compact.environment .dhca-summary__line {
   width: 100%;
   justify-self: start;
 }
 
-.environment.dh-compact-environment .dhca-summary__line--impulses {
+sheet.dh-compact.environment .dhca-summary__line--impulses {
   display: block;
 }
 
-.environment.dh-compact-environment .dhca-summary__line--impulses .dhca-rich-text--impulses {
+sheet.dh-compact.environment .dhca-summary__line--impulses .dhca-rich-text--impulses {
   display: inline;
   min-width: 0;
 }
 
-.environment.dh-compact-environment .dhca-summary__line--impulses .dhca-rich-text--impulses p {
+sheet.dh-compact.environment .dhca-summary__line--impulses .dhca-rich-text--impulses p {
   display: inline;
 }
 
-.environment.dh-compact-environment .dhca-summary__line--impulses .dhca-rich-text--impulses p + p::before {
+sheet.dh-compact.environment .dhca-summary__line--impulses .dhca-rich-text--impulses p + p::before {
   content: " ";
 }
 
-.environment.dh-compact-environment .dhca-detail-panel--environment {
+sheet.dh-compact.environment .dhca-detail-panel--environment {
   margin: 0;
 }
 
-.environment.dh-compact-environment .dhca-detail-panel__title {
+sheet.dh-compact.environment .dhca-detail-panel__title {
   margin: 0 0 4px !important;
   color: var(--dhca-text) !important;
   font-size: 14px !important;
@@ -1391,8 +1383,8 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   font-family: var(--dhca-font-family) !important;
 }
 
-.environment.dh-compact-environment .dhca-rich-text,
-.environment.dh-compact-environment .dhca-rich-text p {
+sheet.dh-compact.environment .dhca-rich-text,
+sheet.dh-compact.environment .dhca-rich-text p {
   margin: 0;
   color: var(--dhca-content-text-soft);
   font-size: 14px !important;
@@ -1402,52 +1394,49 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   text-align: left;
 }
 
-.environment.dh-compact-environment:has(.environment-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover) .window-header {
+sheet.dh-compact.environment:has(.environment-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover) .window-header {
   opacity: 1;
   pointer-events: auto;
 }
 
-.environment.dh-compact-environment:has(.environment-header-sheet:hover, .dhca-header__toolbar:hover) .dhca-header__toolbar {
+sheet.dh-compact.environment:has(.environment-header-sheet:hover, .dhca-header__toolbar:hover) .dhca-header__toolbar {
   pointer-events: auto;
 }
 
-.environment.dh-compact-environment:has(.environment-header-sheet:hover, .dhca-header__toolbar:hover) .dhca-tab-nav {
+sheet.dh-compact.environment:has(.environment-header-sheet:hover, .dhca-header__toolbar:hover) .dhca-tab-nav {
   height: 32px;
   max-height: 32px;
   opacity: 1;
   transform: translateY(0);
 }
 
-.environment.dh-compact-environment .dhca-tab-panel.active {
+sheet.dh-compact.environment .dhca-tab-panel.active {
   padding: 10px 10px !important;
 }
 
-.environment.dh-compact-environment .dhca-panel + .dhca-panel {
+sheet.dh-compact.environment .dhca-panel + .dhca-panel {
   margin-top: 12px;
 }
 
-.environment.dh-compact-environment .dhca-actor-list,
-.environment.dh-compact-environment .dhca-tab-panel .dhca-actor-list {
+sheet.dh-compact.environment .dhca-actor-list,
+sheet.dh-compact.environment .dhca-tab-panel .dhca-actor-list {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.environment.dh-compact-environment .dhca-tab-panel .inventory-item .controls,
-.environment.dh-compact-environment .dhca-tab-panel .inventory-item .controls a[data-action="toChat"] {
+sheet.dh-compact.environment .dhca-tab-panel .inventory-item .controls,
+sheet.dh-compact.environment .dhca-tab-panel .inventory-item .controls a[data-action="toChat"] {
   display: none;
 }
 
-.environment.dh-compact-environment .dhca-tab-panel .inventory-item .invetory-description ul {
+sheet.dh-compact.environment .dhca-tab-panel .inventory-item .invetory-description ul {
   margin: 4px 0px;
 }
 
-.adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .secret,
-.environment.dh-compact-environment .dhca-tab-panel .inventory-item .secret,
-.adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .invetory-description .secret,
-.environment.dh-compact-environment .dhca-tab-panel .inventory-item .invetory-description .secret,
-.adversary.dh-compact-adversary .dhca-tab-panel .inventory-item .invetory-description .secret p,
-.environment.dh-compact-environment .dhca-tab-panel .inventory-item .invetory-description .secret p {
+sheet.dh-compact .dhca-tab-panel .inventory-item .secret,
+sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description .secret,
+sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description .secret p {
   border: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
@@ -1455,11 +1444,11 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   color: var(--dhca-text-subtle) !important;
 }
 
-.environment.dh-compact-environment .dhca-tab-panel .inventory-item-compact .controls {
+sheet.dh-compact.environment .dhca-tab-panel .inventory-item-compact .controls {
   display: none;
 }
 
-.environment.dh-compact-environment .dhca-actor-list .inventory-item-compact {
+sheet.dh-compact.environment .dhca-actor-list .inventory-item-compact {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1472,15 +1461,15 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   min-width: 0;
 }
 
-.environment.dh-compact-environment .dhca-actor-list .inventory-item-compact:last-child {
+sheet.dh-compact.environment .dhca-actor-list .inventory-item-compact:last-child {
   margin-bottom: 0;
 }
 
-.environment.dh-compact-environment .dhca-actor-list .img-portait {
+sheet.dh-compact.environment .dhca-actor-list .img-portait {
   display: none !important;
 }
 
-.environment.dh-compact-environment .dhca-actor-list .item-name {
+sheet.dh-compact.environment .dhca-actor-list .item-name {
   flex: 0 1 auto;
   min-width: 0;
   margin: 0;
@@ -1494,7 +1483,7 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   white-space: nowrap;
 }
 
-.environment.dh-compact-environment .dhca-actor-list .item-labels {
+sheet.dh-compact.environment .dhca-actor-list .item-labels {
   flex: 1 1 auto;
   display: inline-flex;
   align-items: center;
@@ -1502,15 +1491,15 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   white-space: nowrap;
 }
 
-.environment.dh-compact-environment .dhca-actor-list .label,
-.environment.dh-compact-environment .dhca-actor-list .label span {
+sheet.dh-compact.environment .dhca-actor-list .label,
+sheet.dh-compact.environment .dhca-actor-list .label span {
   color: var(--dhca-attack-meta) !important;
   font-size: 14px !important;
   font-family: var(--dhca-font-family);
   line-height: 1.45 !important;
 }
 
-.environment.dh-compact-environment .dhca-actor-list .label {
+sheet.dh-compact.environment .dhca-actor-list .label {
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
@@ -1519,13 +1508,13 @@ body.theme-dark .environment.dh-compact-environment:not(.theme-light),
   white-space: nowrap;
 }
 
-.environment.dh-compact-environment .dhca-panel--notes .editor,
-.environment.dh-compact-environment .dhca-panel--notes .prosemirror,
-.environment.dh-compact-environment .dhca-panel--notes textarea {
+sheet.dh-compact.environment .dhca-panel--notes .editor,
+sheet.dh-compact.environment .dhca-panel--notes .prosemirror,
+sheet.dh-compact.environment .dhca-panel--notes textarea {
   min-height: 240px;
 }
 
-.environment.dh-compact-environment .dhca-notes__attribution {
+sheet.dh-compact.environment .dhca-notes__attribution {
   display: block;
   margin-top: 10px;
   color: var(--dhca-text-soft);

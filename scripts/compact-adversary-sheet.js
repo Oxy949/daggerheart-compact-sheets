@@ -17,7 +17,7 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
     static DEFAULT_OPTIONS = foundry.utils.mergeObject(
       foundry.utils.deepClone(BaseAdversarySheet.DEFAULT_OPTIONS),
       {
-        classes: [...new Set([...(BaseAdversarySheet.DEFAULT_OPTIONS.classes ?? []), "dh-compact-adversary"])],
+        classes: [...new Set([...(BaseAdversarySheet.DEFAULT_OPTIONS.classes ?? []), "dh-compact"])],
         position: {
           ...(BaseAdversarySheet.DEFAULT_OPTIONS.position ?? {}),
           ...DEFAULT_WINDOWS.adversary

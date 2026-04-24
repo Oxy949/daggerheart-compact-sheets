@@ -1,4 +1,4 @@
-export const MODULE_ID = "daggerheart-compact-adversary-sheet";
+export const MODULE_ID = "daggerheart-compact-sheets";
 export const SYSTEM_ID = "daggerheart";
 export const SHEET_LABELS = Object.freeze({
   adversary: "Compact Adversary Sheet",

@@ -14,7 +14,7 @@ export function createCompactEnvironmentSheetClass(BaseEnvironmentSheet) {
     static DEFAULT_OPTIONS = foundry.utils.mergeObject(
       foundry.utils.deepClone(BaseEnvironmentSheet.DEFAULT_OPTIONS),
       {
-        classes: [...new Set([...(BaseEnvironmentSheet.DEFAULT_OPTIONS.classes ?? []), "dh-compact-environment"])],
+        classes: [...new Set([...(BaseEnvironmentSheet.DEFAULT_OPTIONS.classes ?? []), "dh-compact"])],
         position: {
           ...(BaseEnvironmentSheet.DEFAULT_OPTIONS.position ?? {}),
           ...DEFAULT_WINDOWS.environment

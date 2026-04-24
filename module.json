@@ -1,7 +1,7 @@
 {
-  "id": "daggerheart-compact-adversary-sheet",
-  "title": "Daggerheart: Compact Adversary & Environment Sheets",
-  "description": "Compact adversary and environment sheets for Foundry VTT 14 and the Foundryborne Daggerheart system, with an aggressive card-style layout modeled after printable reference cards while keeping core sheet functionality.",
+  "id": "daggerheart-compact-sheets",
+  "title": "Daggerheart: Compact Sheets",
+  "description": "Compact sheets for Foundry VTT 14 and the Foundryborne Daggerheart system, with an aggressive card-style layout modeled after printable reference cards while keeping core sheet functionality.",
   "version": "0.2.0",
   "compatibility": {
     "minimum": "13",
@@ -31,7 +31,7 @@
     "scripts/main.js"
   ],
   "styles": [
-    "styles/compact-adversary-sheet.css"
+    "styles/compact-sheets.css"
   ],
   "license": "MIT"
 }
