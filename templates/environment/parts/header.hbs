@@ -28,14 +28,13 @@
       <span class="dhca-summary__label">{{localize 'DAGGERHEART.GENERAL.difficulty'}}:</span>
       <span class="dhca-summary__value">{{ifThen source.system.difficulty source.system.difficulty '-'}}</span>
     </div>
+    {{#if compact.hasImpulses}}
+      <div class="dhca-summary__line dhca-summary__line--impulses">
+        <span class="dhca-summary__label">{{localize 'DAGGERHEART.ACTORS.Environment.FIELDS.impulses.label'}}:</span>
+        <div class="dhca-summary__value dhca-rich-text dhca-rich-text--impulses">{{{source.system.impulses}}}</div>
+      </div>
+    {{/if}}
   </div>
-
-  {{#if compact.hasImpulses}}
-    <section class="dhca-detail-panel dhca-detail-panel--environment">
-      <h3 class="dhca-detail-panel__title">{{localize 'DAGGERHEART.ACTORS.Environment.FIELDS.impulses.label'}}:</h3>
-      <div class="dhca-rich-text dhca-rich-text--impulses">{{{source.system.impulses}}}</div>
-    </section>
-  {{/if}}
 
   <div class="dhca-header__toolbar">
     <div class="dhca-tab-nav">
