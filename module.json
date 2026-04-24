@@ -35,6 +35,7 @@
     "styles/compact-header.css",
     "styles/compact-panels.css",
     "styles/compact-adversary.css",
+    "styles/compact-character.css",
     "styles/compact-environment.css"
   ],
   "license": "MIT"

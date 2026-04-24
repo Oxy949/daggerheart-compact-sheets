@@ -2,10 +2,10 @@
   --dhca-bg: var(--color-light-2, #efe6d8);
   --dhca-surface: var(--color-light-1, #f7f3e8);
   --dhca-surface-alt: var(--color-light-2, #efe6d8);
-  --dhca-text: var(--color-text-primary, #262626);
-  --dhca-text-strong: var(--color-text-emphatic, #191813);
-  --dhca-text-soft: var(--color-text-secondary, #4b4a44);
-  --dhca-text-subtle: var(--color-text-subtle, var(--dhca-text-soft));
+  --dhca-text: var(--color-dark-2, #262626);
+  --dhca-text-strong: var(--color-dark-1, #191813);
+  --dhca-text-soft: var(--color-dark-3, #4b4a44);
+  --dhca-text-subtle: var(--color-dark-4, #68665d);
   --dhca-line: var(--color-light-5, #9f8475);
   --dhca-accent: var(--color-warm-1, #ee9b3a);
   --dhca-accent-strong: var(--color-warm-2, #c9593f);
@@ -66,10 +66,10 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
   --dhca-bg: var(--color-cool-5, #0b0a13);
   --dhca-surface: var(--color-cool-5-90, rgba(11, 10, 19, 0.9));
   --dhca-surface-alt: var(--color-cool-4, #302831);
-  --dhca-text: var(--color-text-primary, #efe6d8);
-  --dhca-text-strong: var(--color-text-emphatic, #f7f3e8);
-  --dhca-text-soft: var(--color-text-secondary, #e7d1b1);
-  --dhca-text-subtle: var(--color-text-subtle, var(--dhca-text-soft));
+  --dhca-text: var(--color-light-2, #efe6d8);
+  --dhca-text-strong: var(--color-light-1, #f7f3e8);
+  --dhca-text-soft: var(--color-light-3, #e7d1b1);
+  --dhca-text-subtle: var(--color-light-5, #9f8475);
   --dhca-line: var(--color-cool-3, #584a75);
   --dhca-accent: var(--color-warm-1, #ee9b3a);
   --dhca-accent-strong: var(--color-warm-2, #c9593f);
@@ -177,6 +177,7 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
 }
 
 .sheet.dh-compact.adversary .window-content,
+.sheet.dh-compact.character .window-content,
 .sheet.dh-compact.environment .window-content {
   position: relative;
   isolation: isolate;
@@ -189,7 +190,8 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
   color: var(--dhca-text) !important;
 }
 
-.sheet.dh-compact.adversary .window-content {
+.sheet.dh-compact.adversary .window-content,
+.sheet.dh-compact.character .window-content {
   grid-template-rows: auto minmax(0, 1fr) auto !important;
   grid-template-areas:
     "header"
@@ -210,6 +212,12 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
   grid-area: header;
 }
 
+.sheet.dh-compact.character .character-header-sheet {
+  position: relative;
+  z-index: 1;
+  grid-area: header;
+}
+
 .sheet.dh-compact .tab {
   position: relative;
   z-index: 1;
@@ -219,6 +227,12 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
 }
 
 .sheet.dh-compact.adversary .adversary-sidebar-sheet {
+  position: relative;
+  z-index: 1;
+  grid-area: footer;
+}
+
+.sheet.dh-compact.character .character-sidebar-sheet {
   position: relative;
   z-index: 1;
   grid-area: footer;

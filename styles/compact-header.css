@@ -368,8 +368,9 @@
 .sheet.dh-compact.adversary .dhca-experience-row,
 .sheet.dh-compact.adversary .dhca-experience-row *,
 .sheet.dh-compact.adversary .dhca-rich-text,
-.sheet.dh-compact.adversary .dhca-rich-text p {
-  color: var(--dhca-content-text-soft);
+.sheet.dh-compact.adversary .dhca-rich-text p,
+.sheet.dh-compact.adversary .dhca-rich-text * {
+  color: var(--dhca-content-text-soft) !important;
   font-size: 14px !important;
   font-family: var(--dhca-font-family) !important;
   line-height: 1.45 !important;
@@ -394,7 +395,7 @@
 .sheet.dh-compact.adversary .dhca-rich-text p,
 .sheet.dh-compact.adversary .dhca-rich-text--motives {
   margin: 0;
-  color: var(--dhca-content-text-soft);
+  color: var(--dhca-content-text-soft) !important;
   font-style: italic;
   font-family: var(--dhca-font-family);
 

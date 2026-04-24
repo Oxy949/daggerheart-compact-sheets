@@ -1,0 +1,129 @@
+<header class="character-header-sheet dhca-section dhca-section--header dhca-header dhca-header--character">
+  <div class="dhca-header__adornment" aria-hidden="true">
+    <div class="dhca-header__ribbon">{{compact.identity.ribbon}}</div>
+    <div class="dhca-header__tier">{{compact.identity.level}}</div>
+  </div>
+
+  <div class="dhca-header__identity">
+    <h1
+      class="input actor-name dhca-header__name"
+      contenteditable="plaintext-only"
+      data-property="name"
+      placeholder="{{localize 'DAGGERHEART.GENERAL.actorName'}}"
+    >{{source.name}}</h1>
+  </div>
+
+  <div class="dhca-character-lineage">
+    {{#if compact.identity.className}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.class.value.uuid}}">{{compact.identity.className}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="classes">{{localize 'TYPES.Item.class'}}</span>
+    {{/if}}
+
+    <span class="dhca-character-lineage__separator">/</span>
+
+    {{#if compact.identity.subclassName}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.class.subclass.uuid}}">{{compact.identity.subclassName}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="subclasses">{{localize 'TYPES.Item.subclass'}}</span>
+    {{/if}}
+
+    <span class="dhca-character-lineage__separator">/</span>
+
+    {{#if compact.identity.communityName}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.community.uuid}}">{{compact.identity.communityName}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="communities">{{localize 'TYPES.Item.community'}}</span>
+    {{/if}}
+
+    <span class="dhca-character-lineage__separator">/</span>
+
+    {{#if compact.identity.ancestryName}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.ancestry.uuid}}">{{compact.identity.ancestryName}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="ancestries">{{localize 'TYPES.Item.ancestry'}}</span>
+    {{/if}}
+  </div>
+
+  {{#if compact.identity.multiclassLabel}}
+    <div class="dhca-character-lineage dhca-character-lineage--secondary">{{compact.identity.multiclassLabel}}</div>
+  {{/if}}
+
+  <div class="dhca-character-focus">
+    <section class="dhca-character-hope" aria-label="{{localize 'DAGGERHEART.GENERAL.hope'}}">
+      <span class="dhca-character-hope__label">{{localize 'DAGGERHEART.GENERAL.hope'}}</span>
+      <div class="dhca-character-hope__track">
+        {{#each compact.resources.hope.slots as |slot|}}
+          <button
+            type="button"
+            class="dhca-character-hope__pip {{#if slot.filled}}filled{{/if}}"
+            data-action="toggleHope"
+            data-value="{{slot.value}}"
+            data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.hope'}} {{slot.value}}"
+          >
+            <i class="{{#if slot.filled}}fa-solid fa-diamond{{else}}fa-regular fa-circle{{/if}}"></i>
+          </button>
+        {{/each}}
+        {{#times compact.scars}}
+          <span class="dhca-character-hope__pip dhca-character-hope__pip--scar" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.scars'}}">
+            <i class="fa-regular fa-ban"></i>
+          </span>
+        {{/times}}
+      </div>
+    </section>
+
+    {{#if compact.hasDomains}}
+      <div class="dhca-character-domains">
+        {{#each document.system.domainData as |data|}}
+          <img src="{{data.src}}" alt="" data-tooltip="{{data.label}}" />
+        {{/each}}
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="dhca-character-traits">
+    {{#each compact.traits as |trait|}}
+      <button
+        type="button"
+        class="dhca-character-trait {{#if trait.tierMarked}}marked{{/if}}"
+        data-action="rollAttribute"
+        data-attribute="{{trait.key}}"
+        data-value="{{trait.value}}"
+        data-tooltip="<b>{{trait.name}}:</b><br>{{#each trait.verbs}}{{this}}<br>{{/each}}"
+      >
+        <span class="dhca-character-trait__name">{{localize trait.shortLabel}}</span>
+        <span class="dhca-character-trait__value">{{numberFormat trait.value sign=true}}</span>
+        <i class="{{#if trait.tierMarked}}fa-solid{{else}}fa-regular{{/if}} fa-circle"></i>
+      </button>
+    {{/each}}
+  </div>
+
+  <div class="dhca-header__toolbar">
+    {{> 'modules/daggerheart-compact-sheets/templates/parts/tab-nav.hbs'}}
+    <div class="dhca-header-actions">
+      {{#if document.system.needsCharacterSetup}}
+        <button type="button" data-action="levelManagement" data-tooltip-text="{{localize 'DAGGERHEART.APPLICATIONS.CharacterCreation.buttonTitle'}}">
+          <i class="fa-solid fa-wand-sparkles"></i>
+        </button>
+      {{else if document.system.levelData.canLevelUp}}
+        <button type="button" data-action="levelManagement" data-tooltip-text="{{localize 'DAGGERHEART.ACTORS.Character.levelUp'}}">
+          <i class="fa-solid fa-angles-up"></i>
+        </button>
+      {{/if}}
+      {{#if document.parties.size}}
+        <button type="button" data-action="viewParty" data-tooltip-text="{{localize 'DAGGERHEART.ACTORS.Character.viewParty'}}">
+          <i class="fa-solid fa-users"></i>
+        </button>
+      {{/if}}
+      <button type="button" data-action="useDowntime" data-type="shortRest" data-tooltip-text="{{localize 'DAGGERHEART.APPLICATIONS.Downtime.shortRest.title'}}">
+        <i class="fa-solid fa-utensils"></i>
+      </button>
+      <button type="button" data-action="useDowntime" data-type="longRest" data-tooltip-text="{{localize 'DAGGERHEART.APPLICATIONS.Downtime.longRest.title'}}">
+        <i class="fa-solid fa-bed"></i>
+      </button>
+      <button type="button" data-action="openSettings" data-tooltip-text="{{localize 'DAGGERHEART.UI.Tooltip.openSheetSettings'}}">
+        <i class="fa-solid fa-wrench"></i>
+      </button>
+    </div>
+  </div>
+</header>

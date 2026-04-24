@@ -1,0 +1,56 @@
+<section
+  class="tab {{tabs.features.cssClass}} {{tabs.features.id}} dhca-section dhca-section--body dhca-tab-panel dhca-tab-panel--features"
+  data-tab="{{tabs.features.id}}"
+  data-group="{{tabs.features.group}}"
+>
+  <div class="dhca-tab-panel__scroll">
+    <div class="features-sections dhca-character-feature-sections">
+      {{#each document.system.sheetLists as |category|}}
+        {{#if (eq category.type 'feature')}}
+          <fieldset class="drop-section dhca-panel dhca-panel--features">
+            <legend class="dhca-panel__title">{{localize category.title}}</legend>
+            {{#if @root.editable}}
+              <a
+                class="dhca-panel__create"
+                data-action="addNewItem"
+                data-document-class="Item"
+                data-type="feature"
+                data-tooltip="{{localize 'DOCUMENT.Create' type=''}}"
+              >
+                <i class="fa-solid fa-plus icon-button"></i>
+              </a>
+            {{/if}}
+
+            <ul class="items-list dhca-feature-list">
+              {{#each category.values as |item|}}
+                {{> 'daggerheart.inventory-item'
+                  item=item
+                  type='feature'
+                  actorType='character'
+                  hideContextMenu=true
+                  showActions=true
+                }}
+              {{/each}}
+            </ul>
+          </fieldset>
+        {{else if category.values}}
+          <fieldset class="drop-section dhca-panel dhca-panel--features">
+            <legend class="dhca-panel__title">{{localize category.title}}</legend>
+
+            <ul class="items-list dhca-feature-list">
+              {{#each category.values as |item|}}
+                {{> 'daggerheart.inventory-item'
+                  item=item
+                  type='feature'
+                  actorType='character'
+                  hideContextMenu=true
+                  showActions=true
+                }}
+              {{/each}}
+            </ul>
+          </fieldset>
+        {{/if}}
+      {{/each}}
+    </div>
+  </div>
+</section>

@@ -1,4 +1,4 @@
-import { I18N_KEYS, RESOURCE_ACTIONS, RESOURCE_GROUP_SIZE } from "./constants.js";
+import { I18N_KEYS, RESOURCE_ACTIONS, RESOURCE_GROUP_SIZE, RESOURCE_KEYS } from "./constants.js";
 
 export function buildCompactContext(document) {
   const hitPoints = buildResourceTrack("hitPoints", document.system.resources?.hitPoints);
@@ -43,6 +43,50 @@ export function buildCompactEnvironmentContext(document) {
       typeLabel: typeKey ? localizeFallback(typeKey, document.system.type) : null
     },
     potentialAdversaryCategories
+  };
+}
+
+export function buildCompactCharacterContext(document, attributes = {}) {
+  const domainData = document.system.domainData ?? {};
+  const className = getItemName(document.system.class?.value);
+  const subclassName = getItemName(document.system.class?.subclass);
+  const communityName = getItemName(document.system.community);
+  const ancestryName = getItemName(document.system.ancestry);
+  const multiclassName = getItemName(document.system.multiclass?.value);
+  const multiclassSubclassName = getItemName(document.system.multiclass?.subclass);
+
+  const level = document.system.needsCharacterSetup
+    ? 0
+    : toOptionalNumber(document.system.levelData?.level?.changed)
+      ?? toOptionalNumber(document.system.levelData?.level?.current)
+      ?? "-";
+
+  const ribbon = [className, subclassName].filter(Boolean).join(" / ")
+    || localizeFallback("TYPES.Actor.character", "Character");
+
+  return {
+    canEditImage: document.isOwner ?? false,
+    hasDomains: hasEntries(domainData),
+    hasExperiences: !foundry.utils.isEmpty(document.system.experiences),
+    identity: {
+      ancestryName,
+      className,
+      communityName,
+      level,
+      multiclassLabel: [multiclassName, multiclassSubclassName].filter(Boolean).join(" / "),
+      ribbon,
+      subclassName,
+      tierLabel: localizeFallback(I18N_KEYS.tier, "Tier")
+    },
+    resources: {
+      armorScore: buildResourceTrack(RESOURCE_KEYS.armorScore, document.system.armorScore),
+      hitPoints: buildResourceTrack(RESOURCE_KEYS.hitPoints, document.system.resources?.hitPoints),
+      hope: buildResourceTrack(RESOURCE_KEYS.hope, document.system.resources?.hope),
+      stress: buildResourceTrack(RESOURCE_KEYS.stress, document.system.resources?.stress)
+    },
+    scars: Math.max(toNumber(document.system.scars), 0),
+    thresholds: buildThresholds(document.system.damageThresholds),
+    traits: buildTraitSummaries(attributes)
   };
 }
 
@@ -91,6 +135,27 @@ function buildResourceTrack(key, resource = {}, groupSize = RESOURCE_GROUP_SIZE)
     slots,
     value
   };
+}
+
+function buildTraitSummaries(attributes = {}) {
+  return Object.entries(attributes).map(([key, attribute]) => ({
+    key,
+    name: attribute.name ?? localizeFallback(`DAGGERHEART.CONFIG.Traits.${key}.name`, key),
+    shortLabel: `DAGGERHEART.CONFIG.Traits.${key}.short`,
+    tierMarked: Boolean(attribute.tierMarked),
+    value: toNumber(attribute.value),
+    verbs: Array.from(attribute.verbs ?? [])
+  }));
+}
+
+function getItemName(item) {
+  return item?.name ?? null;
+}
+
+function hasEntries(value) {
+  if (!value) return false;
+  if (typeof value[Symbol.iterator] === "function") return Array.from(value).length > 0;
+  return Object.keys(value).length > 0;
 }
 
 function groupItems(items, size) {

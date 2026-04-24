@@ -1,4 +1,5 @@
 import { createCompactAdversarySheetClass } from "./compact-adversary-sheet.js";
+import { createCompactCharacterSheetClass } from "./compact-character-sheet.js";
 import { createCompactEnvironmentSheetClass } from "./compact-environment-sheet.js";
 import {
   MODULE_ID,
@@ -38,6 +39,16 @@ function registerSettings() {
     default: true,
     requiresReload: true
   });
+
+  game.settings.register(MODULE_ID, SETTING_KEYS.makeCharacterDefault, {
+    name: "Use compact sheet as the default character sheet",
+    hint: "When enabled, character actors open with the compact sheet by default. Reload after changing this setting.",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+    requiresReload: true
+  });
 }
 
 async function preloadTemplates() {
@@ -61,6 +72,14 @@ function registerCompactSheets() {
     label: SHEET_LABELS.environment,
     makeDefault: game.settings.get(MODULE_ID, SETTING_KEYS.makeEnvironmentDefault),
     type: "environment"
+  });
+
+  registerCompactSheet({
+    baseSheet: actorSheets?.Character,
+    factory: createCompactCharacterSheetClass,
+    label: SHEET_LABELS.character,
+    makeDefault: game.settings.get(MODULE_ID, SETTING_KEYS.makeCharacterDefault),
+    type: "character"
   });
 }
 

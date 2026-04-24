@@ -1,0 +1,66 @@
+<section
+  class="tab {{tabs.inventory.cssClass}} {{tabs.inventory.id}} dhca-section dhca-section--body dhca-tab-panel dhca-tab-panel--inventory"
+  data-tab="{{tabs.inventory.id}}"
+  data-group="{{tabs.inventory.group}}"
+>
+  <div class="dhca-tab-panel__scroll">
+    <div class="search-section dhca-search-section">
+      <label class="search-bar dhca-search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" name="search" class="search-inventory" placeholder="{{localize 'DAGGERHEART.GENERAL.searchPlaceholder'}}" />
+      </label>
+      <button type="button" class="filter-button dhca-filter-button" data-tooltip-text="Filter">
+        <i class="fa-solid fa-filter"></i>
+      </button>
+    </div>
+
+    {{#if inventory.hasCurrency}}
+      <div class="currency-section dhca-currency-section">
+        {{#each inventory.currencies as |currency key|}}
+          {{#if currency.enabled}}
+            <label class="input currency dhca-currency" data-currency="{{key}}">
+              <span class="drag-handle">
+                <i class="{{currency.icon}}" inert></i>
+                {{localize currency.label}}
+              </span>
+              <input type="text" name="{{currency.field.fieldPath}}" data-allow-delta value="{{currency.value}}" data-dtype="Number" min="0" step="1" />
+            </label>
+          {{/if}}
+        {{/each}}
+      </div>
+    {{/if}}
+
+    <div class="items-section dhca-character-items-section">
+      {{> 'daggerheart.inventory-items'
+        title='TYPES.Item.weapon'
+        type='weapon'
+        collection=@root.inventory.weapons
+        canCreate=@root.editable
+        hideResources=true
+      }}
+
+      {{> 'daggerheart.inventory-items'
+        title='TYPES.Item.armor'
+        type='armor'
+        collection=@root.inventory.armor
+        canCreate=@root.editable
+        hideResources=true
+      }}
+
+      {{> 'daggerheart.inventory-items'
+        title='TYPES.Item.consumable'
+        type='consumable'
+        collection=@root.inventory.consumables
+        canCreate=@root.editable
+      }}
+
+      {{> 'daggerheart.inventory-items'
+        title='TYPES.Item.loot'
+        type='loot'
+        collection=@root.inventory.loot
+        canCreate=@root.editable
+        showActions=true
+      }}
+    </div>
+  </div>
+</section>

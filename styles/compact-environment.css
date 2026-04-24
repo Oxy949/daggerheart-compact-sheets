@@ -74,9 +74,10 @@
 }
 
 .sheet.dh-compact.environment .dhca-rich-text,
-.sheet.dh-compact.environment .dhca-rich-text p {
+.sheet.dh-compact.environment .dhca-rich-text p,
+.sheet.dh-compact.environment .dhca-rich-text * {
   margin: 0;
-  color: var(--dhca-content-text-soft);
+  color: var(--dhca-content-text-soft) !important;
   font-size: 14px !important;
   line-height: 1.45 !important;
   font-family: var(--dhca-font-family);

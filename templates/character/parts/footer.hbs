@@ -1,0 +1,121 @@
+<aside class="character-sidebar-sheet dhca-section dhca-section--footer dhca-footer dhca-character-footer">
+  <div class="dhca-footer__inner">
+    <div class="dhca-footer__title">
+      <span>{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}} / {{localize 'DAGGERHEART.GENERAL.stress'}} / {{localize 'DAGGERHEART.GENERAL.armorSlots'}}</span>
+    </div>
+
+    <div class="dhca-character-status">
+      <div class="dhca-character-status__item">
+        <span class="dhca-character-status__value">{{document.system.evasion}}</span>
+        <span class="dhca-character-status__label">{{localize 'DAGGERHEART.GENERAL.evasion'}}</span>
+      </div>
+      <div class="dhca-character-status__item">
+        <span class="dhca-character-status__value">{{document.system.armorScore.value}}/{{document.system.armorScore.max}}</span>
+        <button type="button" class="dhca-character-status__label" data-action="toggleArmorMangement">
+          {{localize 'DAGGERHEART.GENERAL.armorSlots'}}
+          <i class="fa-solid fa-gear"></i>
+        </button>
+      </div>
+      <div class="dhca-character-status__item">
+        <span class="dhca-character-status__value">{{document.system.proficiency}}</span>
+        <span class="dhca-character-status__label">{{localize 'DAGGERHEART.GENERAL.proficiency'}}</span>
+      </div>
+    </div>
+
+    <div class="dhca-thresholds">
+      <div class="dhca-thresholds__label">
+        <span class="dhca-thresholds__name">{{localize 'DAGGERHEART.GENERAL.DamageThresholds.minor'}}</span>
+      </div>
+
+      <span class="dhca-thresholds__value">{{compact.thresholds.major}}</span>
+
+      <div class="dhca-thresholds__label">
+        <span class="dhca-thresholds__name">{{localize 'DAGGERHEART.GENERAL.DamageThresholds.major'}}</span>
+      </div>
+
+      <span class="dhca-thresholds__value">{{compact.thresholds.severe}}</span>
+
+      <div class="dhca-thresholds__label">
+        <span class="dhca-thresholds__name">{{localize 'DAGGERHEART.GENERAL.DamageThresholds.severe'}}</span>
+      </div>
+    </div>
+
+    <div class="dhca-resources">
+      <div class="dhca-resource-row dhca-resource-row--hp">
+        <span class="dhca-resource-row__label">
+          <span class="dhca-resource-row__label-name">{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}</span>
+          <span class="dhca-resource-row__label-max">{{compact.resources.hitPoints.value}} / {{compact.resources.hitPoints.max}}</span>
+        </span>
+        <button type="button" class="dhca-resource-step" data-dhca-resource-step="hitPoints" data-direction="-1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}">-</button>
+        <div class="dhca-resource-row__track">
+          {{#each compact.resources.hitPoints.slotGroups as |group|}}
+            <div class="dhca-resource-row__group">
+              {{#each group as |slot|}}
+                <button
+                  type="button"
+                  class="dhca-resource-row__pip {{#if slot.filled}}filled{{/if}}"
+                  data-action="toggleHitPoints"
+                  data-value="{{slot.value}}"
+                  data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}} {{slot.value}}"
+                ></button>
+              {{/each}}
+            </div>
+          {{/each}}
+        </div>
+        <button type="button" class="dhca-resource-step" data-dhca-resource-step="hitPoints" data-direction="1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}">+</button>
+      </div>
+
+      <div class="dhca-resource-row dhca-resource-row--stress">
+        <span class="dhca-resource-row__label">
+          <span class="dhca-resource-row__label-name">{{localize 'DAGGERHEART.GENERAL.stress'}}</span>
+          <span class="dhca-resource-row__label-max">{{compact.resources.stress.value}} / {{compact.resources.stress.max}}</span>
+        </span>
+        <button type="button" class="dhca-resource-step" data-dhca-resource-step="stress" data-direction="-1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.stress'}}">-</button>
+        <div class="dhca-resource-row__track">
+          {{#each compact.resources.stress.slotGroups as |group|}}
+            <div class="dhca-resource-row__group">
+              {{#each group as |slot|}}
+                <button
+                  type="button"
+                  class="dhca-resource-row__pip {{#if slot.filled}}filled{{/if}}"
+                  data-action="toggleStress"
+                  data-value="{{slot.value}}"
+                  data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.stress'}} {{slot.value}}"
+                ></button>
+              {{/each}}
+            </div>
+          {{/each}}
+        </div>
+        <button type="button" class="dhca-resource-step" data-dhca-resource-step="stress" data-direction="1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.stress'}}">+</button>
+      </div>
+
+      <div class="dhca-resource-row dhca-resource-row--armor">
+        <span class="dhca-resource-row__label">
+          <span class="dhca-resource-row__label-name">{{localize 'DAGGERHEART.GENERAL.armorSlots'}}</span>
+          <span class="dhca-resource-row__label-max">{{compact.resources.armorScore.value}} / {{compact.resources.armorScore.max}}</span>
+        </span>
+        <button type="button" class="dhca-resource-step" data-dhca-resource-step="armorScore" data-direction="-1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.armorSlots'}}">-</button>
+        <div class="dhca-resource-row__track">
+          {{#each compact.resources.armorScore.slotGroups as |group|}}
+            <div class="dhca-resource-row__group">
+              {{#each group as |slot|}}
+                <button
+                  type="button"
+                  class="dhca-resource-row__pip {{#if slot.filled}}filled{{/if}}"
+                  data-action="toggleArmor"
+                  data-value="{{slot.value}}"
+                  data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.armorSlots'}} {{slot.value}}"
+                ></button>
+              {{/each}}
+            </div>
+          {{/each}}
+        </div>
+        <button type="button" class="dhca-resource-step" data-dhca-resource-step="armorScore" data-direction="1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.armorSlots'}}">+</button>
+      </div>
+    </div>
+
+    {{#if (and showAttribution document.system.attribution.artist)}}
+      <label class="dhca-footer__attribution">{{localize 'DAGGERHEART.GENERAL.artistAttribution' artist=document.system.attribution.artist}}</label>
+    {{/if}}
+  </div>
+</aside>
