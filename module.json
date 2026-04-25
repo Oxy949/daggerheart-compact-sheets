@@ -1,8 +1,8 @@
 {
   "id": "daggerheart-compact-sheets",
   "title": "Daggerheart: Compact Sheets",
-  "description": "Compact sheets for Foundry VTT 14 and the Foundryborne Daggerheart system, with an aggressive card-style layout modeled after printable reference cards while keeping core sheet functionality.",
-  "version": "0.2.0",
+  "description": "Compact sheets for Foundry VTT 13/14 and the Foundryborne Daggerheart system.",
+  "version": "#{VERSION}#",
   "compatibility": {
     "minimum": "13",
     "verified": "14"
@@ -16,7 +16,8 @@
           "minimum": "2.0.0"
         }
       }
-    ]
+    ],
+    "requires": []
   },
   "authors": [
     {
@@ -38,5 +39,9 @@
     "styles/compact-character.css",
     "styles/compact-environment.css"
   ],
-  "license": "MIT"
+  "url": "#{URL}#",
+  "manifest": "#{MANIFEST}#",
+  "download": "#{DOWNLOAD}#",
+  "license": "MIT",
+  "readme": "README.md"
 }
