@@ -17,38 +17,6 @@
     <div class="dhca-header__description">{{{description}}}</div>
   {{/if}}
 
-  <div class="dhca-header__stats">
-    {{#if compact.showResourceBlock}}
-      <div class="dhca-summary__line">
-        <span class="dhca-summary__label">{{localize 'DAGGERHEART.GENERAL.difficulty'}}:</span>
-        <span class="dhca-summary__value">{{ifThen source.system.difficulty source.system.difficulty '-'}}</span>
-      </div>
-    {{/if}}
-    <div class="dhca-summary__line">
-      <span class="dhca-summary__label">{{localize 'DAGGERHEART.GENERAL.attack'}}:</span>
-      <span class="dhca-summary__value">
-        {{#if compact.attackBonus includeZero=true}}
-          {{numberFormat compact.attackBonus sign=true}}
-        {{else}}
-          -
-        {{/if}}
-      </span>
-    </div>
-  </div>
-
-  <div class="dhca-header__attack">
-    <ul class="dhca-header__attack-list">
-      {{> 'daggerheart.inventory-item-compact'
-        item=document.system.attack
-        type='attack'
-        noCompendiumEdit=true
-        hideContextMenu=true
-        hideControls=(not compact.showInteractionButtons)
-        hideTooltip=false
-      }}
-    </ul>
-  </div>
-
   {{#unless compact.showResourceBlock}}
     <div class="dhca-header__compact-summary" aria-label="{{localize 'DAGGERHEART.GENERAL.details'}}">
       <div class="dhca-header__compact-summary-row">
@@ -103,6 +71,38 @@
       </div>
     </div>
   {{/unless}}
+
+  <div class="dhca-header__stats">
+    {{#if compact.showResourceBlock}}
+      <div class="dhca-summary__line">
+        <span class="dhca-summary__label">{{localize 'DAGGERHEART.GENERAL.difficulty'}}:</span>
+        <span class="dhca-summary__value">{{ifThen source.system.difficulty source.system.difficulty '-'}}</span>
+      </div>
+    {{/if}}
+    <div class="dhca-summary__line">
+      <span class="dhca-summary__label">{{localize 'DAGGERHEART.GENERAL.attack'}}:</span>
+      <span class="dhca-summary__value">
+        {{#if compact.attackBonus includeZero=true}}
+          {{numberFormat compact.attackBonus sign=true}}
+        {{else}}
+          -
+        {{/if}}
+      </span>
+    </div>
+  </div>
+
+  <div class="dhca-header__attack">
+    <ul class="dhca-header__attack-list">
+      {{> 'daggerheart.inventory-item-compact'
+        item=document.system.attack
+        type='attack'
+        noCompendiumEdit=true
+        hideContextMenu=true
+        hideControls=(not compact.showInteractionButtons)
+        hideTooltip=false
+      }}
+    </ul>
+  </div>
 
   <div class="dhca-header__details{{#unless compact.hasExperiences}} dhca-header__details--single{{/unless}}">
     {{#if compact.hasExperiences}}
