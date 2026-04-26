@@ -262,3 +262,402 @@
   display: none;
 }
 
+.sheet.dh-compact.dh-minimal-adversary {
+  --dhca-minimal-paper: #f4f0e7;
+  --dhca-minimal-ink: #28272c;
+  --dhca-minimal-soft: #3b3840;
+  --dhca-minimal-rule: #b9a779;
+  --dhca-minimal-rule-soft: #d7c798;
+  --dhca-minimal-action-bg: rgb(244 240 231 / 92%);
+  background: transparent !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary,
+.sheet.dh-compact.dh-minimal-adversary :not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"]) {
+  font-family: var(--dhca-font-family) !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary.adversary .window-content {
+  display: block !important;
+  grid-template-areas: none !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+  padding: 0 !important;
+  overflow: auto !important;
+  background: transparent !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .adversary-header-sheet.dhca-minimal-sheet {
+  position: relative;
+  min-height: 100%;
+  padding: 20px 18px 24px;
+  border: 2px solid var(--dhca-minimal-rule);
+  background: var(--dhca-minimal-paper);
+  color: var(--dhca-minimal-ink);
+  clip-path: polygon(
+    10px 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    10px 100%,
+    0 calc(100% - 10px),
+    0 10px
+  );
+}
+
+.sheet.dh-compact.dh-minimal-adversary .window-header {
+  padding-top: 6px !important;
+  padding-right: 6px !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-sheet:hover .dhca-minimal-actions,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-actions:focus-within {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-actions button {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  padding: 0;
+  border: 1px solid var(--dhca-minimal-rule);
+  border-radius: 999px;
+  background: var(--dhca-minimal-action-bg);
+  color: var(--dhca-minimal-ink);
+  box-shadow: none;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-heading {
+  display: grid;
+  gap: 3px;
+  margin: 0;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-name {
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: var(--dhca-minimal-ink) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0;
+  line-height: 1 !important;
+  text-align: left !important;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-tier {
+  color: var(--dhca-minimal-ink);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.1;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-description,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-description p,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-motives,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-motives p {
+  margin: 0;
+  color: var(--dhca-minimal-soft) !important;
+  line-height: 1.35 !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-description,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-description p {
+  font-style: italic;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-description p,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-motives p {
+  display: inline;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-motives strong {
+  color: var(--dhca-minimal-ink);
+  font-weight: 900;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-summary {
+  display: grid;
+  gap: 4px;
+  margin: 7px 0 10px;
+  padding: 8px 18px 9px;
+  border-top: 2px solid var(--dhca-minimal-rule);
+  border-bottom: 2px solid var(--dhca-minimal-rule);
+  color: var(--dhca-minimal-ink);
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-summary__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 7px;
+  color: var(--dhca-minimal-soft);
+  line-height: 1.35;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-summary strong {
+  color: var(--dhca-minimal-ink);
+  font-weight: 900;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-separator {
+  color: var(--dhca-minimal-ink);
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack__list {
+  display: inline-flex;
+  align-items: baseline;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: inherit;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .inventory-item-compact {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font: inherit !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .img-portait,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .controls {
+  display: none !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .item-name,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .item-labels,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .label,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .label span,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .label i {
+  font-size: inherit !important;
+  line-height: 1.35 !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .item-name {
+  align-self: baseline !important;
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--dhca-minimal-ink) !important;
+  font-size: inherit !important;
+  font-weight: 900 !important;
+  line-height: inherit !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .item-name::after {
+  content: ":";
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .label {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  color: var(--dhca-minimal-soft);
+  gap: 0 5px;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .label > span {
+  color: transparent !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .label > span::before {
+  content: "|";
+  color: var(--dhca-minimal-ink);
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-experience {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 5px;
+  margin-top: 4px;
+  padding-top: 7px;
+  border-top: 1px dotted var(--dhca-minimal-rule-soft);
+  color: var(--dhca-minimal-soft);
+  line-height: 1.35;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-experience__item:not(:last-child)::after {
+  content: ",";
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-features.dhca-tab-panel {
+  position: relative;
+  display: block;
+  padding: 0 !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-features__title {
+  margin: 0 0 6px !important;
+  color: var(--dhca-minimal-ink) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0;
+  line-height: 1.1 !important;
+  text-align: left !important;
+  text-transform: uppercase;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-create {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--dhca-minimal-rule);
+  border-radius: 999px;
+  background: var(--dhca-minimal-action-bg);
+  color: var(--dhca-minimal-ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-features:hover .dhca-minimal-feature-create,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-create:focus {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list {
+  display: grid !important;
+  gap: 6px;
+  column-width: auto;
+  column-gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list > .inventory-item {
+  display: block;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .inventory-item-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: start;
+  padding: 0;
+  background: transparent !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .inventory-item:hover .inventory-item-header,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .inventory-item:hover .inventory-item-content {
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .img-portait,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .expanded-icon,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .item-resource,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .simple-tag,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .controls,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .item-buttons {
+  display: none !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .item-label {
+  display: block !important;
+  min-width: 0;
+  padding-left: 18px;
+  color: var(--dhca-minimal-soft);
+  line-height: 1.3 !important;
+  text-indent: -18px;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .item-name,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .feature-form,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .feature-form span {
+  display: inline !important;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--dhca-minimal-ink) !important;
+  font-style: italic;
+  font-weight: 900 !important;
+  line-height: inherit !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .feature-form::before {
+  content: " - ";
+  font-weight: 900;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .dhca-feature-inline-colon {
+  color: var(--dhca-minimal-ink);
+  font-style: italic;
+  font-weight: 900;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .dhca-feature-inline-description,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .invetory-description,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .invetory-description p {
+  color: var(--dhca-minimal-soft) !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.3 !important;
+  text-indent: 0;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .dhca-feature-inline-description strong,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .dhca-feature-inline-description b,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .invetory-description strong,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .invetory-description b {
+  color: var(--dhca-minimal-ink) !important;
+  font-style: normal !important;
+  font-weight: 900 !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .inventory-item-content.extensible,
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .inventory-item-content.extensible.extended {
+  max-height: none;
+  overflow: visible;
+  padding: 0 0 0 18px !important;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .invetory-description p {
+  margin: 0;
+}
+
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-feature-list .invetory-description p + p {
+  margin-top: 4px;
+}

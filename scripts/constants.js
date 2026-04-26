@@ -1,9 +1,10 @@
 export const MODULE_ID = "daggerheart-compact-sheets";
 export const SYSTEM_ID = "daggerheart";
 export const SHEET_LABELS = Object.freeze({
-  adversary: "Compact Adversary Sheet",
-  character: "Compact Character Sheet",
-  environment: "Compact Environment Sheet"
+  adversary: "DHCS.Sheets.Adversary",
+  character: "DHCS.Sheets.Character",
+  environment: "DHCS.Sheets.Environment",
+  minimalAdversary: "DHCS.Sheets.MinimalAdversary"
 });
 
 export const SETTING_KEYS = Object.freeze({
@@ -32,6 +33,10 @@ export const ADVERSARY_TEMPLATE_PARTIALS = Object.freeze({
   tabNav: SHARED_TEMPLATE_PARTIALS.tabNav
 });
 
+export const MINIMAL_ADVERSARY_TEMPLATE_PARTIALS = Object.freeze({
+  sheet: `${TEMPLATE_ROOT}/adversary/minimal.hbs`
+});
+
 export const ENVIRONMENT_TEMPLATE_PARTIALS = Object.freeze({
   art: SHARED_TEMPLATE_PARTIALS.art,
   header: `${TEMPLATE_ROOT}/environment/parts/header.hbs`,
@@ -56,6 +61,7 @@ export const CHARACTER_TEMPLATE_PARTIALS = Object.freeze({
 export const PRELOAD_TEMPLATE_PATHS = Object.freeze(
   Array.from(new Set([
     ...Object.values(ADVERSARY_TEMPLATE_PARTIALS),
+    ...Object.values(MINIMAL_ADVERSARY_TEMPLATE_PARTIALS),
     ...Object.values(CHARACTER_TEMPLATE_PARTIALS),
     ...Object.values(ENVIRONMENT_TEMPLATE_PARTIALS)
   ]))
@@ -64,6 +70,10 @@ export const PRELOAD_TEMPLATE_PATHS = Object.freeze(
 export const DEFAULT_WINDOWS = Object.freeze({
   adversary: Object.freeze({
     width: 380,
+    height: "auto"
+  }),
+  minimalAdversary: Object.freeze({
+    width: 730,
     height: "auto"
   }),
   character: Object.freeze({

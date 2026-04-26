@@ -1,0 +1,114 @@
+<article class="adversary-header-sheet dhca-minimal-sheet">
+  <div class="dhca-minimal-actions">
+    <button type="button" data-action="reactionRoll" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.Roll.reaction'}}">
+      <i class="fa-solid fa-dice-d20"></i>
+    </button>
+    <button type="button" data-action="openSettings" data-tooltip-text="{{localize 'DAGGERHEART.UI.Tooltip.openSheetSettings'}}">
+      <i class="fa-solid fa-wrench"></i>
+    </button>
+  </div>
+
+  <header class="dhca-minimal-heading">
+    <h1
+      class="input actor-name dhca-minimal-name"
+      contenteditable="plaintext-only"
+      data-property="name"
+      placeholder="{{localize 'DAGGERHEART.GENERAL.actorName'}}"
+    >{{source.name}}</h1>
+
+    <div class="dhca-minimal-tier">
+      {{localize (concat 'DAGGERHEART.GENERAL.Tiers.' source.system.tier)}} {{adversaryType}}
+    </div>
+
+    {{#if description}}
+      <div class="dhca-minimal-description">{{{description}}}</div>
+    {{/if}}
+
+    <div class="dhca-minimal-motives">
+      <strong>{{localize 'DAGGERHEART.ACTORS.Adversary.FIELDS.motivesAndTactics.label'}}:</strong>
+      <span>{{{source.system.motivesAndTactics}}}</span>
+    </div>
+  </header>
+
+  <section class="dhca-minimal-summary" aria-label="{{localize 'DAGGERHEART.GENERAL.details'}}">
+    <div class="dhca-minimal-summary__row">
+      <span>
+        <strong>{{localize 'DAGGERHEART.GENERAL.difficulty'}}:</strong>
+        {{#if source.system.difficulty includeZero=true}}{{source.system.difficulty}}{{else}}-{{/if}}
+      </span>
+      <span class="dhca-minimal-separator">|</span>
+      <span>
+        <strong>{{localize 'DHCS.Labels.Thresholds'}}:</strong>
+        {{compact.thresholds.major}}/{{compact.thresholds.severe}}
+      </span>
+      <span class="dhca-minimal-separator">|</span>
+      <span>
+        <strong>{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}:</strong>
+        {{compact.resources.hitPoints.max}}
+      </span>
+      <span class="dhca-minimal-separator">|</span>
+      <span>
+        <strong>{{localize 'DAGGERHEART.GENERAL.stress'}}:</strong>
+        {{compact.resources.stress.max}}
+      </span>
+    </div>
+
+    <div class="dhca-minimal-summary__row dhca-minimal-attack">
+      <span>
+        <strong>{{localize 'DHCS.Labels.AttackShort'}}:</strong>
+        {{#if compact.attackBonus includeZero=true}}
+          {{numberFormat compact.attackBonus sign=true}}
+        {{else}}
+          -
+        {{/if}}
+      </span>
+      <span class="dhca-minimal-separator">|</span>
+      <ul class="dhca-minimal-attack__list">
+        {{> 'daggerheart.inventory-item-compact'
+          item=document.system.attack
+          type='attack'
+          noCompendiumEdit=true
+          hideControls=true
+          hideTooltip=false
+        }}
+      </ul>
+    </div>
+
+    {{#if compact.hasExperiences}}
+      <div class="dhca-minimal-experience">
+        <strong>{{localize 'DAGGERHEART.GENERAL.experience.single'}}:</strong>
+        {{#each source.system.experiences as |experience id|}}
+          <span class="dhca-minimal-experience__item" data-tooltip-text="{{experience.description}}">{{experience.name}} +{{experience.value}}</span>
+        {{/each}}
+      </div>
+    {{/if}}
+  </section>
+
+  <section class="dhca-minimal-features dhca-tab-panel dhca-tab-panel--features active">
+    <h2 class="dhca-minimal-features__title">{{localize tabs.features.label}}</h2>
+
+    {{#if @root.editable}}
+      <a
+        class="dhca-minimal-feature-create"
+        data-action="createDoc"
+        data-document-class="Item"
+        data-type="feature"
+        data-tooltip="{{localize 'DOCUMENT.Create' type=''}}"
+      >
+        <i class="fa-solid fa-plus"></i>
+      </a>
+    {{/if}}
+
+    <ul class="items-list dhca-feature-list dhca-minimal-feature-list">
+      {{#each @root.features as |item|}}
+        {{> 'daggerheart.inventory-item'
+          item=item
+          type='feature'
+          actorType=@root.document.type
+          hideContextMenu=true
+          showActions=@root.editable
+        }}
+      {{/each}}
+    </ul>
+  </section>
+</article>

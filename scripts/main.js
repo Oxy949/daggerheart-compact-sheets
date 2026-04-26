@@ -1,6 +1,7 @@
 import { createCompactAdversarySheetClass } from "./compact-adversary-sheet.js";
 import { createCompactCharacterSheetClass } from "./compact-character-sheet.js";
 import { createCompactEnvironmentSheetClass } from "./compact-environment-sheet.js";
+import { createMinimalAdversarySheetClass } from "./minimal-adversary-sheet.js";
 import {
   MODULE_ID,
   PRELOAD_TEMPLATE_PATHS,
@@ -21,8 +22,8 @@ Hooks.once("setup", () => {
 
 function registerSettings() {
   game.settings.register(MODULE_ID, SETTING_KEYS.makeAdversaryDefault, {
-    name: "Use compact sheet as the default adversary sheet",
-    hint: "When enabled, adversary actors open with the compact sheet by default. Reload after changing this setting.",
+    name: "DHCS.Settings.MakeAdversaryDefault.Name",
+    hint: "DHCS.Settings.MakeAdversaryDefault.Hint",
     scope: "world",
     config: true,
     type: Boolean,
@@ -31,8 +32,8 @@ function registerSettings() {
   });
 
   game.settings.register(MODULE_ID, SETTING_KEYS.makeEnvironmentDefault, {
-    name: "Use compact sheet as the default environment sheet",
-    hint: "When enabled, environment actors open with the compact sheet by default. Reload after changing this setting.",
+    name: "DHCS.Settings.MakeEnvironmentDefault.Name",
+    hint: "DHCS.Settings.MakeEnvironmentDefault.Hint",
     scope: "world",
     config: true,
     type: Boolean,
@@ -41,8 +42,8 @@ function registerSettings() {
   });
 
   game.settings.register(MODULE_ID, SETTING_KEYS.makeCharacterDefault, {
-    name: "Use compact sheet as the default character sheet",
-    hint: "When enabled, character actors open with the compact sheet by default. Reload after changing this setting.",
+    name: "DHCS.Settings.MakeCharacterDefault.Name",
+    hint: "DHCS.Settings.MakeCharacterDefault.Hint",
     scope: "world",
     config: true,
     type: Boolean,
@@ -63,6 +64,14 @@ function registerCompactSheets() {
     factory: createCompactAdversarySheetClass,
     label: SHEET_LABELS.adversary,
     makeDefault: game.settings.get(MODULE_ID, SETTING_KEYS.makeAdversaryDefault),
+    type: "adversary"
+  });
+
+  registerCompactSheet({
+    baseSheet: actorSheets?.Adversary,
+    factory: createMinimalAdversarySheetClass,
+    label: SHEET_LABELS.minimalAdversary,
+    makeDefault: false,
     type: "adversary"
   });
 

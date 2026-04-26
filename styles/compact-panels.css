@@ -328,7 +328,6 @@
   border: none !important;
   border-radius: 0px !important;
   background: unset;
-  color: var(--dhca-text);
   margin: 0;
   padding: 0;
 }

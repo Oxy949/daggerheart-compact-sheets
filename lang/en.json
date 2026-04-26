@@ -1,0 +1,28 @@
+{
+  "DHCS": {
+    "Labels": {
+      "AttackShort": "ATK",
+      "Thresholds": "Thresholds"
+    },
+    "Settings": {
+      "MakeAdversaryDefault": {
+        "Name": "Use compact sheet as the default adversary sheet",
+        "Hint": "When enabled, adversary actors open with the compact sheet by default. Reload after changing this setting."
+      },
+      "MakeCharacterDefault": {
+        "Name": "Use compact sheet as the default character sheet",
+        "Hint": "When enabled, character actors open with the compact sheet by default. Reload after changing this setting."
+      },
+      "MakeEnvironmentDefault": {
+        "Name": "Use compact sheet as the default environment sheet",
+        "Hint": "When enabled, environment actors open with the compact sheet by default. Reload after changing this setting."
+      }
+    },
+    "Sheets": {
+      "Adversary": "Compact Adversary Sheet",
+      "Character": "Compact Character Sheet",
+      "Environment": "Compact Environment Sheet",
+      "MinimalAdversary": "Minimal Adversary Sheet"
+    }
+  }
+}

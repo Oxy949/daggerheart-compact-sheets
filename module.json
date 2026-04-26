@@ -31,6 +31,18 @@
   "esmodules": [
     "scripts/main.js"
   ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "ru",
+      "name": "Русский",
+      "path": "lang/ru.json"
+    }
+  ],
   "styles": [
     "styles/compact-sheets.css",
     "styles/compact-header.css",
