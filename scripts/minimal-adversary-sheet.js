@@ -31,6 +31,7 @@ export function createMinimalAdversarySheetClass(BaseAdversarySheet) {
       this.#renderController = refreshRenderController(this.#renderController);
       expandFeatureDescriptions(this.element);
       inlineFeatureDescriptions(this.element, this.#renderController.signal);
+      normalizeAttackSeparators(this.element);
     }
 
     async close(options = {}) {
@@ -38,6 +39,16 @@ export function createMinimalAdversarySheetClass(BaseAdversarySheet) {
       return super.close(options);
     }
   };
+}
+
+function normalizeAttackSeparators(element) {
+  if (!element) return;
+
+  for (const separator of element.querySelectorAll(".dhca-minimal-attack .label > span")) {
+    if (separator.textContent.trim() !== "-") continue;
+    separator.textContent = "|";
+    separator.classList.add("dhca-minimal-attack-separator");
+  }
 }
 
 function createMinimalDefaultOptions(BaseAdversarySheet) {

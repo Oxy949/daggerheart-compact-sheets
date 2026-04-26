@@ -272,6 +272,16 @@
   background: transparent !important;
 }
 
+body.theme-dark .sheet.dh-compact.dh-minimal-adversary:not(.theme-light),
+.sheet.dh-compact.dh-minimal-adversary.theme-dark {
+  --dhca-minimal-paper: var(--dhca-surface);
+  --dhca-minimal-ink: var(--dhca-text-strong);
+  --dhca-minimal-soft: var(--dhca-text-soft);
+  --dhca-minimal-rule: rgb(231 209 177 / 52%);
+  --dhca-minimal-rule-soft: rgb(231 209 177 / 24%);
+  --dhca-minimal-action-bg: var(--dhca-surface-alt);
+}
+
 .sheet.dh-compact.dh-minimal-adversary,
 .sheet.dh-compact.dh-minimal-adversary :not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"]) {
   font-family: var(--dhca-font-family) !important;
@@ -487,12 +497,7 @@
   gap: 0 5px;
 }
 
-.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .label > span {
-  color: transparent !important;
-}
-
-.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .label > span::before {
-  content: "|";
+.sheet.dh-compact.dh-minimal-adversary .dhca-minimal-attack .dhca-minimal-attack-separator {
   color: var(--dhca-minimal-ink);
 }
 
