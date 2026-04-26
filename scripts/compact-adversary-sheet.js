@@ -28,6 +28,7 @@ const TAB_NAV_ENTRIES = Object.freeze([
 ]);
 
 const ATTACK_CHAT_ACTION_SELECTOR = ".dhca-header__attack .inventory-item-compact .item-name";
+const HEADER_RESOURCE_MAX_SELECTOR = ".dhca-header__resource-max[data-dhca-resource-path]";
 const HEADER_RESOURCE_VALUE_SELECTOR = ".dhca-header__resource-current[data-dhca-resource-path]";
 
 export function createCompactAdversarySheetClass(BaseAdversarySheet) {
@@ -101,6 +102,11 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
         value.addEventListener("focus", this.#onHeaderResourceFocus, { signal });
         value.addEventListener("keydown", this.#onHeaderResourceKeydown, { signal });
         value.addEventListener("blur", this.#onHeaderResourceBlur, { signal });
+      }
+
+      for (const maxValue of this.element.querySelectorAll(HEADER_RESOURCE_MAX_SELECTOR)) {
+        maxValue.addEventListener("click", this.#onHeaderResourceMaxClick, { signal });
+        maxValue.addEventListener("contextmenu", this.#onHeaderResourceMaxContextMenu, { signal });
       }
     }
 
@@ -207,6 +213,29 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
 
       await this.document.update({ [path]: nextValue });
     };
+
+    #onHeaderResourceMaxClick = (event) => this.#stepHeaderResource(event, 1);
+
+    #onHeaderResourceMaxContextMenu = (event) => this.#stepHeaderResource(event, -1);
+
+    async #stepHeaderResource(event, direction) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!this.#isSheetEditable()) return;
+
+      const target = event.currentTarget;
+      const path = target.dataset.dhcaResourcePath;
+      if (!path) return;
+
+      const current = Number(foundry.utils.getProperty(this.document, path) ?? 0);
+      const max = Math.max(Number(target.dataset.dhcaResourceMax ?? 0), 0);
+      const nextValue = clampNumber(current + direction, 0, max);
+
+      if (nextValue === current) return;
+
+      await this.document.update({ [path]: nextValue });
+    }
   };
 }
 

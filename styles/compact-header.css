@@ -286,6 +286,16 @@
   color: var(--dhca-accent-strong) !important;
 }
 
+.sheet.dh-compact.adversary .dhca-header__resource-max {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sheet.dh-compact.adversary .dhca-header__resource-max:hover,
+.sheet.dh-compact.adversary .dhca-header__resource-max:focus-visible {
+  color: var(--dhca-accent-strong);
+}
+
 .sheet.dh-compact.adversary .dhca-header__attack-list {
   margin: 0;
   padding: 0;

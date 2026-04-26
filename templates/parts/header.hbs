@@ -72,7 +72,11 @@
               data-property="system.resources.hitPoints.value"
               data-dhca-resource-path="system.resources.hitPoints.value"
               data-dhca-resource-max="{{compact.resources.hitPoints.max}}"
-            >{{compact.resources.hitPoints.value}}</span>/<span>{{compact.resources.hitPoints.max}}</span>
+            >{{compact.resources.hitPoints.value}}</span>/<span
+              class="dhca-header__resource-max"
+              data-dhca-resource-path="system.resources.hitPoints.value"
+              data-dhca-resource-max="{{compact.resources.hitPoints.max}}"
+            >{{compact.resources.hitPoints.max}}</span>
           {{else}}
             {{compact.resources.hitPoints.max}}
           {{/if}}
@@ -87,7 +91,11 @@
               data-property="system.resources.stress.value"
               data-dhca-resource-path="system.resources.stress.value"
               data-dhca-resource-max="{{compact.resources.stress.max}}"
-            >{{compact.resources.stress.value}}</span>/<span>{{compact.resources.stress.max}}</span>
+            >{{compact.resources.stress.value}}</span>/<span
+              class="dhca-header__resource-max"
+              data-dhca-resource-path="system.resources.stress.value"
+              data-dhca-resource-max="{{compact.resources.stress.max}}"
+            >{{compact.resources.stress.max}}</span>
           {{else}}
             {{compact.resources.stress.max}}
           {{/if}}
