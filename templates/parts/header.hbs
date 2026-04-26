@@ -51,25 +51,48 @@
 
   {{#unless compact.showResourceBlock}}
     <div class="dhca-header__compact-summary" aria-label="{{localize 'DAGGERHEART.GENERAL.details'}}">
-      <span>
-        <strong>{{localize 'DAGGERHEART.GENERAL.difficulty'}}:</strong>
-        {{#if source.system.difficulty includeZero=true}}{{source.system.difficulty}}{{else}}-{{/if}}
-      </span>
-      <span class="dhca-summary__separator">|</span>
-      <span>
-        <strong>{{localize 'DHCS.Labels.Thresholds'}}:</strong>
-        {{compact.thresholds.major}}/{{compact.thresholds.severe}}
-      </span>
-      <span class="dhca-summary__separator">|</span>
-      <span>
-        <strong>{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}:</strong>
-        {{compact.resources.hitPoints.max}}
-      </span>
-      <span class="dhca-summary__separator">|</span>
-      <span>
-        <strong>{{localize 'DAGGERHEART.GENERAL.stress'}}:</strong>
-        {{compact.resources.stress.max}}
-      </span>
+      <div class="dhca-header__compact-summary-row">
+        <span>
+          <strong>{{localize 'DAGGERHEART.GENERAL.difficulty'}}:</strong>
+          {{#if source.system.difficulty includeZero=true}}{{source.system.difficulty}}{{else}}-{{/if}}
+        </span>
+        <span class="dhca-summary__separator">|</span>
+        <span>
+          <strong>{{localize 'DHCS.Labels.Thresholds'}}:</strong>
+          {{compact.thresholds.major}}/{{compact.thresholds.severe}}
+        </span>
+      </div>
+      <div class="dhca-header__compact-summary-row">
+        <span>
+          <strong>{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}:</strong>
+          {{#if compact.showInteractionButtons}}
+            <span
+              class="input dhca-header__resource-current"
+              contenteditable="plaintext-only"
+              data-property="system.resources.hitPoints.value"
+              data-dhca-resource-path="system.resources.hitPoints.value"
+              data-dhca-resource-max="{{compact.resources.hitPoints.max}}"
+            >{{compact.resources.hitPoints.value}}</span>/<span>{{compact.resources.hitPoints.max}}</span>
+          {{else}}
+            {{compact.resources.hitPoints.max}}
+          {{/if}}
+        </span>
+        <span class="dhca-summary__separator">|</span>
+        <span>
+          <strong>{{localize 'DAGGERHEART.GENERAL.stress'}}:</strong>
+          {{#if compact.showInteractionButtons}}
+            <span
+              class="input dhca-header__resource-current"
+              contenteditable="plaintext-only"
+              data-property="system.resources.stress.value"
+              data-dhca-resource-path="system.resources.stress.value"
+              data-dhca-resource-max="{{compact.resources.stress.max}}"
+            >{{compact.resources.stress.value}}</span>/<span>{{compact.resources.stress.max}}</span>
+          {{else}}
+            {{compact.resources.stress.max}}
+          {{/if}}
+        </span>
+      </div>
     </div>
   {{/unless}}
 

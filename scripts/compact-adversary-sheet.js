@@ -28,6 +28,7 @@ const TAB_NAV_ENTRIES = Object.freeze([
 ]);
 
 const ATTACK_CHAT_ACTION_SELECTOR = ".dhca-header__attack .inventory-item-compact .item-name";
+const HEADER_RESOURCE_VALUE_SELECTOR = ".dhca-header__resource-current[data-dhca-resource-path]";
 
 export function createCompactAdversarySheetClass(BaseAdversarySheet) {
   return class CompactAdversarySheet extends BaseAdversarySheet {
@@ -69,6 +70,7 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
       expandFeatureDescriptions(this.element);
       inlineFeatureDescriptions(this.element, this.#renderController.signal);
       this.#bindResourceStepButtons();
+      this.#bindHeaderResourceEdits();
       bindCompactImageEditButtons(this.element, this.#renderController.signal, this.#onCompactImageEdit);
       this.#bindResponsiveResourceTracks();
     }
@@ -87,6 +89,18 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
 
       for (const button of this.element.querySelectorAll(RESOURCE_STEP_SELECTOR)) {
         button.addEventListener("click", this.#onCompactResourceStep, { signal });
+      }
+    }
+
+    #bindHeaderResourceEdits() {
+      if (!this.element || !this.#renderController) return;
+
+      const { signal } = this.#renderController;
+
+      for (const value of this.element.querySelectorAll(HEADER_RESOURCE_VALUE_SELECTOR)) {
+        value.addEventListener("focus", this.#onHeaderResourceFocus, { signal });
+        value.addEventListener("keydown", this.#onHeaderResourceKeydown, { signal });
+        value.addEventListener("blur", this.#onHeaderResourceBlur, { signal });
       }
     }
 
@@ -157,6 +171,42 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
     };
 
     #onCompactImageEdit = (event) => openCompactImagePicker(this, event);
+
+    #onHeaderResourceFocus = (event) => {
+      event.currentTarget.dataset.dhcaOriginalValue = event.currentTarget.textContent.trim();
+    };
+
+    #onHeaderResourceKeydown = (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        event.currentTarget.blur();
+        return;
+      }
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.currentTarget.textContent = event.currentTarget.dataset.dhcaOriginalValue ?? "";
+        event.currentTarget.blur();
+      }
+    };
+
+    #onHeaderResourceBlur = async (event) => {
+      if (!this.#isSheetEditable()) return;
+
+      const target = event.currentTarget;
+      const path = target.dataset.dhcaResourcePath;
+      if (!path) return;
+
+      const original = Number(target.dataset.dhcaOriginalValue ?? 0);
+      const max = Math.max(Number(target.dataset.dhcaResourceMax ?? 0), 0);
+      const nextValue = clampNumber(target.textContent.trim(), 0, max);
+
+      target.textContent = String(nextValue);
+
+      if (nextValue === original) return;
+
+      await this.document.update({ [path]: nextValue });
+    };
   };
 }
 
