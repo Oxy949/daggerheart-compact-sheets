@@ -10,7 +10,12 @@ const COMPACT_HEADER_SELECTOR = ".dhca-section--header";
 const COMPACT_HEADER_NAME_SELECTOR = ".dhca-header__name";
 const COMPACT_WINDOW_DRAGGING_CLASS = "dhca-window-dragging";
 const COMPACT_WINDOW_DRAG_READY_CLASS = "dhca-title-gap-drag-ready";
-const COMPACT_WINDOW_CONTROLS_SELECTOR = ".window-header";
+const COMPACT_WINDOW_HEADER_SELECTOR = ".window-header";
+const COMPACT_WINDOW_CONTROL_SELECTOR = [
+  ".window-header .header-button",
+  ".window-header button",
+  ".window-header a"
+].join(", ");
 const COMPACT_WINDOW_DRAG_EXCLUDE_SELECTOR = [
   "button",
   "a",
@@ -179,18 +184,21 @@ export function bindCompactWindowTitleGapDrag(sheet, element, signal) {
   const header = element.querySelector(COMPACT_HEADER_SELECTOR);
   if (!header) return;
 
+  const setDragCursor = (ready) => {
+    element.classList.toggle(COMPACT_WINDOW_DRAG_READY_CLASS, ready);
+    document.body.classList.toggle(COMPACT_WINDOW_DRAG_READY_CLASS, ready);
+  };
   const updateDragCursor = (event) => {
-    header.classList.toggle(
-      COMPACT_WINDOW_DRAG_READY_CLASS,
+    setDragCursor(
       isCompactTitleGapDragStart(sheet, header, event, { requirePrimaryButton: false })
     );
   };
-  const clearDragCursor = () => header.classList.remove(COMPACT_WINDOW_DRAG_READY_CLASS);
+  const clearDragCursor = () => setDragCursor(false);
 
-  header.addEventListener("pointermove", updateDragCursor, { signal });
-  header.addEventListener("pointerleave", clearDragCursor, { signal });
-  header.addEventListener("pointercancel", clearDragCursor, { signal });
-  header.addEventListener("pointerdown", (event) => {
+  element.addEventListener("pointermove", updateDragCursor, { signal });
+  element.addEventListener("pointerleave", clearDragCursor, { signal });
+  element.addEventListener("pointercancel", clearDragCursor, { signal });
+  element.addEventListener("pointerdown", (event) => {
     if (!isCompactTitleGapDragStart(sheet, header, event)) return;
     beginCompactWindowDrag(sheet, event, signal);
   }, { signal });
@@ -240,10 +248,24 @@ function isCompactTitleGapDragStart(sheet, header, event, { requirePrimaryButton
   if (event.clientY < rowTop - 4 || event.clientY > rowBottom + 4) return false;
   if (nameRect && event.clientX <= nameRect.right + 4) return false;
 
-  const controlsRect = sheet.element?.querySelector(COMPACT_WINDOW_CONTROLS_SELECTOR)?.getBoundingClientRect();
-  if (controlsRect && event.clientX >= controlsRect.left - 4) return false;
+  const controlsLeft = getCompactWindowControlsLeft(sheet.element);
+  if (Number.isFinite(controlsLeft) && event.clientX >= controlsLeft) return false;
 
   return true;
+}
+
+function getCompactWindowControlsLeft(element) {
+  if (!element) return null;
+
+  let left = Infinity;
+  for (const control of element.querySelectorAll(COMPACT_WINDOW_CONTROL_SELECTOR)) {
+    const rect = control.getBoundingClientRect();
+    if (rect.width <= 0 && rect.height <= 0) continue;
+    left = Math.min(left, rect.left);
+  }
+
+  if (Number.isFinite(left)) return left;
+  return element.querySelector(COMPACT_WINDOW_HEADER_SELECTOR)?.getBoundingClientRect().left ?? null;
 }
 
 function beginCompactWindowDrag(sheet, event, signal) {
@@ -273,6 +295,8 @@ function beginCompactWindowDrag(sheet, event, signal) {
     document.removeEventListener("pointerup", onPointerUp);
     document.removeEventListener("pointercancel", onPointerUp);
     signal.removeEventListener("abort", cleanup);
+    element.classList.remove(COMPACT_WINDOW_DRAG_READY_CLASS);
+    document.body.classList.remove(COMPACT_WINDOW_DRAG_READY_CLASS);
     document.body.classList.remove(COMPACT_WINDOW_DRAGGING_CLASS);
     document.body.style.userSelect = initialUserSelect;
   };

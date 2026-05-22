@@ -4,8 +4,37 @@
   isolation: isolate;
 }
 
-.sheet.dh-compact .dhca-section--header.dhca-title-gap-drag-ready {
+.sheet.dh-compact.dhca-title-gap-drag-ready,
+.sheet.dh-compact.dhca-title-gap-drag-ready .dhca-section--header {
   cursor: grab;
+}
+
+.sheet.dh-compact .window-header {
+  cursor: grab;
+}
+
+.sheet.dh-compact .window-header .header-button,
+.sheet.dh-compact .window-header button,
+.sheet.dh-compact .window-header a {
+  cursor: pointer;
+}
+
+body.dhca-title-gap-drag-ready,
+body.dhca-title-gap-drag-ready * {
+  cursor: grab !important;
+}
+
+body.dhca-title-gap-drag-ready button,
+body.dhca-title-gap-drag-ready a,
+body.dhca-title-gap-drag-ready [data-action] {
+  cursor: pointer !important;
+}
+
+body.dhca-title-gap-drag-ready input,
+body.dhca-title-gap-drag-ready textarea,
+body.dhca-title-gap-drag-ready select,
+body.dhca-title-gap-drag-ready [contenteditable] {
+  cursor: text !important;
 }
 
 body.dhca-window-dragging,
