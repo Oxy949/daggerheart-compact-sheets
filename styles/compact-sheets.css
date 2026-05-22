@@ -177,7 +177,6 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
 }
 
 .sheet.dh-compact.adversary .window-content,
-.sheet.dh-compact.character .window-content,
 .sheet.dh-compact.environment .window-content {
   position: relative;
   isolation: isolate;
@@ -190,8 +189,7 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
   color: var(--dhca-text) !important;
 }
 
-.sheet.dh-compact.adversary .window-content,
-.sheet.dh-compact.character .window-content {
+.sheet.dh-compact.adversary .window-content {
   grid-template-rows: auto minmax(0, 1fr) auto !important;
   grid-template-areas:
     "header"
@@ -212,12 +210,6 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
   grid-area: header;
 }
 
-.sheet.dh-compact.character .character-header-sheet {
-  position: relative;
-  z-index: 1;
-  grid-area: header;
-}
-
 .sheet.dh-compact .tab {
   position: relative;
   z-index: 1;
@@ -228,12 +220,6 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
 }
 
 .sheet.dh-compact.adversary .adversary-sidebar-sheet {
-  position: relative;
-  z-index: 1;
-  grid-area: footer;
-}
-
-.sheet.dh-compact.character .character-sidebar-sheet {
   position: relative;
   z-index: 1;
   grid-area: footer;

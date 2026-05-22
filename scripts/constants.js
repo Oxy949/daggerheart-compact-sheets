@@ -2,14 +2,11 @@ export const MODULE_ID = "daggerheart-compact-sheets";
 export const SYSTEM_ID = "daggerheart";
 export const SHEET_LABELS = Object.freeze({
   adversary: "DHCS.Sheets.Adversary",
-  character: "DHCS.Sheets.Character",
-  environment: "DHCS.Sheets.Environment",
-  minimalAdversary: "DHCS.Sheets.MinimalAdversary"
+  environment: "DHCS.Sheets.Environment"
 });
 
 export const SETTING_KEYS = Object.freeze({
   makeAdversaryDefault: "makeAdversaryDefault",
-  makeCharacterDefault: "makeCharacterDefault",
   makeEnvironmentDefault: "makeEnvironmentDefault",
   showAdversaryResourceBlock: "showAdversaryResourceBlock",
   showAdversaryInteractionButtons: "showAdversaryInteractionButtons"
@@ -35,10 +32,6 @@ export const ADVERSARY_TEMPLATE_PARTIALS = Object.freeze({
   tabNav: SHARED_TEMPLATE_PARTIALS.tabNav
 });
 
-export const MINIMAL_ADVERSARY_TEMPLATE_PARTIALS = Object.freeze({
-  sheet: `${TEMPLATE_ROOT}/adversary/minimal.hbs`
-});
-
 export const ENVIRONMENT_TEMPLATE_PARTIALS = Object.freeze({
   art: SHARED_TEMPLATE_PARTIALS.art,
   header: `${TEMPLATE_ROOT}/environment/parts/header.hbs`,
@@ -48,23 +41,9 @@ export const ENVIRONMENT_TEMPLATE_PARTIALS = Object.freeze({
   tabNav: SHARED_TEMPLATE_PARTIALS.tabNav
 });
 
-export const CHARACTER_TEMPLATE_PARTIALS = Object.freeze({
-  art: SHARED_TEMPLATE_PARTIALS.art,
-  header: `${TEMPLATE_ROOT}/character/parts/header.hbs`,
-  footer: `${TEMPLATE_ROOT}/character/parts/footer.hbs`,
-  features: `${TEMPLATE_ROOT}/character/parts/features.hbs`,
-  loadout: `${TEMPLATE_ROOT}/character/parts/loadout.hbs`,
-  inventory: `${TEMPLATE_ROOT}/character/parts/inventory.hbs`,
-  biography: `${TEMPLATE_ROOT}/character/parts/biography.hbs`,
-  effects: SHARED_TEMPLATE_PARTIALS.effects,
-  tabNav: SHARED_TEMPLATE_PARTIALS.tabNav
-});
-
 export const PRELOAD_TEMPLATE_PATHS = Object.freeze(
   Array.from(new Set([
     ...Object.values(ADVERSARY_TEMPLATE_PARTIALS),
-    ...Object.values(MINIMAL_ADVERSARY_TEMPLATE_PARTIALS),
-    ...Object.values(CHARACTER_TEMPLATE_PARTIALS),
     ...Object.values(ENVIRONMENT_TEMPLATE_PARTIALS)
   ]))
 );
@@ -72,14 +51,6 @@ export const PRELOAD_TEMPLATE_PATHS = Object.freeze(
 export const DEFAULT_WINDOWS = Object.freeze({
   adversary: Object.freeze({
     width: 400,
-    height: "auto"
-  }),
-  minimalAdversary: Object.freeze({
-    width: 480,
-    height: "auto"
-  }),
-  character: Object.freeze({
-    width: 430,
     height: "auto"
   }),
   environment: Object.freeze({
@@ -95,18 +66,9 @@ export const RESOURCE_STEP_SELECTOR = ".dhca-resource-step";
 export const SCROLLABLE_PANEL_SELECTOR = ".dhca-tab-panel__scroll";
 export const RESOURCE_GROUP_SIZE = 3;
 
-export const RESOURCE_KEYS = Object.freeze({
-  armorScore: "armorScore",
-  hitPoints: "hitPoints",
-  hope: "hope",
-  stress: "stress"
-});
-
 export const RESOURCE_ACTIONS = Object.freeze({
-  [RESOURCE_KEYS.armorScore]: "toggleArmor",
-  [RESOURCE_KEYS.hitPoints]: "toggleHitPoints",
-  [RESOURCE_KEYS.hope]: "toggleHope",
-  [RESOURCE_KEYS.stress]: "toggleStress"
+  hitPoints: "toggleHitPoints",
+  stress: "toggleStress"
 });
 
 export const I18N_KEYS = Object.freeze({

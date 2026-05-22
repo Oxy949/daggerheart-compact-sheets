@@ -1,7 +1,5 @@
 import { createCompactAdversarySheetClass } from "./compact-adversary-sheet.js";
-import { createCompactCharacterSheetClass } from "./compact-character-sheet.js";
 import { createCompactEnvironmentSheetClass } from "./compact-environment-sheet.js";
-import { createMinimalAdversarySheetClass } from "./minimal-adversary-sheet.js";
 import {
   MODULE_ID,
   PRELOAD_TEMPLATE_PATHS,
@@ -34,16 +32,6 @@ function registerSettings() {
   game.settings.register(MODULE_ID, SETTING_KEYS.makeEnvironmentDefault, {
     name: "DHCS.Settings.MakeEnvironmentDefault.Name",
     hint: "DHCS.Settings.MakeEnvironmentDefault.Hint",
-    scope: "world",
-    config: true,
-    type: Boolean,
-    default: true,
-    requiresReload: true
-  });
-
-  game.settings.register(MODULE_ID, SETTING_KEYS.makeCharacterDefault, {
-    name: "DHCS.Settings.MakeCharacterDefault.Name",
-    hint: "DHCS.Settings.MakeCharacterDefault.Hint",
     scope: "world",
     config: true,
     type: Boolean,
@@ -86,7 +74,6 @@ function rerenderOpenCompactAdversarySheets() {
       : application.element?.[0];
 
     if (!element?.classList?.contains("dh-compact")) continue;
-    if (element.classList.contains("dh-minimal-adversary")) continue;
 
     application.render?.({ force: true });
   }
@@ -114,27 +101,11 @@ function registerCompactSheets() {
   });
 
   registerCompactSheet({
-    baseSheet: actorSheets?.Adversary,
-    factory: createMinimalAdversarySheetClass,
-    label: SHEET_LABELS.minimalAdversary,
-    makeDefault: false,
-    type: "adversary"
-  });
-
-  registerCompactSheet({
     baseSheet: actorSheets?.Environment,
     factory: createCompactEnvironmentSheetClass,
     label: SHEET_LABELS.environment,
     makeDefault: game.settings.get(MODULE_ID, SETTING_KEYS.makeEnvironmentDefault),
     type: "environment"
-  });
-
-  registerCompactSheet({
-    baseSheet: actorSheets?.Character,
-    factory: createCompactCharacterSheetClass,
-    label: SHEET_LABELS.character,
-    makeDefault: game.settings.get(MODULE_ID, SETTING_KEYS.makeCharacterDefault),
-    type: "character"
   });
 }
 

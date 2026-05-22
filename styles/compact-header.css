@@ -165,11 +165,13 @@
   display: block;
   min-width: 0;
   margin: 0 104px 6px 0;
+  pointer-events: none;
 }
 
 .sheet.dh-compact .dhca-header__name {
   min-width: 0;
-  display: block;
+  display: inline-block;
+  max-width: 100%;
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
@@ -186,6 +188,8 @@
   text-align: left !important;
   text-transform: uppercase;
   overflow-wrap: anywhere;
+  pointer-events: auto;
+  vertical-align: top;
 }
 
 .sheet.dh-compact.adversary .dhca-header__separator,
