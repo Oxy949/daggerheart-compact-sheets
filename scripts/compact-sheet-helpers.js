@@ -252,11 +252,10 @@ function isCompactTitleGapDragStart(sheet, header, event, { requirePrimaryButton
   const name = header.querySelector(COMPACT_HEADER_NAME_SELECTOR);
   const nameRect = name?.getBoundingClientRect();
   const headerRect = header.getBoundingClientRect();
-  const rowTop = nameRect?.top ?? headerRect.top;
+  const rowTop = headerRect.top;
   const rowBottom = nameRect?.bottom ?? Math.min(headerRect.bottom, headerRect.top + 36);
 
   if (event.clientY < rowTop - 4 || event.clientY > rowBottom + 4) return false;
-  if (nameRect && event.clientX <= nameRect.right + 4) return false;
 
   const controlsLeft = getCompactWindowControlsLeft(sheet.element);
   if (Number.isFinite(controlsLeft) && event.clientX >= controlsLeft) return false;
