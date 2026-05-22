@@ -8,6 +8,8 @@ const FEATURE_TOGGLE_ACTION = "toggleExtended";
 const FEATURE_TOGGLE_TARGET_SELECTOR = ":scope > .inventory-item-header .item-name, :scope > .inventory-item-header .feature-form";
 const COMPACT_HEADER_SELECTOR = ".dhca-section--header";
 const COMPACT_HEADER_NAME_SELECTOR = ".dhca-header__name";
+const COMPACT_WINDOW_DRAGGING_CLASS = "dhca-window-dragging";
+const COMPACT_WINDOW_DRAG_READY_CLASS = "dhca-title-gap-drag-ready";
 const COMPACT_WINDOW_CONTROLS_SELECTOR = ".window-header";
 const COMPACT_WINDOW_DRAG_EXCLUDE_SELECTOR = [
   "button",
@@ -177,10 +179,22 @@ export function bindCompactWindowTitleGapDrag(sheet, element, signal) {
   const header = element.querySelector(COMPACT_HEADER_SELECTOR);
   if (!header) return;
 
+  const updateDragCursor = (event) => {
+    header.classList.toggle(
+      COMPACT_WINDOW_DRAG_READY_CLASS,
+      isCompactTitleGapDragStart(sheet, header, event, { requirePrimaryButton: false })
+    );
+  };
+  const clearDragCursor = () => header.classList.remove(COMPACT_WINDOW_DRAG_READY_CLASS);
+
+  header.addEventListener("pointermove", updateDragCursor, { signal });
+  header.addEventListener("pointerleave", clearDragCursor, { signal });
+  header.addEventListener("pointercancel", clearDragCursor, { signal });
   header.addEventListener("pointerdown", (event) => {
     if (!isCompactTitleGapDragStart(sheet, header, event)) return;
     beginCompactWindowDrag(sheet, event, signal);
   }, { signal });
+  signal.addEventListener("abort", clearDragCursor, { once: true });
 }
 
 export function isCompactSheetEditable(sheet) {
@@ -212,8 +226,8 @@ export function openCompactImagePicker(sheet, event) {
   return picker.browse();
 }
 
-function isCompactTitleGapDragStart(sheet, header, event) {
-  if (event.button !== 0) return false;
+function isCompactTitleGapDragStart(sheet, header, event, { requirePrimaryButton = true } = {}) {
+  if (requirePrimaryButton && event.button !== 0) return false;
   if (!(event.target instanceof Element)) return false;
   if (event.target.closest(COMPACT_WINDOW_DRAG_EXCLUDE_SELECTOR)) return false;
 
@@ -249,6 +263,7 @@ function beginCompactWindowDrag(sheet, event, signal) {
   event.preventDefault();
   event.stopPropagation();
   sheet.bringToFront?.();
+  document.body.classList.add(COMPACT_WINDOW_DRAGGING_CLASS);
   document.body.style.userSelect = "none";
 
   const cleanup = () => {
@@ -258,6 +273,7 @@ function beginCompactWindowDrag(sheet, event, signal) {
     document.removeEventListener("pointerup", onPointerUp);
     document.removeEventListener("pointercancel", onPointerUp);
     signal.removeEventListener("abort", cleanup);
+    document.body.classList.remove(COMPACT_WINDOW_DRAGGING_CLASS);
     document.body.style.userSelect = initialUserSelect;
   };
 

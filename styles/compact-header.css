@@ -4,6 +4,15 @@
   isolation: isolate;
 }
 
+.sheet.dh-compact .dhca-section--header.dhca-title-gap-drag-ready {
+  cursor: grab;
+}
+
+body.dhca-window-dragging,
+body.dhca-window-dragging * {
+  cursor: grabbing !important;
+}
+
 .sheet.dh-compact .dhca-header__art-layer {
   display: contents;
 }
