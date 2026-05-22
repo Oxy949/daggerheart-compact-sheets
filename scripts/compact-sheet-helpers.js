@@ -200,7 +200,17 @@ export function bindCompactWindowTitleGapDrag(sheet, element, signal) {
   element.addEventListener("pointercancel", clearDragCursor, { signal });
   element.addEventListener("pointerdown", (event) => {
     if (!isCompactTitleGapDragStart(sheet, header, event)) return;
+    blurCompactActiveEditable(element);
     beginCompactWindowDrag(sheet, event, signal);
+  }, { signal });
+  element.addEventListener("dblclick", (event) => {
+    if (!isCompactTitleGapDragStart(sheet, header, event, { requirePrimaryButton: false })) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    blurCompactActiveEditable(element);
+    clearDragCursor();
+    toggleCompactWindowMinimized(sheet, element);
   }, { signal });
   signal.addEventListener("abort", clearDragCursor, { once: true });
 }
@@ -266,6 +276,24 @@ function getCompactWindowControlsLeft(element) {
 
   if (Number.isFinite(left)) return left;
   return element.querySelector(COMPACT_WINDOW_HEADER_SELECTOR)?.getBoundingClientRect().left ?? null;
+}
+
+function blurCompactActiveEditable(element) {
+  const activeElement = document.activeElement;
+  if (!(activeElement instanceof HTMLElement)) return;
+  if (!element.contains(activeElement)) return;
+  if (!activeElement.matches("input, textarea, select, [contenteditable]")) return;
+
+  activeElement.blur();
+}
+
+function toggleCompactWindowMinimized(sheet, element) {
+  if (element?.classList?.contains("minimized")) {
+    sheet.maximize?.();
+    return;
+  }
+
+  sheet.minimize?.();
 }
 
 function beginCompactWindowDrag(sheet, event, signal) {
