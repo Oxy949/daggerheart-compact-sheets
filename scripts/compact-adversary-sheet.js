@@ -8,6 +8,7 @@ import {
 } from "./constants.js";
 import {
   bindCompactImageEditButtons,
+  bindCompactWindowTitleGapDrag,
   buildTabNavContext,
   closeRenderController,
   createCompactDefaultOptions,
@@ -74,6 +75,7 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
       this.#bindResourceStepButtons();
       this.#bindHeaderResourceEdits();
       bindCompactImageEditButtons(this.element, this.#renderController.signal, this.#onCompactImageEdit);
+      bindCompactWindowTitleGapDrag(this, this.element, this.#renderController.signal);
       this.#bindResponsiveResourceTracks();
     }
 

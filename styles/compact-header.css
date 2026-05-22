@@ -67,13 +67,15 @@
 
 .sheet.dh-compact .dhca-header__art-edit {
   position: absolute;
-  top: 52px;
-  right: 18px;
+  top: 74px;
+  right: 10px;
   z-index: 4;
   display: grid;
   place-items: center;
   width: 24px;
   height: 24px;
+  min-height: 24px;
+  min-width: 24px;
   padding: 0;
   border: 0;
   border-radius: 999px;

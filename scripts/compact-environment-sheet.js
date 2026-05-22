@@ -4,6 +4,7 @@ import {
 } from "./constants.js";
 import {
   bindCompactImageEditButtons,
+  bindCompactWindowTitleGapDrag,
   buildTabNavContext,
   closeRenderController,
   createCompactDefaultOptions,
@@ -51,6 +52,7 @@ export function createCompactEnvironmentSheetClass(BaseEnvironmentSheet) {
       expandFeatureDescriptions(this.element);
       inlineFeatureDescriptions(this.element, this.#renderController.signal);
       bindCompactImageEditButtons(this.element, this.#renderController.signal, this.#onCompactImageEdit);
+      bindCompactWindowTitleGapDrag(this, this.element, this.#renderController.signal);
     }
 
     async close(options = {}) {

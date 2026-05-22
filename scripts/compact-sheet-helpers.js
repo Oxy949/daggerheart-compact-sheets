@@ -6,6 +6,20 @@ import {
 
 const FEATURE_TOGGLE_ACTION = "toggleExtended";
 const FEATURE_TOGGLE_TARGET_SELECTOR = ":scope > .inventory-item-header .item-name, :scope > .inventory-item-header .feature-form";
+const COMPACT_HEADER_SELECTOR = ".dhca-section--header";
+const COMPACT_HEADER_NAME_SELECTOR = ".dhca-header__name";
+const COMPACT_WINDOW_CONTROLS_SELECTOR = ".window-header";
+const COMPACT_WINDOW_DRAG_EXCLUDE_SELECTOR = [
+  "button",
+  "a",
+  "input",
+  "textarea",
+  "select",
+  "[contenteditable]",
+  "[data-action]",
+  ".dhca-header__toolbar",
+  ".dhca-header__art-edit"
+].join(", ");
 
 export function createCompactDefaultOptions(BaseSheet, position = {}) {
   return foundry.utils.mergeObject(
@@ -157,6 +171,18 @@ export function bindCompactImageEditButtons(element, signal, handler) {
   }
 }
 
+export function bindCompactWindowTitleGapDrag(sheet, element, signal) {
+  if (!sheet || !element || !signal) return;
+
+  const header = element.querySelector(COMPACT_HEADER_SELECTOR);
+  if (!header) return;
+
+  header.addEventListener("pointerdown", (event) => {
+    if (!isCompactTitleGapDragStart(sheet, header, event)) return;
+    beginCompactWindowDrag(sheet, event, signal);
+  }, { signal });
+}
+
 export function isCompactSheetEditable(sheet) {
   return sheet.isEditable ?? sheet.document.isOwner ?? false;
 }
@@ -184,6 +210,76 @@ export function openCompactImagePicker(sheet, event) {
   });
 
   return picker.browse();
+}
+
+function isCompactTitleGapDragStart(sheet, header, event) {
+  if (event.button !== 0) return false;
+  if (!(event.target instanceof Element)) return false;
+  if (event.target.closest(COMPACT_WINDOW_DRAG_EXCLUDE_SELECTOR)) return false;
+
+  const name = header.querySelector(COMPACT_HEADER_NAME_SELECTOR);
+  const nameRect = name?.getBoundingClientRect();
+  const headerRect = header.getBoundingClientRect();
+  const rowTop = nameRect?.top ?? headerRect.top;
+  const rowBottom = nameRect?.bottom ?? Math.min(headerRect.bottom, headerRect.top + 36);
+
+  if (event.clientY < rowTop - 4 || event.clientY > rowBottom + 4) return false;
+  if (nameRect && event.clientX <= nameRect.right + 4) return false;
+
+  const controlsRect = sheet.element?.querySelector(COMPACT_WINDOW_CONTROLS_SELECTOR)?.getBoundingClientRect();
+  if (controlsRect && event.clientX >= controlsRect.left - 4) return false;
+
+  return true;
+}
+
+function beginCompactWindowDrag(sheet, event, signal) {
+  const element = sheet.element;
+  if (!element || typeof sheet.setPosition !== "function") return;
+
+  const startLeft = Number(sheet.position?.left ?? element.offsetLeft ?? 0);
+  const startTop = Number(sheet.position?.top ?? element.offsetTop ?? 0);
+  if (!Number.isFinite(startLeft) || !Number.isFinite(startTop)) return;
+
+  const startX = event.clientX;
+  const startY = event.clientY;
+  const pointerId = event.pointerId;
+  const initialUserSelect = document.body.style.userSelect;
+  let cleanedUp = false;
+
+  event.preventDefault();
+  event.stopPropagation();
+  sheet.bringToFront?.();
+  document.body.style.userSelect = "none";
+
+  const cleanup = () => {
+    if (cleanedUp) return;
+    cleanedUp = true;
+    document.removeEventListener("pointermove", onPointerMove);
+    document.removeEventListener("pointerup", onPointerUp);
+    document.removeEventListener("pointercancel", onPointerUp);
+    signal.removeEventListener("abort", cleanup);
+    document.body.style.userSelect = initialUserSelect;
+  };
+
+  const onPointerMove = (moveEvent) => {
+    if (moveEvent.pointerId !== pointerId) return;
+
+    moveEvent.preventDefault();
+    sheet.setPosition({
+      left: startLeft + moveEvent.clientX - startX,
+      top: startTop + moveEvent.clientY - startY
+    });
+  };
+
+  const onPointerUp = (upEvent) => {
+    if (upEvent.pointerId !== pointerId) return;
+    cleanup();
+  };
+
+  document.addEventListener("pointermove", onPointerMove);
+  document.addEventListener("pointerup", onPointerUp);
+  document.addEventListener("pointercancel", onPointerUp);
+  signal.addEventListener("abort", cleanup, { once: true });
 }
 
 export function buildTabNavContext(tabs, entries) {
