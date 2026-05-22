@@ -3,7 +3,8 @@
 # Daggerheart Compact Sheets
 Compact adaptive sheets for Daggerheart (Foundryborne) system.
 
-<img width="1771" height="1064" alt="preview" src="https://github.com/user-attachments/assets/86f917f5-f9ad-4753-899b-4bd91d378103" />
+<img alt="preview" src="https://github.com/user-attachments/assets/53e1ccf9-80bb-4d1c-8ea7-e0095331e89f" />
+
 
 ## Installation
 
@@ -17,6 +18,7 @@ Compact adaptive sheets for Daggerheart (Foundryborne) system.
 
 - Compact adversary and environment actor sheets
 - Responsive and adaptive layout
+- Dark and Light color sheme support
 - Quick pip controls for adversary hit points and stress
 - Keeps the system item/effect partials, so core sheet actions still work
 - Supports Carolingian UI theme (https://foundryvtt.com/packages/crlngn-ui)
