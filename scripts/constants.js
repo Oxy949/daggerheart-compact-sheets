@@ -72,5 +72,6 @@ export const RESOURCE_ACTIONS = Object.freeze({
 });
 
 export const I18N_KEYS = Object.freeze({
+  hitPointsShort: "DAGGERHEART.GENERAL.HitPoints.short",
   tier: "DAGGERHEART.GENERAL.tier"
 });

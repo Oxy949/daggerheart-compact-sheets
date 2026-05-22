@@ -4,6 +4,7 @@ export function buildCompactContext(document) {
   const hitPoints = buildResourceTrack("hitPoints", document.system.resources?.hitPoints);
   const stress = buildResourceTrack("stress", document.system.resources?.stress);
   const thresholds = buildThresholds(document.system.damageThresholds);
+  const hordeHp = buildHordeHpContext(document.system);
 
   return {
     attackBonus: toOptionalNumber(document.system.attack?.roll?.bonus),
@@ -11,6 +12,7 @@ export function buildCompactContext(document) {
     criticalThreshold: toNumber(document.system.criticalThreshold, 20),
     hasExperiences: !foundry.utils.isEmpty(document.system.experiences),
     identity: {
+      hordeHp,
       tierLabel: localizeFallback(I18N_KEYS.tier, "Tier")
     },
     resources: {
@@ -55,6 +57,18 @@ export function clampNumber(value, min, max) {
 export function localizeFallback(key, fallback) {
   const localized = game.i18n?.localize?.(key);
   return localized && localized !== key ? localized : fallback;
+}
+
+function buildHordeHpContext(system = {}) {
+  if (system.type !== "horde") return null;
+
+  const value = toOptionalNumber(system.hordeHp);
+  if (value === null) return null;
+
+  return {
+    unitLabel: localizeFallback(I18N_KEYS.hitPointsShort, "HP"),
+    value
+  };
 }
 
 function buildThresholds(damageThresholds = {}) {

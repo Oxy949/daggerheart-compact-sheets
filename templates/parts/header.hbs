@@ -1,6 +1,6 @@
 <header class="adversary-header-sheet dhca-section dhca-section--header dhca-header">
   <div class="dhca-header__adornment" aria-hidden="true">
-    <div class="dhca-header__ribbon">{{adversaryType}}</div>
+    <div class="dhca-header__ribbon">{{adversaryType}}{{#if compact.identity.hordeHp}} ({{compact.identity.hordeHp.value}} / {{compact.identity.hordeHp.unitLabel}}){{/if}}</div>
     <div class="dhca-header__tier">{{source.system.tier}}</div>
   </div>
 
