@@ -69,7 +69,7 @@
   --dhca-resource-pip-size: calc(16px * var(--dhca-resource-scale));
   --dhca-resource-pip-radius: calc(2px * var(--dhca-resource-scale));
   display: grid;
-  grid-template-columns: 78px 30px minmax(0, 1fr) 30px;
+  grid-template-columns: max-content 30px minmax(0, 1fr) 30px;
   align-items: center;
 }
 
@@ -90,6 +90,7 @@
   align-content: center;
   flex-wrap: wrap;
   gap: 4px 6px;
+  padding-right: 6px;
   color: var(--dhca-resource-label);
   font-size: 12px !important;
   font-weight: 800 !important;
