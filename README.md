@@ -15,6 +15,7 @@ Compact sheet module for Foundryborne Daggerheart system.
 ## Highlights
 
 - Compact adversary and environment actor sheets
+- Responsive and adaptive layout
 - Quick pip controls for adversary hit points and stress
 - Keeps the system item/effect partials, so core sheet actions still work
 - Supports Carolingian UI theme (https://foundryvtt.com/packages/crlngn-ui)
