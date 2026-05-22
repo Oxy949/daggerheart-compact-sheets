@@ -1,3 +1,5 @@
+[![Module Download Count](https://img.shields.io/github/downloads/Oxy949/daggerheart-compact-sheets/total?color=2b82fc&label=ТОTAL%20DOWNLOADS&style=for-the-badge&logo=github)](https://tooomm.github.io/github-release-stats/?username=Oxy949&repository=daggerheart-compact-sheets) [![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fdaggerheart-compact-sheets&color=2b82fc&style=for-the-badge&logo=cloudfoundry)](https://forge-vtt.com/bazaar#package=daggerheart-compact-sheets) [![Foundry 13](https://img.shields.io/badge/Foundry-v13-informational?color=2b82fc&label=Foundry%20VTT&style=for-the-badge&logo=foundryvirtualtabletop)](https://foundryvtt.com/packages/daggerheart-compact-sheets)
+
 # Daggerheart Compact Sheets
 Compact sheet module for Foundryborne Daggerheart system.
 
@@ -6,7 +8,7 @@ Compact sheet module for Foundryborne Daggerheart system.
 
 ## Installation
 
-1. Copy https://github.com/Oxy949/daggerheart-compact-sheets/releases/latest/download/module.json
+1. Copy https://github.com/Oxy949/daggerheart-compact-sheets/releases/latest/download/module.json'
 2. Paste it in your Foundry VTT, wait for install
 3. Enable the module in your world
 4. Enjoy!
@@ -19,3 +21,6 @@ Compact sheet module for Foundryborne Daggerheart system.
 - Quick pip controls for adversary hit points and stress
 - Keeps the system item/effect partials, so core sheet actions still work
 - Supports Carolingian UI theme (https://foundryvtt.com/packages/crlngn-ui)
+  
+## Credits
+- [Oxy949](https://boosty.to/oxy949)
