@@ -21,6 +21,15 @@ Compact sheet module for Foundryborne Daggerheart system.
 - Quick pip controls for adversary hit points and stress
 - Keeps the system item/effect partials, so core sheet actions still work
 - Supports Carolingian UI theme (https://foundryvtt.com/packages/crlngn-ui)
+
+## Settings
+
+Module settings are available in Foundry VTT under **Configure Settings > Module Settings > Daggerheart Compact Sheets**.
+
+- **Use compact sheet as the default adversary sheet** - enabled by default. This is a world setting and requires a world reload after changing.
+- **Use compact sheet as the default environment sheet** - enabled by default. This is a world setting and requires a world reload after changing.
+- **Show interaction buttons on compact adversary sheets** - enabled by default. This is a client setting that shows attack, chat, item action, and similar controls on compact adversary sheets.
+- **Show a separate HP and stress block on compact adversary sheets** - enabled by default. This is a client setting that shows HP, stress, and damage thresholds in a footer block. When disabled, the footer is hidden and those values move into the header summary.
   
 ## Credits
 - [Oxy949](https://boosty.to/oxy949)
