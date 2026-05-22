@@ -8,7 +8,7 @@ Compact sheet module for Foundryborne Daggerheart system.
 
 ## Installation
 
-1. Copy https://github.com/Oxy949/daggerheart-compact-sheets/releases/latest/download/module.json'
+1. Copy https://github.com/Oxy949/daggerheart-compact-sheets/releases/latest/download/module.json
 2. Paste it in your Foundry VTT, wait for install
 3. Enable the module in your world
 4. Enjoy!
