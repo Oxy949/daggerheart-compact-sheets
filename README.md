@@ -32,3 +32,4 @@ Module settings are available in Foundry VTT under **Configure Settings > Module
   
 ## Credits
 - [Oxy949](https://boosty.to/oxy949)
+- https://freshcutgrass.app for some design inspiration
