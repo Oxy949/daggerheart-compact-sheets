@@ -3,7 +3,7 @@
 # Daggerheart Compact Sheets
 Compact adaptive sheets for Daggerheart (Foundryborne) system.
 
-<img alt="preview" src="https://github.com/user-attachments/assets/53e1ccf9-80bb-4d1c-8ea7-e0095331e89f" />
+![Image](./assets/sheets_preview.webp)
 
 
 ## Installation
