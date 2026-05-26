@@ -42,7 +42,7 @@ function registerSettings() {
   game.settings.register(MODULE_ID, SETTING_KEYS.showAdversaryInteractionButtons, {
     name: "DHCS.Settings.ShowAdversaryInteractionButtons.Name",
     hint: "DHCS.Settings.ShowAdversaryInteractionButtons.Hint",
-    scope: "client",
+    scope: "world",
     config: true,
     type: Boolean,
     default: true,
@@ -52,7 +52,7 @@ function registerSettings() {
   game.settings.register(MODULE_ID, SETTING_KEYS.showAdversaryResourceBlock, {
     name: "DHCS.Settings.ShowAdversaryResourceBlock.Name",
     hint: "DHCS.Settings.ShowAdversaryResourceBlock.Hint",
-    scope: "client",
+    scope: "world",
     config: true,
     type: Boolean,
     default: true,
