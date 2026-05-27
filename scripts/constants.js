@@ -72,6 +72,7 @@ export const RESOURCE_ACTIONS = Object.freeze({
 });
 
 export const I18N_KEYS = Object.freeze({
+  difficulty: "DAGGERHEART.GENERAL.difficulty",
   hitPointsShort: "DAGGERHEART.GENERAL.HitPoints.short",
   tier: "DAGGERHEART.GENERAL.tier"
 });

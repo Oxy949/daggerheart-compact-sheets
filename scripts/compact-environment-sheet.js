@@ -39,8 +39,9 @@ export function createCompactEnvironmentSheetClass(BaseEnvironmentSheet) {
 
     async _prepareContext(options) {
       const context = await super._prepareContext(options);
+      const compactEnvironment = await buildCompactEnvironmentContext(this.document);
       context.compact = {
-        ...buildCompactEnvironmentContext(this.document),
+        ...compactEnvironment,
         tabNav: buildTabNavContext(context.tabs, TAB_NAV_ENTRIES)
       };
       return context;

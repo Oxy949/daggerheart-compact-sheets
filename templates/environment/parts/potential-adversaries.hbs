@@ -6,18 +6,37 @@
   <div class="dhca-tab-panel__scroll">
     {{#each compact.potentialAdversaryCategories as |category|}}
       <fieldset class="dhca-panel dhca-panel--adversaries">
-        <legend class="dhca-panel__title">{{category.label}}</legend>
+        <legend class="dhca-panel__title dhca-panel__title--adversary-category">
+          <span class="dhca-panel__title-text">{{category.label}}</span>
+          <span class="dhca-panel__count">{{category.count}}</span>
+        </legend>
 
-        <ul class="items-list dhca-actor-list">
-          {{#each category.adversaries as |item|}}
-            {{> 'daggerheart.inventory-item-compact'
-              item=item
-              type='adversary'
-              isActor=true
-              categoryAdversary=category.id
-              hideControls=true
-              hideTooltip=false
-            }}
+        <ul class="items-list dhca-potential-adversary-list">
+          {{#each category.adversaries as |adversary|}}
+            <li
+              class="inventory-item inventory-item-compact dhca-potential-adversary"
+              data-item-id="{{adversary.id}}"
+              data-item-uuid="{{adversary.uuid}}"
+              data-type="adversary"
+              draggable="true"
+            >
+              <a
+                class="dhca-potential-adversary__link"
+                role="button"
+                tabindex="0"
+                aria-label="{{adversary.name}}"
+                data-action="editDoc"
+                draggable="true"
+              >
+                <span class="dhca-potential-adversary__portrait" aria-hidden="true">
+                  <img src="{{adversary.img}}" alt="" loading="lazy" />
+                </span>
+                <span class="dhca-potential-adversary__body">
+                  <span class="dhca-potential-adversary__name">{{adversary.name}}</span>
+                  <span class="dhca-potential-adversary__meta">{{#if adversary.metaText}}{{adversary.metaText}}{{else}}{{#each adversary.meta as |label|}}{{#unless @first}} {{/unless}}{{label}}{{/each}}{{/if}}</span>
+                </span>
+              </a>
+            </li>
           {{/each}}
         </ul>
       </fieldset>

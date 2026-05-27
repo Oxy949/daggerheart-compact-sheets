@@ -109,11 +109,37 @@
   margin-top: 12px;
 }
 
-.sheet.dh-compact.environment .dhca-actor-list,
-.sheet.dh-compact.environment .dhca-tab-panel .dhca-actor-list {
+.sheet.dh-compact.environment .dhca-potential-adversary-list,
+.sheet.dh-compact.environment .dhca-tab-panel .dhca-potential-adversary-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 168px), 1fr));
+  align-items: start;
+  gap: 10px 18px;
+  width: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.sheet.dh-compact.environment .dhca-panel__title--adversary-category {
+  gap: 8px;
+}
+
+.sheet.dh-compact.environment .dhca-panel__count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border: 1px solid var(--dhca-line);
+  border-radius: 999px;
+  background: var(--dhca-button-bg);
+  color: var(--dhca-text-soft);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
 }
 
 .sheet.dh-compact.environment .dhca-tab-panel .inventory-item .controls,
@@ -139,12 +165,9 @@
   display: none;
 }
 
-.sheet.dh-compact.environment .dhca-actor-list .inventory-item-compact {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: nowrap;
-  margin: 0 0 10px;
+.sheet.dh-compact.environment .dhca-potential-adversary-list .dhca-potential-adversary {
+  display: block;
+  margin: 0;
   padding: 0;
   border: 0;
   background: transparent;
@@ -152,52 +175,100 @@
   min-width: 0;
 }
 
-.sheet.dh-compact.environment .dhca-actor-list .inventory-item-compact:last-child {
-  margin-bottom: 0;
-}
-
-.sheet.dh-compact.environment .dhca-actor-list .img-portait {
-  display: none !important;
-}
-
-.sheet.dh-compact.environment .dhca-actor-list .item-name {
-  flex: 0 1 auto;
-  min-width: 0;
+.sheet.dh-compact.environment .dhca-potential-adversary__link {
+  appearance: none;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-height: 50px;
+  box-sizing: border-box;
+  width: 100%;
   margin: 0;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--dhca-text) !important;
+  cursor: pointer;
+  font: inherit;
+  font-family: var(--dhca-font-family);
+  text-align: left;
+  text-decoration: none !important;
+  text-shadow: none !important;
+  box-shadow: none;
+  transition:
+    background 140ms ease,
+    color 140ms ease,
+    opacity 140ms ease;
+}
+
+.sheet.dh-compact.environment .dhca-potential-adversary__link:hover,
+.sheet.dh-compact.environment .dhca-potential-adversary__link:focus-visible {
+  background: light-dark(var(--dark-blue-40, #18162e40), var(--golden-40, #f3c26740)) !important;
+  box-shadow: none;
+  outline: 0;
+  text-shadow: none !important;
+}
+
+.sheet.dh-compact.environment .dhca-potential-adversary__portrait {
+  display: block;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--dhca-line) 55%, transparent);
+  border-radius: 6px;
+  background: var(--dhca-surface);
+}
+
+.sheet.dh-compact.environment .dhca-potential-adversary__portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.sheet.dh-compact.environment .dhca-potential-adversary__body {
+  display: grid;
+  gap: 4px;
+  align-content: center;
+  min-width: 0;
+}
+
+.sheet.dh-compact.environment .dhca-potential-adversary__name {
+  display: -webkit-box;
+  min-width: 0;
   overflow: hidden;
   color: var(--dhca-text) !important;
   font-size: 14px !important;
-  font-style: italic;
-  font-weight: 700 !important;
-  line-height: 1.35 !important;
-  font-family: var(--dhca-font-family);
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-style: normal;
+  font-weight: 800 !important;
+  line-height: 1.18 !important;
+  text-shadow: none !important;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
-.sheet.dh-compact.environment .dhca-actor-list .item-labels {
-  flex: 1 1 auto;
-  display: inline-flex;
-  align-items: center;
+.sheet.dh-compact.environment .dhca-potential-adversary__link:hover .dhca-potential-adversary__name,
+.sheet.dh-compact.environment .dhca-potential-adversary__link:focus-visible .dhca-potential-adversary__name {
+  color: var(--dhca-text) !important;
+  text-shadow: none !important;
+}
+
+.sheet.dh-compact.environment .dhca-potential-adversary__meta {
+  display: -webkit-box;
   min-width: 0;
-  white-space: nowrap;
-}
-
-.sheet.dh-compact.environment .dhca-actor-list .label,
-.sheet.dh-compact.environment .dhca-actor-list .label span {
+  overflow: hidden;
   color: var(--dhca-attack-meta) !important;
-  font-size: 14px !important;
-  font-family: var(--dhca-font-family);
-  line-height: 1.45 !important;
-}
-
-.sheet.dh-compact.environment .dhca-actor-list .label {
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0 4px;
-  min-width: 0;
-  white-space: nowrap;
+  font-size: 11px !important;
+  font-weight: 600;
+  line-height: 1.2 !important;
+  text-shadow: none !important;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .sheet.dh-compact.environment .dhca-panel--notes .editor,
