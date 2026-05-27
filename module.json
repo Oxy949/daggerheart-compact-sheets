@@ -48,7 +48,8 @@
     "styles/compact-header.css",
     "styles/compact-panels.css",
     "styles/compact-adversary.css",
-    "styles/compact-environment.css"
+    "styles/compact-environment.css",
+    "styles/compact-character.css"
   ],
   "url": "#{URL}#",
   "manifest": "#{MANIFEST}#",

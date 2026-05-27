@@ -1,0 +1,40 @@
+<section
+  class="tab {{tabs.loadout.cssClass}} {{tabs.loadout.id}} dhca-section dhca-section--body dhca-tab-panel dhca-tab-panel--loadout"
+  data-tab="{{tabs.loadout.id}}"
+  data-group="{{tabs.loadout.group}}"
+>
+  <div class="dhca-tab-panel__scroll">
+    <div class="dhca-character__tool-row">
+      <label class="dhca-character__search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" name="search" class="search-loadout" placeholder="{{localize 'DAGGERHEART.GENERAL.searchPlaceholder'}}" />
+      </label>
+      <button type="button" class="filter-button" data-tooltip-text="{{localize 'DHCS.Labels.Filter'}}">
+        <i class="fa-solid fa-filter"></i>
+      </button>
+      <button type="button" class="btn-toggle-view" data-action="toggleLoadoutView" data-value="{{not cardView}}" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.Tabs.loadout'}}">
+        <i class="fa-solid {{#if cardView}}fa-bars{{else}}fa-grip{{/if}}"></i>
+      </button>
+    </div>
+
+    <div class="items-section dhca-character__section-stack">
+      {{> 'daggerheart.inventory-items'
+        title='DAGGERHEART.GENERAL.Tabs.loadout'
+        type='domainCard'
+        isGlassy=true
+        cardView=cardView
+        collection=document.system.domainCards.loadout
+        canCreate=@root.editable
+      }}
+      {{> 'daggerheart.inventory-items'
+        title='DAGGERHEART.GENERAL.Tabs.vault'
+        type='domainCard'
+        isGlassy=true
+        cardView=cardView
+        collection=document.system.domainCards.vault
+        canCreate=@root.editable
+        inVault=true
+      }}
+    </div>
+  </div>
+</section>

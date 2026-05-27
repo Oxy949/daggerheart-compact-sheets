@@ -1,0 +1,159 @@
+<header class="character-header-sheet dhca-section dhca-section--header dhca-header dhca-header--character">
+  <div class="dhca-header__adornment" aria-hidden="true">
+    <div class="dhca-header__ribbon">{{compact.identity.primaryLabel}}</div>
+    <div class="dhca-header__tier">{{compact.identity.level}}</div>
+  </div>
+
+  <div class="dhca-header__identity">
+    <h1
+      class="input actor-name dhca-header__name"
+      contenteditable="plaintext-only"
+      data-property="name"
+      placeholder="{{localize 'DAGGERHEART.GENERAL.actorName'}}"
+    >{{source.name}}</h1>
+  </div>
+
+  <div class="dhca-character__lineage" aria-label="{{localize 'DAGGERHEART.GENERAL.details'}}">
+    {{#if document.system.class.value}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.class.value.uuid}}">{{document.system.class.value.name}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="classes">{{localize 'TYPES.Item.class'}}</span>
+    {{/if}}
+    <span class="dhca-summary__separator">|</span>
+    {{#if document.system.class.subclass}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.class.subclass.uuid}}">{{document.system.class.subclass.name}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="subclasses">{{localize 'TYPES.Item.subclass'}}</span>
+    {{/if}}
+    <span class="dhca-summary__separator">|</span>
+    {{#if document.system.community}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.community.uuid}}">{{document.system.community.name}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="communities">{{localize 'TYPES.Item.community'}}</span>
+    {{/if}}
+    <span class="dhca-summary__separator">|</span>
+    {{#if document.system.ancestry}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.ancestry.uuid}}">{{document.system.ancestry.name}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="ancestries">{{localize 'TYPES.Item.ancestry'}}</span>
+    {{/if}}
+  </div>
+
+  {{#if document.system.multiclass.value}}
+    <div class="dhca-character__lineage dhca-character__lineage--secondary">
+      <span>{{localize 'DAGGERHEART.GENERAL.multiclass'}}:</span>
+      <span data-action="editDoc" data-item-uuid="{{document.system.multiclass.value.uuid}}">{{document.system.multiclass.value.name}}</span>
+      {{#if document.system.multiclass.subclass}}
+        <span class="dhca-summary__separator">|</span>
+        <span data-action="editDoc" data-item-uuid="{{document.system.multiclass.subclass.uuid}}">{{document.system.multiclass.subclass.name}}</span>
+      {{/if}}
+    </div>
+  {{/if}}
+
+  <div class="dhca-character__focus-row">
+    <div class="dhca-character__hope" aria-label="{{localize 'DAGGERHEART.GENERAL.hope'}}">
+      <span class="dhca-character__focus-label">{{localize 'DAGGERHEART.GENERAL.hope'}}</span>
+      <div class="dhca-character__hope-track">
+        {{#each compact.resources.hope.slots as |slot|}}
+          <button
+            type="button"
+            class="dhca-character__hope-pip {{#if slot.filled}}filled{{/if}}"
+            data-action="{{slot.action}}"
+            data-value="{{slot.value}}"
+            data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.hope'}} {{slot.value}}"
+          >
+            <i class="{{#if slot.filled}}fa-solid fa-diamond{{else}}fa-regular fa-circle{{/if}}"></i>
+          </button>
+        {{/each}}
+        {{#times compact.scars}}
+          <span class="dhca-character__hope-pip dhca-character__hope-pip--scar" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.scars'}}">
+            <i class="fa-regular fa-ban"></i>
+          </span>
+        {{/times}}
+      </div>
+      {{#if hasExtraResources}}
+        <button
+          type="button"
+          class="dhca-character__micro-button"
+          data-action="toggleResourceManagement"
+          data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.Tabs.resources'}}"
+        >
+          <i class="fa-solid fa-angle-down"></i>
+        </button>
+      {{/if}}
+    </div>
+
+    {{#if compact.domains.length}}
+      <div class="dhca-character__domains" aria-label="{{localize 'DAGGERHEART.GENERAL.Tabs.domains'}}">
+        {{#each compact.domains as |domain|}}
+          <img src="{{domain.src}}" alt="" data-tooltip="{{domain.label}}" />
+        {{/each}}
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="dhca-character__traits">
+    {{#each attributes as |attribute key|}}
+      <button
+        type="button"
+        class="dhca-character__trait"
+        data-action="rollAttribute"
+        data-attribute="{{key}}"
+        data-value="{{attribute.value}}"
+        data-tooltip="<b>{{localize (concat 'DAGGERHEART.CONFIG.Traits.' key '.name')}}:</b><br>{{#each attribute.verbs}}{{this}}<br>{{/each}}"
+      >
+        <span class="dhca-character__trait-name">
+          {{localize (concat 'DAGGERHEART.CONFIG.Traits.' key '.short')}}
+          <i class="{{#if attribute.tierMarked}}fa-solid{{else}}fa-regular{{/if}} fa-circle"></i>
+        </span>
+        <span class="dhca-character__trait-value">{{numberFormat attribute.value sign=true}}</span>
+      </button>
+    {{/each}}
+  </div>
+
+  <div class="dhca-character__status-strip">
+    <div>
+      <span>{{localize 'DAGGERHEART.GENERAL.evasion'}}</span>
+      <strong>{{#if compact.status.evasion includeZero=true}}{{compact.status.evasion}}{{else}}-{{/if}}</strong>
+    </div>
+    <button type="button" data-action="toggleArmorMangement" {{disabled (not @root.editable)}}>
+      <span>{{localize 'DAGGERHEART.GENERAL.armorSlots'}}</span>
+      <strong>{{compact.resources.armor.value}}/{{compact.resources.armor.max}}</strong>
+    </button>
+    <div>
+      <span>{{localize 'DAGGERHEART.GENERAL.proficiency'}}</span>
+      <strong>{{#if compact.status.proficiency includeZero=true}}{{compact.status.proficiency}}{{else}}-{{/if}}</strong>
+    </div>
+  </div>
+
+  <div class="dhca-header__toolbar">
+    {{> 'modules/daggerheart-compact-sheets/templates/parts/tab-nav.hbs'}}
+    <div class="dhca-header-actions">
+      {{#if @root.editable}}
+        {{#if document.system.needsCharacterSetup}}
+          <button type="button" data-action="levelManagement" data-tooltip-text="{{localize 'DAGGERHEART.APPLICATIONS.CharacterCreation.buttonTitle'}}">
+            <i class="fa-solid fa-user-plus"></i>
+          </button>
+        {{else if document.system.levelData.canLevelUp}}
+          <button type="button" data-action="levelManagement" data-tooltip-text="{{localize 'DAGGERHEART.ACTORS.Character.levelUp'}}">
+            <i class="fa-solid fa-angles-up"></i>
+          </button>
+        {{/if}}
+        <button type="button" data-action="useDowntime" data-type="shortRest" data-tooltip-text="{{localize 'DAGGERHEART.APPLICATIONS.Downtime.shortRest.title'}}">
+          <i class="fa-solid fa-utensils"></i>
+        </button>
+        <button type="button" data-action="useDowntime" data-type="longRest" data-tooltip-text="{{localize 'DAGGERHEART.APPLICATIONS.Downtime.longRest.title'}}">
+          <i class="fa-solid fa-bed"></i>
+        </button>
+      {{/if}}
+      {{#if document.parties.size}}
+        <button type="button" data-action="viewParty" data-tooltip-text="{{localize 'DAGGERHEART.ACTORS.Character.viewParty'}}">
+          <i class="fa-solid fa-users"></i>
+        </button>
+      {{/if}}
+      <button type="button" data-action="openSettings" data-tooltip-text="{{localize 'DAGGERHEART.UI.Tooltip.openSheetSettings'}}">
+        <i class="fa-solid fa-wrench"></i>
+      </button>
+    </div>
+  </div>
+</header>

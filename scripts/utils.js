@@ -58,6 +58,43 @@ export async function buildCompactEnvironmentContext(document) {
   };
 }
 
+export function buildCompactCharacterContext(document) {
+  const system = document.system ?? {};
+  const hitPoints = buildResourceTrack("hitPoints", system.resources?.hitPoints);
+  const stress = buildResourceTrack("stress", system.resources?.stress);
+  const hope = buildResourceTrack("hope", system.resources?.hope);
+  const armor = buildResourceTrack("armor", system.armorScore);
+  const thresholds = buildThresholds(system.damageThresholds);
+
+  return {
+    canEditImage: document.isOwner ?? false,
+    domains: normalizeCollection(system.domainData),
+    identity: {
+      ancestry: system.ancestry ?? null,
+      class: system.class?.value ?? null,
+      community: system.community ?? null,
+      level: getCharacterLevel(system),
+      multiclass: system.multiclass?.value ?? null,
+      multiclassSubclass: system.multiclass?.subclass ?? null,
+      primaryLabel: system.class?.value?.name
+        ?? localizeFallback("DAGGERHEART.GENERAL.character", "Character"),
+      subclass: system.class?.subclass ?? null
+    },
+    resources: {
+      armor,
+      hitPoints,
+      hope,
+      stress
+    },
+    scars: Math.max(toNumber(system.scars), 0),
+    status: {
+      evasion: toOptionalNumber(system.evasion),
+      proficiency: toOptionalNumber(system.proficiency)
+    },
+    thresholds
+  };
+}
+
 async function buildPotentialAdversaryContext(adversary) {
   const document = await resolvePotentialAdversaryDocument(adversary);
   const source = document ?? adversary ?? {};
@@ -203,7 +240,7 @@ function buildHordeHpContext(system = {}) {
   };
 }
 
-function buildThresholds(damageThresholds = {}) {
+export function buildThresholds(damageThresholds = {}) {
   const major = Math.max(toNumber(damageThresholds.major), 0);
   const severe = Math.max(toNumber(damageThresholds.severe, major), major);
 
@@ -216,7 +253,7 @@ function buildThresholds(damageThresholds = {}) {
   };
 }
 
-function buildResourceTrack(key, resource = {}, groupSize = RESOURCE_GROUP_SIZE) {
+export function buildResourceTrack(key, resource = {}, groupSize = RESOURCE_GROUP_SIZE) {
   const max = Math.max(toNumber(resource.max), 0);
   const value = clampNumber(resource.value, 0, max);
 
@@ -237,6 +274,24 @@ function buildResourceTrack(key, resource = {}, groupSize = RESOURCE_GROUP_SIZE)
     slots,
     value
   };
+}
+
+function getCharacterLevel(system = {}) {
+  if (system.needsCharacterSetup) return 0;
+
+  return toNumber(
+    system.levelData?.level?.changed
+      ?? system.levelData?.level?.value
+      ?? system.level
+  );
+}
+
+function normalizeCollection(collection) {
+  if (!collection) return [];
+  if (Array.isArray(collection)) return collection;
+  if (typeof collection[Symbol.iterator] === "function") return Array.from(collection);
+  if (typeof collection === "object") return Object.values(collection);
+  return [];
 }
 
 function groupItems(items, size) {

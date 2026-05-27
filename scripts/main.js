@@ -1,4 +1,5 @@
 import { createCompactAdversarySheetClass } from "./compact-adversary-sheet.js";
+import { createCompactCharacterSheetClass } from "./compact-character-sheet.js";
 import { createCompactEnvironmentSheetClass } from "./compact-environment-sheet.js";
 import {
   MODULE_ID,
@@ -19,6 +20,16 @@ Hooks.once("setup", () => {
 });
 
 function registerSettings() {
+  game.settings.register(MODULE_ID, SETTING_KEYS.makeCharacterDefault, {
+    name: "DHCS.Settings.MakeCharacterDefault.Name",
+    hint: "DHCS.Settings.MakeCharacterDefault.Hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+    requiresReload: true
+  });
+
   game.settings.register(MODULE_ID, SETTING_KEYS.makeAdversaryDefault, {
     name: "DHCS.Settings.MakeAdversaryDefault.Name",
     hint: "DHCS.Settings.MakeAdversaryDefault.Hint",
@@ -91,6 +102,14 @@ async function preloadTemplates() {
 
 function registerCompactSheets() {
   const actorSheets = game.system.api?.applications?.sheets?.actors;
+
+  registerCompactSheet({
+    baseSheet: actorSheets?.Character,
+    factory: createCompactCharacterSheetClass,
+    label: SHEET_LABELS.character,
+    makeDefault: game.settings.get(MODULE_ID, SETTING_KEYS.makeCharacterDefault),
+    type: "character"
+  });
 
   registerCompactSheet({
     baseSheet: actorSheets?.Adversary,

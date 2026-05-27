@@ -2,9 +2,14 @@
   "DHCS": {
     "Labels": {
       "AttackShort": "ATK",
+      "Filter": "Filter",
       "Thresholds": "Thresholds"
     },
     "Settings": {
+      "MakeCharacterDefault": {
+        "Name": "Use compact sheet as the default character sheet",
+        "Hint": "When enabled, player characters open with the compact sheet by default. Reload after changing this setting."
+      },
       "MakeAdversaryDefault": {
         "Name": "Use compact sheet as the default adversary sheet",
         "Hint": "When enabled, adversary actors open with the compact sheet by default. Reload after changing this setting."
@@ -23,6 +28,7 @@
       }
     },
     "Sheets": {
+      "Character": "Compact Character Sheet",
       "Adversary": "Compact Adversary Sheet",
       "Environment": "Compact Environment Sheet"
     }

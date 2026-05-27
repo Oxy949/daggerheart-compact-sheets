@@ -16,10 +16,11 @@ Compact adaptive sheets for Daggerheart (Foundryborne) system.
 
 ## Highlights
 
-- Compact adversary and environment actor sheets
+- Compact character, adversary, and environment actor sheets
 - Responsive and adaptive layout
 - Dark and Light color sheme support
-- Quick pip controls for adversary hit points and stress
+- Minimal player character layout with quick traits, Hope, HP, Stress, Armor, Loadout, Inventory, Biography, and Effects
+- Quick pip controls for character and adversary resources
 - Keeps the system item/effect partials, so core sheet actions still work
 - Supports Carolingian UI theme (https://foundryvtt.com/packages/crlngn-ui)
 
@@ -27,6 +28,7 @@ Compact adaptive sheets for Daggerheart (Foundryborne) system.
 
 Module settings are available in Foundry VTT under **Configure Settings > Module Settings > Daggerheart Compact Sheets**.
 
+- **Use compact sheet as the default character sheet** - enabled by default. This is a world setting and requires a world reload after changing.
 - **Use compact sheet as the default adversary sheet** - enabled by default. This is a world setting and requires a world reload after changing.
 - **Use compact sheet as the default environment sheet** - enabled by default. This is a world setting and requires a world reload after changing.
 - **Show interaction buttons on compact adversary sheets** - enabled by default. This is a client setting that shows attack, chat, item action, and similar controls on compact adversary sheets.
