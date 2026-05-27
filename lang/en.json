@@ -2,6 +2,7 @@
   "DHCS": {
     "Labels": {
       "AttackShort": "ATK",
+      "CreateCharacter": "Create Character",
       "Filter": "Filter",
       "Thresholds": "Thresholds"
     },

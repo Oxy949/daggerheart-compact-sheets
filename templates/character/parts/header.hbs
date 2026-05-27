@@ -1,7 +1,20 @@
-<header class="character-header-sheet dhca-section dhca-section--header dhca-header dhca-header--character">
-  <div class="dhca-header__adornment" aria-hidden="true">
-    <div class="dhca-header__ribbon">{{compact.identity.primaryLabel}}</div>
-    <div class="dhca-header__tier">{{compact.identity.level}}</div>
+<header class="character-header-sheet dhca-section dhca-section--header dhca-header dhca-header--character{{#if document.system.needsCharacterSetup}} dhca-header--needs-setup{{/if}}">
+  <div class="dhca-header__adornment{{#if document.system.needsCharacterSetup}} dhca-header__adornment--setup{{/if}}">
+    <div class="dhca-header__ribbon" aria-hidden="true">{{compact.identity.primaryLabel}}</div>
+    {{#if document.system.needsCharacterSetup}}
+      <button
+        type="button"
+        class="dhca-character__setup-button"
+        data-action="levelManagement"
+        data-tooltip-text="{{localize 'DHCS.Labels.CreateCharacter'}}"
+        {{disabled (not @root.editable)}}
+      >
+        <i class="fa-solid fa-user-plus"></i>
+        <span>{{localize 'DHCS.Labels.CreateCharacter'}}</span>
+      </button>
+    {{else}}
+      <div class="dhca-header__tier" aria-hidden="true">{{compact.identity.level}}</div>
+    {{/if}}
   </div>
 
   <div class="dhca-header__identity">
@@ -130,15 +143,13 @@
     {{> 'modules/daggerheart-compact-sheets/templates/parts/tab-nav.hbs'}}
     <div class="dhca-header-actions">
       {{#if @root.editable}}
-        {{#if document.system.needsCharacterSetup}}
-          <button type="button" data-action="levelManagement" data-tooltip-text="{{localize 'DAGGERHEART.APPLICATIONS.CharacterCreation.buttonTitle'}}">
-            <i class="fa-solid fa-user-plus"></i>
-          </button>
-        {{else if document.system.levelData.canLevelUp}}
+        {{#unless document.system.needsCharacterSetup}}
+          {{#if document.system.levelData.canLevelUp}}
           <button type="button" data-action="levelManagement" data-tooltip-text="{{localize 'DAGGERHEART.ACTORS.Character.levelUp'}}">
             <i class="fa-solid fa-angles-up"></i>
           </button>
-        {{/if}}
+          {{/if}}
+        {{/unless}}
         <button type="button" data-action="useDowntime" data-type="shortRest" data-tooltip-text="{{localize 'DAGGERHEART.APPLICATIONS.Downtime.shortRest.title'}}">
           <i class="fa-solid fa-utensils"></i>
         </button>

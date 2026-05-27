@@ -2,6 +2,7 @@
   "DHCS": {
     "Labels": {
       "AttackShort": "АТК",
+      "CreateCharacter": "Создать персонажа",
       "Filter": "Фильтр",
       "Thresholds": "Пороги"
     },
