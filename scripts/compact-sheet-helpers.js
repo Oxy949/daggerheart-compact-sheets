@@ -66,6 +66,18 @@ export function closeRenderController(controller) {
   return null;
 }
 
+export function measureCompactTrackContentWidth(track) {
+  if (!track) return 0;
+
+  const styles = getComputedStyle(track);
+  const padding = parseCssPixelValue(styles.paddingLeft) + parseCssPixelValue(styles.paddingRight);
+  const gap = parseCssPixelValue(styles.columnGap);
+  const children = Array.from(track.children);
+  const childWidth = children.reduce((total, child) => total + child.getBoundingClientRect().width, 0);
+
+  return padding + childWidth + gap * Math.max(children.length - 1, 0);
+}
+
 export function expandFeatureDescriptions(element) {
   if (!element) return;
 
@@ -284,6 +296,11 @@ function getCompactWindowControlsLeft(element) {
 
   if (Number.isFinite(left)) return left;
   return element.querySelector(COMPACT_WINDOW_HEADER_SELECTOR)?.getBoundingClientRect().left ?? null;
+}
+
+function parseCssPixelValue(value) {
+  const parsed = Number.parseFloat(value);
+  return Number.isFinite(parsed) ? parsed : 0;
 }
 
 function blurCompactActiveEditable(element) {

@@ -4,21 +4,23 @@
   data-group="{{tabs.effects.group}}"
 >
   <div class="dhca-tab-panel__scroll">
-    {{> 'daggerheart.inventory-items'
-      title='DAGGERHEART.GENERAL.activeEffects'
-      type='effect'
-      collection=effects.actives
-      canCreate=@root.editable
-      hideResources=true
-    }}
+    <div class="dhca-effects__section-stack">
+      {{> 'daggerheart.inventory-items'
+        title='DAGGERHEART.GENERAL.activeEffects'
+        type='effect'
+        collection=effects.actives
+        canCreate=@root.editable
+        hideResources=true
+      }}
 
-    {{> 'daggerheart.inventory-items'
-      title='DAGGERHEART.GENERAL.inactiveEffects'
-      type='effect'
-      collection=effects.inactives
-      canCreate=@root.editable
-      hideResources=true
-      disabled=true
-    }}
+      {{> 'daggerheart.inventory-items'
+        title='DAGGERHEART.GENERAL.inactiveEffects'
+        type='effect'
+        collection=effects.inactives
+        canCreate=@root.editable
+        hideResources=true
+        disabled=true
+      }}
+    </div>
   </div>
 </section>

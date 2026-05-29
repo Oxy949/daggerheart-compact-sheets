@@ -82,6 +82,8 @@ export const FEATURE_DESCRIPTION_SELECTOR = ".dhca-tab-panel--features .inventor
 export const ART_EDIT_SELECTOR = ".dhca-header__art-edit";
 export const RESOURCE_ROW_SELECTOR = ".dhca-resource-row:not(.dhca-resource-row--fallback)";
 export const RESOURCE_STEP_SELECTOR = ".dhca-resource-step";
+export const RESOURCE_TRACK_MIN_SCALE = 0.6;
+export const RESOURCE_TRACK_SHRINK_START_RATIO = 0.9;
 export const SCROLLABLE_PANEL_SELECTOR = ".dhca-tab-panel__scroll";
 export const RESOURCE_GROUP_SIZE = 3;
 

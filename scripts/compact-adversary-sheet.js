@@ -4,6 +4,8 @@ import {
   MODULE_ID,
   RESOURCE_ROW_SELECTOR,
   RESOURCE_STEP_SELECTOR,
+  RESOURCE_TRACK_MIN_SCALE,
+  RESOURCE_TRACK_SHRINK_START_RATIO,
   SETTING_KEYS
 } from "./constants.js";
 import {
@@ -17,6 +19,7 @@ import {
   expandFeatureDescriptions,
   inlineFeatureDescriptions,
   isCompactSheetEditable,
+  measureCompactTrackContentWidth,
   openCompactImagePicker,
   refreshRenderController
 } from "./compact-sheet-helpers.js";
@@ -138,11 +141,12 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
         row.style.setProperty("--dhca-resource-scale", "1");
 
         const availableWidth = track.clientWidth;
-        const contentWidth = track.scrollWidth;
+        const contentWidth = measureCompactTrackContentWidth(track);
+        const targetWidth = availableWidth * RESOURCE_TRACK_SHRINK_START_RATIO;
 
-        if (!availableWidth || !contentWidth || contentWidth <= availableWidth) continue;
+        if (!availableWidth || !contentWidth || contentWidth <= targetWidth) continue;
 
-        const scale = Math.max(Math.min(availableWidth / contentWidth, 1), 0.6);
+        const scale = Math.max(Math.min(targetWidth / contentWidth, 1), RESOURCE_TRACK_MIN_SCALE);
         row.style.setProperty("--dhca-resource-scale", scale.toFixed(3));
       }
     }

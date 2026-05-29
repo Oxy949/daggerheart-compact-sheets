@@ -1345,6 +1345,19 @@ body.theme-light.sheet.dh-compact.character .dhca-character__domains img {
   gap: var(--dhca-character-section-gap);
 }
 
+.sheet.dh-compact.character .dhca-tab-panel .dhca-character__section-stack,
+.sheet.dh-compact.character .dhca-tab-panel .dhca-tab-panel__scroll > .items-section.dhca-character__section-stack,
+.sheet.dh-compact.character .dhca-tab-panel--effects .dhca-effects__section-stack {
+  display: block !important;
+  column-fill: balance;
+  column-gap: var(--dhca-feature-column-gap);
+  column-width: var(--dhca-feature-column-width);
+}
+
+.sheet.dh-compact.character .dhca-tab-panel--effects .dhca-effects__section-stack {
+  min-width: 0;
+}
+
 .sheet.dh-compact.character .dhca-character__section-stack > fieldset,
 .sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) {
   position: relative;
@@ -1352,6 +1365,21 @@ body.theme-light.sheet.dh-compact.character .dhca-character__domains img {
   margin: 0 !important;
   padding: 0 !important;
   overflow: visible;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel .dhca-character__section-stack > fieldset,
+.sheet.dh-compact.character .dhca-tab-panel--effects .dhca-effects__section-stack > fieldset {
+  display: block;
+  width: 100%;
+  margin: 0 0 var(--dhca-character-section-gap) !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel .dhca-character__section-stack > fieldset:last-child,
+.sheet.dh-compact.character .dhca-tab-panel--effects .dhca-effects__section-stack > fieldset:last-child {
+  margin-bottom: 0 !important;
 }
 
 .sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend {
@@ -1435,7 +1463,8 @@ body.theme-light.sheet.dh-compact.character .dhca-character__domains img {
   margin-top: var(--dhca-character-section-gap) !important;
 }
 
-.sheet.dh-compact.character .dhca-character__section-stack > fieldset + fieldset {
+.sheet.dh-compact.character .dhca-character__section-stack > fieldset + fieldset,
+.sheet.dh-compact.character .dhca-effects__section-stack > fieldset + fieldset {
   margin-top: 0 !important;
 }
 
