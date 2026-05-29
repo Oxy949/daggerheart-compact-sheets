@@ -13,7 +13,14 @@
         <span>{{localize 'DHCS.Labels.CreateCharacter'}}</span>
       </button>
     {{else}}
-      <div class="dhca-header__tier" aria-hidden="true">{{compact.identity.level}}</div>
+      <button
+        type="button"
+        class="dhca-header__tier dhca-header__tier--button{{#if document.system.levelData.canLevelUp}} dhca-header__tier--ready{{/if}}"
+        data-action="levelManagement"
+        data-tooltip-text="{{localize 'DAGGERHEART.ACTORS.Character.levelUp'}}"
+        aria-label="{{localize 'DAGGERHEART.ACTORS.Character.levelUp'}}"
+        {{disabled (not @root.editable)}}
+      >{{compact.identity.level}}</button>
     {{/if}}
   </div>
 
@@ -33,22 +40,16 @@
       <span class="missing-header-feature" data-action="openPack" data-key="classes">{{localize 'TYPES.Item.class'}}</span>
     {{/if}}
     <span class="dhca-summary__separator">|</span>
-    {{#if document.system.class.subclass}}
-      <span data-action="editDoc" data-item-uuid="{{document.system.class.subclass.uuid}}">{{document.system.class.subclass.name}}</span>
-    {{else}}
-      <span class="missing-header-feature" data-action="openPack" data-key="subclasses">{{localize 'TYPES.Item.subclass'}}</span>
-    {{/if}}
-    <span class="dhca-summary__separator">|</span>
-    {{#if document.system.community}}
-      <span data-action="editDoc" data-item-uuid="{{document.system.community.uuid}}">{{document.system.community.name}}</span>
-    {{else}}
-      <span class="missing-header-feature" data-action="openPack" data-key="communities">{{localize 'TYPES.Item.community'}}</span>
-    {{/if}}
-    <span class="dhca-summary__separator">|</span>
     {{#if document.system.ancestry}}
       <span data-action="editDoc" data-item-uuid="{{document.system.ancestry.uuid}}">{{document.system.ancestry.name}}</span>
     {{else}}
       <span class="missing-header-feature" data-action="openPack" data-key="ancestries">{{localize 'TYPES.Item.ancestry'}}</span>
+    {{/if}}
+    <span class="dhca-summary__separator">-</span>
+    {{#if document.system.community}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.community.uuid}}">{{document.system.community.name}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="communities">{{localize 'TYPES.Item.community'}}</span>
     {{/if}}
   </div>
 
@@ -61,6 +62,38 @@
         <span data-action="editDoc" data-item-uuid="{{document.system.multiclass.subclass.uuid}}">{{document.system.multiclass.subclass.name}}</span>
       {{/if}}
     </div>
+  {{/if}}
+
+  {{#if compact.hasExperiences}}
+    <section class="dhca-detail-panel dhca-detail-panel--experience dhca-character__experiences">
+      <div class="dhca-experience-list">
+        {{#each source.system.experiences as |experience id|}}
+          <div
+            class="dhca-experience-row"
+            {{#unless @root.compact.showInteractionButtons}}data-tooltip-text="{{experience.description}}"{{/unless}}
+          >
+            {{#if @root.compact.showInteractionButtons}}
+              <button
+                type="button"
+                class="dhca-experience-action"
+                data-action="sendExpToChat"
+                data-type="experience"
+                data-id="{{id}}"
+                data-tooltip-text="{{localize 'DAGGERHEART.UI.Tooltip.sendToChat'}}"
+              >
+                <span class="dhca-experience-name">{{experience.name}}</span>
+                <span class="dhca-experience-value">{{numberFormat experience.value sign=true}}</span>
+              </button>
+            {{else}}
+              <span class="dhca-experience-action dhca-experience-action--static">
+                <span class="dhca-experience-name">{{experience.name}}</span>
+                <span class="dhca-experience-value">{{numberFormat experience.value sign=true}}</span>
+              </span>
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+    </section>
   {{/if}}
 
   <div class="dhca-character__focus-row">
@@ -96,13 +129,6 @@
       {{/if}}
     </div>
 
-    {{#if compact.domains.length}}
-      <div class="dhca-character__domains" aria-label="{{localize 'DAGGERHEART.GENERAL.Tabs.domains'}}">
-        {{#each compact.domains as |domain|}}
-          <img src="{{domain.src}}" alt="" data-tooltip="{{domain.label}}" />
-        {{/each}}
-      </div>
-    {{/if}}
   </div>
 
   <div class="dhca-character__traits">

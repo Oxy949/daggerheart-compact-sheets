@@ -119,12 +119,21 @@ function inlineFeatureDescription(item) {
 
   const featureForm = label.querySelector(".feature-form");
   const featureFormText = featureForm?.querySelector(".recall-value");
+  const itemName = label.querySelector(".item-name");
 
   if (featureFormText) {
     featureFormText.textContent = featureFormText.textContent.trimEnd().replace(/:+$/, "");
   }
 
   removeEmptyTextNodes(featureForm);
+
+  if (!featureForm && itemName) {
+    const titleColon = label.querySelector(".dhca-feature-inline-title-colon")
+      ?? document.createElement("span");
+    titleColon.textContent = ":";
+    titleColon.className = "dhca-feature-inline-title-colon";
+    itemName.append(titleColon);
+  }
 
   if (featureForm && !featureForm.querySelector(":scope > .dhca-feature-inline-colon")) {
     const colon = document.createElement("span");

@@ -68,7 +68,8 @@ export function buildCompactCharacterContext(document) {
 
   return {
     canEditImage: document.isOwner ?? false,
-    domains: normalizeCollection(system.domainData),
+    domains: buildCharacterDomains(system.domainData),
+    hasExperiences: !foundry.utils.isEmpty(system.experiences),
     identity: {
       ancestry: system.ancestry ?? null,
       class: system.class?.value ?? null,
@@ -76,8 +77,7 @@ export function buildCompactCharacterContext(document) {
       level: getCharacterLevel(system),
       multiclass: system.multiclass?.value ?? null,
       multiclassSubclass: system.multiclass?.subclass ?? null,
-      primaryLabel: system.class?.value?.name
-        ?? localizeFallback("DAGGERHEART.GENERAL.character", "Character"),
+      primaryLabel: getCharacterBadgeLabel(system),
       subclass: system.class?.subclass ?? null
     },
     resources: {
@@ -284,6 +284,49 @@ function getCharacterLevel(system = {}) {
       ?? system.levelData?.level?.value
       ?? system.level
   );
+}
+
+function getCharacterBadgeLabel(system = {}) {
+  return system.class?.subclass?.name
+    ?? system.class?.value?.name
+    ?? system.multiclass?.subclass?.name
+    ?? system.multiclass?.value?.name
+    ?? localizeFallback("DAGGERHEART.GENERAL.character", "Character");
+}
+
+function buildCharacterDomains(domainData) {
+  return normalizeCollection(domainData)
+    .map((domain, index) => {
+      const id = typeof domain === "string"
+        ? domain
+        : domain?.id ?? domain?.key ?? String(index);
+      const configuredDomain = getConfiguredDomain(id);
+      const source = typeof domain === "string" ? configuredDomain : domain;
+      const src = source?.src
+        ?? source?.img
+        ?? source?.icon
+        ?? configuredDomain?.src
+        ?? configuredDomain?.img
+        ?? configuredDomain?.icon
+        ?? "";
+
+      return {
+        ...configuredDomain,
+        ...source,
+        id,
+        label: source?.label ?? source?.name ?? configuredDomain?.label ?? configuredDomain?.name ?? id,
+        src
+      };
+    })
+    .filter((domain) => domain.src);
+}
+
+function getConfiguredDomain(id) {
+  try {
+    return globalThis.CONFIG?.DH?.DOMAIN?.allDomains?.()?.[id] ?? null;
+  } catch {
+    return null;
+  }
 }
 
 function normalizeCollection(collection) {

@@ -264,6 +264,7 @@
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item .item-tags,
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item .feature-form,
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item .feature-form span,
+.sheet.dh-compact .dhca-tab-panel--features .inventory-item .dhca-feature-inline-title-colon,
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item .dhca-feature-inline-colon,
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item .dhca-feature-inline-description {
   display: inline !important;
@@ -287,6 +288,7 @@
   margin-top: 0 !important;
 }
 
+.sheet.dh-compact .dhca-tab-panel--features .inventory-item:not(:has(> .inventory-item-content.extended)) .dhca-feature-inline-title-colon,
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item:not(:has(> .inventory-item-content.extended)) .dhca-feature-inline-colon,
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item:not(:has(> .inventory-item-content.extended)) .dhca-feature-inline-description {
   display: none !important;

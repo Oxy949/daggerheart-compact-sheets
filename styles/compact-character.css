@@ -1,5 +1,6 @@
 .sheet.dh-compact.character .dhca-header__identity,
 .sheet.dh-compact.character .dhca-character__lineage,
+.sheet.dh-compact.character .dhca-character__experiences,
 .sheet.dh-compact.character .dhca-character__focus-row,
 .sheet.dh-compact.character .dhca-character__traits,
 .sheet.dh-compact.character .dhca-character__status-strip {
@@ -34,6 +35,12 @@
   font-size: 0.82em;
   text-overflow: ellipsis;
   white-space: nowrap;
+  pointer-events: none;
+}
+
+.sheet.dh-compact.character .dhca-header__adornment {
+  z-index: 4;
+  pointer-events: auto;
 }
 
 .sheet.dh-compact.character .dhca-character__setup-button {
@@ -79,6 +86,52 @@
   opacity: 0.7;
 }
 
+.sheet.dh-compact.character .dhca-header__tier--button {
+  appearance: none;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  aspect-ratio: 1 / 1;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  max-width: 30px;
+  max-height: 30px;
+  margin-top: 4px;
+  margin-right: 8px;
+  padding: 2px 0 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: none;
+  font-size: 20px !important;
+  line-height: 1 !important;
+}
+
+.sheet.dh-compact.character .dhca-header__tier--button::before,
+.sheet.dh-compact.character .dhca-header__tier--button::after {
+  pointer-events: none;
+}
+
+.sheet.dh-compact.character .dhca-header__tier--button:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.sheet.dh-compact.character .dhca-header__tier--button:not(:disabled):hover,
+.sheet.dh-compact.character .dhca-header__tier--button:not(:disabled):focus-visible {
+  color: var(--dhca-accent-strong);
+  filter: brightness(1.1);
+  outline: 0;
+}
+
+.sheet.dh-compact.character .dhca-header__tier--ready {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--dhca-accent) 55%, transparent));
+}
+
 .sheet.dh-compact.character .dhca-header--needs-setup .dhca-header__identity,
 .sheet.dh-compact.character .dhca-header--needs-setup .dhca-character__lineage {
   margin-right: 166px;
@@ -102,6 +155,99 @@
   margin-bottom: 6px;
 }
 
+.sheet.dh-compact.character .dhca-character__experiences {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 6px;
+  min-width: 0;
+  margin: -1px 118px 3px 0;
+  color: var(--dhca-content-text-soft);
+  font-size: 13px !important;
+  font-family: var(--dhca-font-family);
+  line-height: 1.25 !important;
+}
+
+.sheet.dh-compact.character .dhca-character__experiences .dhca-detail-panel__title {
+  display: inline;
+  flex: 0 0 auto;
+  margin: 0 !important;
+  color: inherit !important;
+  font-size: inherit !important;
+  font-weight: 800 !important;
+  line-height: inherit !important;
+  letter-spacing: 0 !important;
+  text-align: left !important;
+  text-transform: none !important;
+  font-family: var(--dhca-font-family) !important;
+}
+
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-list {
+  display: inline-flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  min-width: 0;
+}
+
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-row,
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-row * {
+  color: var(--dhca-content-text-soft) !important;
+  font-size: 13px !important;
+  font-family: var(--dhca-font-family) !important;
+  line-height: 1.25 !important;
+}
+
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-row {
+  display: inline-flex;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action {
+  appearance: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action--static {
+  cursor: default;
+}
+
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action:not(.dhca-experience-action--static):hover .dhca-experience-name,
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action:not(.dhca-experience-action--static):hover .dhca-experience-value,
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action:not(.dhca-experience-action--static):focus-visible .dhca-experience-name,
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action:not(.dhca-experience-action--static):focus-visible .dhca-experience-value {
+  color: var(--dhca-accent-strong) !important;
+}
+
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-name {
+  min-width: 0;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-value {
+  font-weight: 800 !important;
+}
+
 .sheet.dh-compact.character .dhca-character__lineage [data-action] {
   cursor: pointer;
 }
@@ -117,6 +263,10 @@
   align-items: center;
   gap: 6px 10px;
   margin: 6px 0 8px;
+}
+
+.sheet.dh-compact.character .dhca-character__experiences + .dhca-character__focus-row {
+  margin-top: 3px;
 }
 
 .sheet.dh-compact.character .dhca-character__hope {
@@ -207,10 +357,24 @@
   display: block;
   width: 24px;
   height: 24px;
-  border: 1px solid color-mix(in srgb, var(--dhca-line) 60%, transparent);
-  border-radius: 5px;
-  background: var(--dhca-surface);
-  object-fit: cover;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  object-fit: contain;
+}
+
+.themed.theme-dark .sheet.dh-compact.character .dhca-character__domains img,
+.themed.theme-dark.sheet.dh-compact.character .dhca-character__domains img,
+body.theme-dark .sheet.dh-compact.character .dhca-character__domains img,
+body.theme-dark.sheet.dh-compact.character .dhca-character__domains img {
+  filter: var(--golden-filter, brightness(0) saturate(100%) invert(89%) sepia(13%) saturate(2008%) hue-rotate(332deg) brightness(99%) contrast(92%));
+}
+
+.themed.theme-light .sheet.dh-compact.character .dhca-character__domains img,
+.themed.theme-light.sheet.dh-compact.character .dhca-character__domains img,
+body.theme-light .sheet.dh-compact.character .dhca-character__domains img,
+body.theme-light.sheet.dh-compact.character .dhca-character__domains img {
+  filter: brightness(0) saturate(100%);
 }
 
 .sheet.dh-compact.character .dhca-character__traits {
@@ -532,8 +696,12 @@
 }
 
 .sheet.dh-compact.character .dhca-resource-row__pip--shield {
-  border-radius: 999px;
-  font-size: 10px;
+  border-radius: var(--dhca-resource-pip-radius);
+  font-size: 0;
+}
+
+.sheet.dh-compact.character .dhca-resource-row__pip--shield i {
+  display: none;
 }
 
 .sheet.dh-compact.character .dhca-resource-row__pip:hover,
@@ -726,6 +894,23 @@
   border-color: var(--dhca-accent);
   background: var(--dhca-button-bg-hover);
   color: var(--dhca-accent-strong);
+}
+
+.sheet.dh-compact.character .dhca-tab-panel .inventory-item .controls a[data-action="toChat"],
+.sheet.dh-compact.character .dhca-tab-panel .inventory-item .controls a[data-action="triggerContextMenu"],
+.sheet.dh-compact.character .dhca-tab-panel .card-item .controls a[data-action="toChat"],
+.sheet.dh-compact.character .dhca-tab-panel .card-item .controls a[data-action="triggerContextMenu"] {
+  display: none !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel .inventory-item .controls:not(:has(> a:not([data-action="toChat"]):not([data-action="triggerContextMenu"]))),
+.sheet.dh-compact.character .dhca-tab-panel .card-item .controls:not(:has(> a:not([data-action="toChat"]):not([data-action="triggerContextMenu"]))) {
+  display: none !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel .inventory-item .invetory-description ul,
+.sheet.dh-compact.character .dhca-tab-panel .inventory-item .invetory-description ol {
+  margin: 4px 0;
 }
 
 .sheet.dh-compact.character .dhca-tab-panel .inventory-item .item-buttons {
@@ -925,6 +1110,203 @@
   background: transparent;
 }
 
+.sheet.dh-compact.character {
+  --dhca-character-tab-padding: 10px;
+  --dhca-character-section-gap: 8px;
+  --dhca-character-item-gap: 8px;
+  --dhca-character-title-gap: 6px;
+  --dhca-character-title-height: 26px;
+}
+
+.sheet.dh-compact.character .dhca-character__setup-button {
+  max-width: 190px;
+  min-height: 26px;
+  font-size: 10px !important;
+}
+
+.sheet.dh-compact.character .dhca-header--needs-setup .dhca-header__identity,
+.sheet.dh-compact.character .dhca-header--needs-setup .dhca-character__lineage {
+  margin-right: 202px;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel,
+.sheet.dh-compact.character .dhca-tab-panel.active {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel__scroll {
+  height: 100%;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: var(--dhca-character-tab-padding);
+  scrollbar-gutter: stable;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel__scroll > .items-section,
+.sheet.dh-compact.character .dhca-tab-panel__scroll > .dhca-character__section-stack {
+  min-width: 0;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel__scroll > .items-section.dhca-character__section-stack {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--dhca-character-section-gap) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  scrollbar-width: auto !important;
+}
+
+.sheet.dh-compact.character .dhca-character__section-stack {
+  gap: var(--dhca-character-section-gap);
+}
+
+.sheet.dh-compact.character .dhca-character__section-stack > fieldset,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) {
+  position: relative;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend {
+  position: relative;
+  justify-content: center;
+  min-height: var(--dhca-character-title-height);
+  margin: 0 0 var(--dhca-character-title-gap);
+  padding: 0;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend a {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel):hover > legend a,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel):focus-within > legend a,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend a:hover,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend a:focus-visible {
+  pointer-events: auto;
+}
+
+.sheet.dh-compact.character .dhca-character__tool-row {
+  margin: 0 0 var(--dhca-character-section-gap);
+}
+
+.sheet.dh-compact.character .dhca-tab-panel--inventory .currency,
+.sheet.dh-compact.character .dhca-tab-panel--inventory .gold-section,
+.sheet.dh-compact.character .dhca-tab-panel--inventory .currency-section {
+  margin-bottom: var(--dhca-character-section-gap);
+}
+
+.sheet.dh-compact.character .dhca-panel__title {
+  min-height: var(--dhca-character-title-height);
+  margin-bottom: var(--dhca-character-title-gap);
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sheet.dh-compact.character .dhca-panel--biography-section .editor,
+.sheet.dh-compact.character .dhca-panel--biography-section .prosemirror {
+  min-height: 170px;
+  overflow: visible;
+}
+
+.sheet.dh-compact.character .dhca-panel--biography-section textarea {
+  min-height: 170px;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel .items-list,
+.sheet.dh-compact.character .dhca-tab-panel .card-list {
+  min-width: 0;
+  gap: var(--dhca-character-item-gap) !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel .inventory-item {
+  margin: 0 !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset.glassy,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) + fieldset:not(.dhca-panel) {
+  margin-top: var(--dhca-character-section-gap) !important;
+}
+
+.sheet.dh-compact.character .dhca-character__section-stack > fieldset + fieldset {
+  margin-top: 0 !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset.glassy > legend,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend,
+.sheet.dh-compact.character .dhca-panel__title {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--dhca-character-title-height);
+  margin: 0 0 var(--dhca-character-title-gap) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--dhca-panel-title) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset.glassy > legend::before,
+.sheet.dh-compact.character .dhca-tab-panel fieldset.glassy > legend::after,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend::before,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend::after,
+.sheet.dh-compact.character .dhca-panel__title::before,
+.sheet.dh-compact.character .dhca-panel__title::after {
+  min-width: 24px;
+  background: transparent !important;
+  border-top: 1px dashed var(--dhca-line) !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend a {
+  background: var(--dhca-button-bg) !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend a:hover,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:not(.dhca-panel) > legend a:focus-visible {
+  background: var(--dhca-button-bg-hover) !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset:has(> ul.items-list):not(:has(> ul.items-list > li)) > ul.items-list,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:has(> ul.card-list):not(:has(> ul.card-list > li)) > ul.card-list {
+  display: none !important;
+}
+
+.sheet.dh-compact.character .dhca-tab-panel fieldset:has(> ul.items-list):not(:has(> ul.items-list > li)) > legend,
+.sheet.dh-compact.character .dhca-tab-panel fieldset:has(> ul.card-list):not(:has(> ul.card-list > li)) > legend {
+  margin-bottom: 0 !important;
+}
+
 @container (max-width: 430px) {
   .sheet.dh-compact.character .dhca-character__lineage {
     margin-right: 76px;
@@ -935,14 +1317,14 @@
   }
 
   .sheet.dh-compact.character .dhca-character__setup-button {
-    max-width: 118px;
+    max-width: 148px;
     padding-inline: 7px;
     font-size: 10px !important;
   }
 
   .sheet.dh-compact.character .dhca-header--needs-setup .dhca-header__identity,
   .sheet.dh-compact.character .dhca-header--needs-setup .dhca-character__lineage {
-    margin-right: 126px;
+    margin-right: 158px;
   }
 
   .sheet.dh-compact.character .dhca-character__traits {
