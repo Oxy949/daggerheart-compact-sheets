@@ -13,14 +13,29 @@
         <span>{{localize 'DHCS.Labels.CreateCharacter'}}</span>
       </button>
     {{else}}
-      <button
-        type="button"
-        class="dhca-header__tier dhca-header__tier--button{{#if document.system.levelData.canLevelUp}} dhca-header__tier--ready{{/if}}"
-        data-action="levelManagement"
-        data-tooltip-text="{{localize 'DAGGERHEART.ACTORS.Character.levelUp'}}"
-        aria-label="{{localize 'DAGGERHEART.ACTORS.Character.levelUp'}}"
-        {{disabled (not @root.editable)}}
-      >{{compact.identity.level}}</button>
+      <div class="dhca-character__level-row">
+        {{#if document.system.levelData.canLevelUp}}
+          <button
+            type="button"
+            class="dhca-character__level-up"
+            data-action="levelManagement"
+            data-tooltip-text="{{localize 'DAGGERHEART.ACTORS.Character.levelUp'}}"
+            aria-label="{{localize 'DAGGERHEART.ACTORS.Character.levelUp'}}"
+            {{disabled (not @root.editable)}}
+          >
+            <i class="fa-solid fa-angles-up"></i>
+          </button>
+        {{/if}}
+        <div class="dhca-header__tier dhca-header__tier--field{{#if document.system.levelData.canLevelUp}} dhca-header__tier--ready{{/if}}">
+          <input
+            type="text"
+            data-dtype="Number"
+            class="level-value dhca-header__tier-input"
+            value="{{document.system.levelData.level.changed}}"
+            {{disabled (not @root.editable)}}
+          />
+        </div>
+      </div>
     {{/if}}
   </div>
 
@@ -34,12 +49,16 @@
   </div>
 
   <div class="dhca-character__lineage" aria-label="{{localize 'DAGGERHEART.GENERAL.details'}}">
-    {{#if document.system.class.value}}
-      <span data-action="editDoc" data-item-uuid="{{document.system.class.value.uuid}}">{{document.system.class.value.name}}</span>
+    {{#if document.system.class.subclass}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.class.subclass.uuid}}">{{document.system.class.subclass.name}}</span>
     {{else}}
-      <span class="missing-header-feature" data-action="openPack" data-key="classes">{{localize 'TYPES.Item.class'}}</span>
+      <span class="missing-header-feature" data-action="openPack" data-key="subclasses">{{localize 'TYPES.Item.subclass'}}</span>
     {{/if}}
-    <span class="dhca-summary__separator">/</span>
+    {{#if document.system.multiclass.subclass}}
+      <span class="dhca-summary__separator">,</span>
+      <span data-action="editDoc" data-item-uuid="{{document.system.multiclass.subclass.uuid}}">{{document.system.multiclass.subclass.name}}</span>
+    {{/if}}
+    <span class="dhca-summary__separator">|</span>
     {{#if document.system.community}}
       <span data-action="editDoc" data-item-uuid="{{document.system.community.uuid}}">{{document.system.community.name}}</span>
     {{else}}
@@ -52,17 +71,6 @@
       <span class="missing-header-feature" data-action="openPack" data-key="ancestries">{{localize 'TYPES.Item.ancestry'}}</span>
     {{/if}}
   </div>
-
-  {{#if document.system.multiclass.value}}
-    <div class="dhca-character__lineage dhca-character__lineage--secondary">
-      <span>{{localize 'DAGGERHEART.GENERAL.multiclass'}}:</span>
-      <span data-action="editDoc" data-item-uuid="{{document.system.multiclass.value.uuid}}">{{document.system.multiclass.value.name}}</span>
-      {{#if document.system.multiclass.subclass}}
-        <span class="dhca-summary__separator">|</span>
-        <span data-action="editDoc" data-item-uuid="{{document.system.multiclass.subclass.uuid}}">{{document.system.multiclass.subclass.name}}</span>
-      {{/if}}
-    </div>
-  {{/if}}
 
   {{#if compact.hasExperiences}}
     <section class="dhca-detail-panel dhca-detail-panel--experience dhca-character__experiences">
@@ -79,14 +87,14 @@
               data-tooltip-text="{{localize 'DAGGERHEART.UI.Tooltip.sendToChat'}}"
             >
               <span class="dhca-experience-name">{{experience.name}}</span>
-              <span class="dhca-experience-value">{{numberFormat experience.value sign=true}}</span>
+              <span class="dhca-experience-value">{{numberFormat experience.value sign=true}}</span>{{#unless @last}}<span class="dhca-experience-separator">,</span>{{/unless}}
             </button>
           {{else}}
             <span class="dhca-experience-action dhca-experience-action--static" data-tooltip-text="{{experience.description}}">
               <span class="dhca-experience-name">{{experience.name}}</span>
-              <span class="dhca-experience-value">{{numberFormat experience.value sign=true}}</span>
+              <span class="dhca-experience-value">{{numberFormat experience.value sign=true}}</span>{{#unless @last}}<span class="dhca-experience-separator">,</span>{{/unless}}
             </span>
-          {{/if}}{{#unless @last}}<span class="dhca-experience-separator">,</span>{{/unless}}
+          {{/if}}
         {{/each}}
       </div>
     </section>
@@ -162,13 +170,6 @@
     {{> 'modules/daggerheart-compact-sheets/templates/parts/tab-nav.hbs'}}
     <div class="dhca-header-actions">
       {{#if @root.editable}}
-        {{#unless document.system.needsCharacterSetup}}
-          {{#if document.system.levelData.canLevelUp}}
-          <button type="button" data-action="levelManagement" data-tooltip-text="{{localize 'DAGGERHEART.ACTORS.Character.levelUp'}}">
-            <i class="fa-solid fa-angles-up"></i>
-          </button>
-          {{/if}}
-        {{/unless}}
         <button type="button" data-action="useDowntime" data-type="shortRest" data-tooltip-text="{{localize 'DAGGERHEART.APPLICATIONS.Downtime.shortRest.title'}}">
           <i class="fa-solid fa-utensils"></i>
         </button>

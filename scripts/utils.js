@@ -287,11 +287,14 @@ function getCharacterLevel(system = {}) {
 }
 
 function getCharacterBadgeLabel(system = {}) {
-  return system.class?.subclass?.name
-    ?? system.class?.value?.name
-    ?? system.multiclass?.subclass?.name
-    ?? system.multiclass?.value?.name
-    ?? localizeFallback("DAGGERHEART.GENERAL.character", "Character");
+  const labels = [
+    system.class?.value?.name,
+    system.multiclass?.value?.name
+  ].filter(Boolean);
+
+  return labels.length
+    ? labels.join(" / ")
+    : localizeFallback("DAGGERHEART.GENERAL.character", "Character");
 }
 
 function buildCharacterDomains(domainData) {
