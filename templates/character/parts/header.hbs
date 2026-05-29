@@ -151,7 +151,7 @@
     {{#each attributes as |attribute key|}}
       <button
         type="button"
-        class="dhca-character__trait"
+        class="dhca-character__trait{{#if attribute.isSpellcasting}} dhca-character__trait--spellcasting{{/if}}"
         data-action="rollAttribute"
         data-attribute="{{key}}"
         data-value="{{attribute.value}}"
@@ -162,6 +162,11 @@
           <i class="{{#if attribute.tierMarked}}fa-solid{{else}}fa-regular{{/if}} fa-circle"></i>
         </span>
         <span class="dhca-character__trait-value">{{numberFormat attribute.value sign=true}}</span>
+        {{#if attribute.isSpellcasting}}
+          <span class="dhca-character__spellcasting-mark" data-tooltip="DAGGERHEART.ITEMS.Subclass.spellcastingTrait">
+            <i class="fa-solid fa-wand-magic-sparkles" inert></i>
+          </span>
+        {{/if}}
       </button>
     {{/each}}
   </div>

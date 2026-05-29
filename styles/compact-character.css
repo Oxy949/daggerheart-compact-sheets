@@ -505,6 +505,7 @@ body.theme-light.sheet.dh-compact.character .dhca-character__domains img {
 
 .sheet.dh-compact.character .dhca-character__trait {
   appearance: none;
+  position: relative;
   display: grid;
   gap: 2px;
   min-width: 0;
@@ -517,6 +518,11 @@ body.theme-light.sheet.dh-compact.character .dhca-character__domains img {
   box-shadow: none;
   font-family: var(--dhca-font-family) !important;;
   text-align: center;
+  overflow: visible;
+}
+
+.sheet.dh-compact.character .dhca-character__trait--spellcasting {
+  border-color: color-mix(in srgb, var(--dhca-accent) 72%, var(--dhca-line));
 }
 
 .sheet.dh-compact.character .dhca-character__trait:hover,
@@ -553,6 +559,32 @@ body.theme-light.sheet.dh-compact.character .dhca-character__domains img {
   font-weight: 900 !important;
   letter-spacing: 0;
   line-height: 1 !important;
+}
+
+.sheet.dh-compact.character .dhca-character__spellcasting-mark {
+  position: absolute;
+  left: calc(80%);
+  bottom: -7px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--dhca-line);
+  border-radius: 999px;
+  background: radial-gradient(190.63% 190.63% at 50% -80.63%, #18152e 70%, #4d4494 80%, #a0837e 90%, var(--dhca-line) 100%);
+  color: var(--dhca-accent-strong);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
+  font-size: 8px !important;
+  line-height: 1;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.35);
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+
+.sheet.dh-compact.character .dhca-character__spellcasting-mark i {
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .sheet.dh-compact.character .dhca-character__trait:hover .dhca-character__trait-name,
