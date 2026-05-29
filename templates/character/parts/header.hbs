@@ -92,6 +92,18 @@
     </section>
   {{/if}}
 
+  <div class="dhca-character__quick-stats" aria-label="{{localize 'DAGGERHEART.GENERAL.details'}}">
+    <span>
+      <strong>{{localize 'DAGGERHEART.GENERAL.evasion'}}:</strong>
+      {{#if compact.status.evasion includeZero=true}}{{compact.status.evasion}}{{else}}-{{/if}}
+    </span>
+    <span class="dhca-summary__separator">|</span>
+    <span>
+      <strong>{{localize 'DAGGERHEART.GENERAL.proficiency'}}:</strong>
+      {{#if compact.status.proficiency includeZero=true}}{{compact.status.proficiency}}{{else}}-{{/if}}
+    </span>
+  </div>
+
   <div class="dhca-character__focus-row">
     <div class="dhca-character__hope" aria-label="{{localize 'DAGGERHEART.GENERAL.hope'}}">
       <span class="dhca-character__focus-label">{{localize 'DAGGERHEART.GENERAL.hope'}}</span>
@@ -144,21 +156,6 @@
         <span class="dhca-character__trait-value">{{numberFormat attribute.value sign=true}}</span>
       </button>
     {{/each}}
-  </div>
-
-  <div class="dhca-character__status-strip">
-    <div>
-      <span>{{localize 'DAGGERHEART.GENERAL.evasion'}}</span>
-      <strong>{{#if compact.status.evasion includeZero=true}}{{compact.status.evasion}}{{else}}-{{/if}}</strong>
-    </div>
-    <button type="button" data-action="toggleArmorMangement" {{disabled (not @root.editable)}}>
-      <span>{{localize 'DAGGERHEART.GENERAL.armorSlots'}}</span>
-      <strong>{{compact.resources.armor.value}}/{{compact.resources.armor.max}}</strong>
-    </button>
-    <div>
-      <span>{{localize 'DAGGERHEART.GENERAL.proficiency'}}</span>
-      <strong>{{#if compact.status.proficiency includeZero=true}}{{compact.status.proficiency}}{{else}}-{{/if}}</strong>
-    </div>
   </div>
 
   <div class="dhca-header__toolbar">
