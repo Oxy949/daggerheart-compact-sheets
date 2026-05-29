@@ -1,7 +1,8 @@
 import {
   CHARACTER_TEMPLATE_PARTIALS,
   DEFAULT_WINDOWS,
-  RESOURCE_ROW_SELECTOR
+  RESOURCE_ROW_SELECTOR,
+  RESOURCE_STEP_SELECTOR
 } from "./constants.js";
 import {
   bindCompactImageEditButtons,
@@ -13,10 +14,11 @@ import {
   createTemplatePart,
   expandFeatureDescriptions,
   inlineFeatureDescriptions,
+  isCompactSheetEditable,
   openCompactImagePicker,
   refreshRenderController
 } from "./compact-sheet-helpers.js";
-import { buildCompactCharacterContext } from "./utils.js";
+import { buildCompactCharacterContext, clampNumber } from "./utils.js";
 
 const TAB_NAV_ENTRIES = Object.freeze([
   { id: "features", icon: "fa-solid fa-list" },
@@ -61,6 +63,7 @@ export function createCompactCharacterSheetClass(BaseCharacterSheet) {
       expandFeatureDescriptions(this.element);
       inlineFeatureDescriptions(this.element, this.#renderController.signal);
       normalizeCompactItemSeparators(this.element);
+      this.#bindResourceStepButtons();
       bindCompactImageEditButtons(this.element, this.#renderController.signal, this.#onCompactImageEdit);
       bindCompactWindowTitleGapDrag(this, this.element, this.#renderController.signal);
       this.#bindResponsiveResourceTracks();
@@ -88,6 +91,16 @@ export function createCompactCharacterSheetClass(BaseCharacterSheet) {
       requestAnimationFrame(() => updateSizing());
     }
 
+    #bindResourceStepButtons() {
+      if (!this.element || !this.#renderController) return;
+
+      const { signal } = this.#renderController;
+
+      for (const button of this.element.querySelectorAll(RESOURCE_STEP_SELECTOR)) {
+        button.addEventListener("click", this.#onCompactResourceStep, { signal });
+      }
+    }
+
     #updateResponsiveResourceTracks() {
       if (!this.element) return;
 
@@ -107,7 +120,60 @@ export function createCompactCharacterSheetClass(BaseCharacterSheet) {
       }
     }
 
+    #isSheetEditable() {
+      return isCompactSheetEditable(this);
+    }
+
     #onCompactImageEdit = (event) => openCompactImagePicker(this, event);
+
+    #onCompactResourceStep = async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!this.#isSheetEditable()) return;
+
+      const button = event.currentTarget;
+      const resourceKey = button.dataset.dhcaResourceStep;
+      const direction = Number(button.dataset.direction ?? 0);
+
+      if (!resourceKey || !Number.isFinite(direction) || direction === 0) return;
+
+      const current = this.#getResourceStepValue(resourceKey);
+      if (!current) return;
+
+      const nextValue = clampNumber(current.value + direction, 0, current.max);
+      if (nextValue === current.value) return;
+
+      button.disabled = true;
+
+      try {
+        if (resourceKey === "armor") {
+          await this.document.system.updateArmorValue({ value: nextValue - current.value });
+        } else {
+          await this.document.update({ [`system.resources.${resourceKey}.value`]: nextValue });
+        }
+      } finally {
+        button.disabled = !this.#isSheetEditable();
+      }
+    };
+
+    #getResourceStepValue(resourceKey) {
+      const resource = resourceKey === "armor"
+        ? this.document.system.armorScore
+        : this.document.system.resources?.[resourceKey];
+
+      if (!resource) return null;
+
+      const value = Number(resource.value ?? 0);
+      const max = Math.max(Number(resource.max ?? value), 0);
+
+      if (!Number.isFinite(value) || !Number.isFinite(max)) return null;
+
+      return {
+        max,
+        value: clampNumber(value, 0, max)
+      };
+    }
   };
 }
 

@@ -28,6 +28,7 @@
           <span class="dhca-resource-row__label-name">{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}</span>
           <span class="dhca-resource-row__label-max">{{compact.resources.hitPoints.value}} / {{compact.resources.hitPoints.max}}</span>
         </span>
+        <button type="button" class="dhca-resource-step" data-dhca-resource-step="hitPoints" data-direction="-1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}">-</button>
         <div class="dhca-resource-row__track">
           {{#each compact.resources.hitPoints.slotGroups as |group|}}
             <div class="dhca-resource-row__group">
@@ -43,6 +44,7 @@
             </div>
           {{/each}}
         </div>
+        <button type="button" class="dhca-resource-step" data-dhca-resource-step="hitPoints" data-direction="1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}">+</button>
       </div>
 
       <div class="dhca-resource-row dhca-resource-row--stress">
@@ -50,6 +52,7 @@
           <span class="dhca-resource-row__label-name">{{localize 'DAGGERHEART.GENERAL.stress'}}</span>
           <span class="dhca-resource-row__label-max">{{compact.resources.stress.value}} / {{compact.resources.stress.max}}</span>
         </span>
+        <button type="button" class="dhca-resource-step" data-dhca-resource-step="stress" data-direction="-1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.stress'}}">-</button>
         <div class="dhca-resource-row__track">
           {{#each compact.resources.stress.slotGroups as |group|}}
             <div class="dhca-resource-row__group">
@@ -65,6 +68,7 @@
             </div>
           {{/each}}
         </div>
+        <button type="button" class="dhca-resource-step" data-dhca-resource-step="stress" data-direction="1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.stress'}}">+</button>
       </div>
 
       {{#if compact.resources.armor.max}}
@@ -78,6 +82,7 @@
             <span class="dhca-resource-row__label-name">{{localize 'DAGGERHEART.GENERAL.armorSlots'}}</span>
             <span class="dhca-resource-row__label-max">{{compact.resources.armor.value}} / {{compact.resources.armor.max}}</span>
           </button>
+          <button type="button" class="dhca-resource-step" data-dhca-resource-step="armor" data-direction="-1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.armorSlots'}}">-</button>
           <div class="dhca-resource-row__track">
             {{#each compact.resources.armor.slotGroups as |group|}}
               <div class="dhca-resource-row__group">
@@ -95,6 +100,7 @@
               </div>
             {{/each}}
           </div>
+          <button type="button" class="dhca-resource-step" data-dhca-resource-step="armor" data-direction="1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.armorSlots'}}">+</button>
         </div>
       {{/if}}
     </div>
