@@ -39,17 +39,17 @@
     {{else}}
       <span class="missing-header-feature" data-action="openPack" data-key="classes">{{localize 'TYPES.Item.class'}}</span>
     {{/if}}
-    <span class="dhca-summary__separator">|</span>
-    {{#if document.system.ancestry}}
-      <span data-action="editDoc" data-item-uuid="{{document.system.ancestry.uuid}}">{{document.system.ancestry.name}}</span>
-    {{else}}
-      <span class="missing-header-feature" data-action="openPack" data-key="ancestries">{{localize 'TYPES.Item.ancestry'}}</span>
-    {{/if}}
-    <span class="dhca-summary__separator">-</span>
+    <span class="dhca-summary__separator">/</span>
     {{#if document.system.community}}
       <span data-action="editDoc" data-item-uuid="{{document.system.community.uuid}}">{{document.system.community.name}}</span>
     {{else}}
       <span class="missing-header-feature" data-action="openPack" data-key="communities">{{localize 'TYPES.Item.community'}}</span>
+    {{/if}}
+    <span class="dhca-summary__separator">-</span>
+    {{#if document.system.ancestry}}
+      <span data-action="editDoc" data-item-uuid="{{document.system.ancestry.uuid}}">{{document.system.ancestry.name}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="ancestries">{{localize 'TYPES.Item.ancestry'}}</span>
     {{/if}}
   </div>
 
@@ -66,31 +66,27 @@
 
   {{#if compact.hasExperiences}}
     <section class="dhca-detail-panel dhca-detail-panel--experience dhca-character__experiences">
+      <h3 class="dhca-detail-panel__title">{{localize 'DHCS.Labels.Experiences'}}:</h3>
       <div class="dhca-experience-list">
         {{#each source.system.experiences as |experience id|}}
-          <div
-            class="dhca-experience-row"
-            {{#unless @root.compact.showInteractionButtons}}data-tooltip-text="{{experience.description}}"{{/unless}}
-          >
-            {{#if @root.compact.showInteractionButtons}}
-              <button
-                type="button"
-                class="dhca-experience-action"
-                data-action="sendExpToChat"
-                data-type="experience"
-                data-id="{{id}}"
-                data-tooltip-text="{{localize 'DAGGERHEART.UI.Tooltip.sendToChat'}}"
-              >
-                <span class="dhca-experience-name">{{experience.name}}</span>
-                <span class="dhca-experience-value">{{numberFormat experience.value sign=true}}</span>
-              </button>
-            {{else}}
-              <span class="dhca-experience-action dhca-experience-action--static">
-                <span class="dhca-experience-name">{{experience.name}}</span>
-                <span class="dhca-experience-value">{{numberFormat experience.value sign=true}}</span>
-              </span>
-            {{/if}}
-          </div>
+          {{#if @root.compact.showInteractionButtons}}
+            <button
+              type="button"
+              class="dhca-experience-action"
+              data-action="sendExpToChat"
+              data-type="experience"
+              data-id="{{id}}"
+              data-tooltip-text="{{localize 'DAGGERHEART.UI.Tooltip.sendToChat'}}"
+            >
+              <span class="dhca-experience-name">{{experience.name}}</span>
+              <span class="dhca-experience-value">{{numberFormat experience.value sign=true}}</span>
+            </button>
+          {{else}}
+            <span class="dhca-experience-action dhca-experience-action--static" data-tooltip-text="{{experience.description}}">
+              <span class="dhca-experience-name">{{experience.name}}</span>
+              <span class="dhca-experience-value">{{numberFormat experience.value sign=true}}</span>
+            </span>
+          {{/if}}{{#unless @last}}<span class="dhca-experience-separator">,</span>{{/unless}}
         {{/each}}
       </div>
     </section>

@@ -156,10 +156,7 @@
 }
 
 .sheet.dh-compact.character .dhca-character__experiences {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0 6px;
+  display: block;
   min-width: 0;
   margin: -1px 118px 3px 0;
   color: var(--dhca-content-text-soft);
@@ -170,7 +167,6 @@
 
 .sheet.dh-compact.character .dhca-character__experiences .dhca-detail-panel__title {
   display: inline;
-  flex: 0 0 auto;
   margin: 0 !important;
   color: inherit !important;
   font-size: inherit !important;
@@ -183,39 +179,30 @@
 }
 
 .sheet.dh-compact.character .dhca-character__experiences .dhca-experience-list {
-  display: inline-flex;
-  flex: 1 1 auto;
-  flex-wrap: wrap;
-  gap: 0 8px;
+  display: inline;
   min-width: 0;
 }
 
-.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-row,
-.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-row * {
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action,
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action * {
   color: var(--dhca-content-text-soft) !important;
   font-size: 13px !important;
+  font-weight: 400 !important;
   font-family: var(--dhca-font-family) !important;
   line-height: 1.25 !important;
 }
 
-.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-row {
-  display: inline-flex;
-  align-items: baseline;
-  min-width: 0;
-}
-
 .sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action {
   appearance: none;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
+  display: inline !important;
+  vertical-align: baseline;
   width: auto;
   max-width: 100%;
   min-width: 0;
-  min-height: 0;
-  height: auto;
-  margin: 0;
-  padding: 0;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
   border: 0 !important;
   border-radius: 0;
   background: transparent !important;
@@ -229,6 +216,14 @@
   cursor: default;
 }
 
+.sheet.dh-compact.character .dhca-character__experiences .dhca-experience-separator {
+  margin-right: 4px;
+  color: var(--dhca-content-text-soft);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
 .sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action:not(.dhca-experience-action--static):hover .dhca-experience-name,
 .sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action:not(.dhca-experience-action--static):hover .dhca-experience-value,
 .sheet.dh-compact.character .dhca-character__experiences .dhca-experience-action:not(.dhca-experience-action--static):focus-visible .dhca-experience-name,
@@ -238,14 +233,12 @@
 
 .sheet.dh-compact.character .dhca-character__experiences .dhca-experience-name {
   min-width: 0;
-  max-width: 220px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .sheet.dh-compact.character .dhca-character__experiences .dhca-experience-value {
-  font-weight: 800 !important;
+  margin-left: 3px;
+  font-weight: 400 !important;
 }
 
 .sheet.dh-compact.character .dhca-character__lineage [data-action] {
