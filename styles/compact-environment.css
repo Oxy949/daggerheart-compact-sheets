@@ -14,11 +14,6 @@
   text-align: left;
 }
 
-.sheet.dh-compact.environment:has(.environment-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover, .dhca-header__art-edit:hover, .dhca-header__art-edit:focus-visible) .dhca-header__art-edit {
-  opacity: 1;
-  pointer-events: auto;
-}
-
 .sheet.dh-compact.environment .dhca-header__ribbon {
   font-size: 0.82em;
 }
@@ -83,22 +78,6 @@
   font-family: var(--dhca-font-family);
   font-style: italic;
   text-align: left;
-}
-
-.sheet.dh-compact.environment:has(.environment-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover) .window-header {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.sheet.dh-compact.environment:has(.dhca-header__toolbar:hover, .dhca-header__toolbar:focus-within) .dhca-header__toolbar {
-  pointer-events: auto;
-}
-
-.sheet.dh-compact.environment:has(.dhca-header__toolbar:hover, .dhca-header__toolbar:focus-within) .dhca-tab-nav {
-  height: 32px;
-  max-height: 32px;
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .sheet.dh-compact.environment .dhca-tab-panel.active {

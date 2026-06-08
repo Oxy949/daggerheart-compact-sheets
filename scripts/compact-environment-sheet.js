@@ -3,7 +3,7 @@ import {
   ENVIRONMENT_TEMPLATE_PARTIALS
 } from "./constants.js";
 import {
-  bindCompactImageEditButtons,
+  bindCompactArtContextMenu,
   bindCompactWindowTitleGapDrag,
   buildTabNavContext,
   closeRenderController,
@@ -12,7 +12,6 @@ import {
   createTemplatePart,
   expandFeatureDescriptions,
   inlineFeatureDescriptions,
-  openCompactImagePicker,
   refreshRenderController
 } from "./compact-sheet-helpers.js";
 import { buildCompactEnvironmentContext } from "./utils.js";
@@ -52,7 +51,7 @@ export function createCompactEnvironmentSheetClass(BaseEnvironmentSheet) {
       this.#renderController = refreshRenderController(this.#renderController);
       expandFeatureDescriptions(this.element);
       inlineFeatureDescriptions(this.element, this.#renderController.signal);
-      bindCompactImageEditButtons(this.element, this.#renderController.signal, this.#onCompactImageEdit);
+      bindCompactArtContextMenu(this, this.element, this.#renderController.signal);
       bindCompactWindowTitleGapDrag(this, this.element, this.#renderController.signal);
     }
 
@@ -60,7 +59,5 @@ export function createCompactEnvironmentSheetClass(BaseEnvironmentSheet) {
       this.#renderController = closeRenderController(this.#renderController);
       return super.close(options);
     }
-
-    #onCompactImageEdit = (event) => openCompactImagePicker(this, event);
   };
 }

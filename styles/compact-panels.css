@@ -61,22 +61,6 @@
   text-transform: uppercase;
 }
 
-.sheet.dh-compact.adversary:has(.adversary-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover) .window-header {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.sheet.dh-compact.adversary:has(.dhca-header__toolbar:hover, .dhca-header__toolbar:focus-within) .dhca-header__toolbar {
-  pointer-events: auto;
-}
-
-.sheet.dh-compact.adversary:has(.dhca-header__toolbar:hover, .dhca-header__toolbar:focus-within) .dhca-tab-nav {
-  height: 32px;
-  max-height: 32px;
-  opacity: 1;
-  transform: translateY(0);
-}
-
 .sheet.dh-compact .dhca-panel__title::before,
 .sheet.dh-compact .dhca-panel__title::after,
 .sheet.dh-compact .dhca-footer__title::before,

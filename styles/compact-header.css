@@ -62,7 +62,7 @@ body.dhca-window-dragging * {
   z-index: 0;
   width: 70%;
   height: auto;
-  pointer-events: none;
+  cursor: context-menu;
   opacity: 0.52;
 }
 
@@ -103,39 +103,62 @@ body.dhca-window-dragging * {
   mask-image: radial-gradient(circle at 72% 20%, #000 0%, rgba(0, 0, 0, 0.96) 30%, rgba(0, 0, 0, 0.5) 58%, transparent 84%);
 }
 
-.sheet.dh-compact .dhca-header__art-edit {
-  position: absolute;
-  top: 74px;
-  right: 10px;
-  z-index: 4;
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  min-height: 24px;
-  min-width: 24px;
-  padding: 0;
-  border: 0;
-  border-radius: 999px;
-  background: var(--dhca-control-bg);
-  color: var(--dhca-control-fg);
-  box-shadow: none;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(0);
-  transition:
-    opacity 140ms ease,
-    background-color 140ms ease;
-}
-
-.sheet.dh-compact.adversary:has(.adversary-header-sheet:hover, .window-header:hover, .dhca-header__toolbar:hover, .dhca-header__art-edit:hover, .dhca-header__art-edit:focus-visible) .dhca-header__art-edit {
+.sheet.dh-compact:has(.dhca-section--header:hover, .window-header:hover, .dhca-header__toolbar:hover) .window-header {
   opacity: 1;
   pointer-events: auto;
 }
 
-.sheet.dh-compact .dhca-header__art-edit:hover,
-.sheet.dh-compact .dhca-header__art-edit:focus-visible {
-  background: var(--dhca-control-bg-hover);
+.dhca-art-context-menu {
+  position: fixed;
+  z-index: 100000;
+  display: grid;
+  gap: 2px;
+  min-width: 196px;
+  padding: 4px;
+  border: 1px solid var(--dhca-menu-border, var(--color-border-light-primary, #b8a98c));
+  border-radius: 6px;
+  background: var(--dhca-menu-bg, var(--color-bg, #f7f2e8));
+  box-shadow: 0 10px 30px rgb(0 0 0 / 24%);
+  color: var(--dhca-menu-text, var(--color-text-primary, #241b16));
+  font-family: var(--dhca-menu-font, var(--font-primary, sans-serif));
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.dhca-art-context-menu__item {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 28px;
+  margin: 0;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+.dhca-art-context-menu__item i {
+  color: var(--dhca-menu-text-soft, currentColor);
+  text-align: center;
+}
+
+.dhca-art-context-menu__item:hover,
+.dhca-art-context-menu__item:focus-visible {
+  outline: 0;
+  background: var(--dhca-menu-hover-bg, rgb(0 0 0 / 8%));
+  color: var(--dhca-menu-accent, currentColor);
+}
+
+.dhca-art-context-menu__item:hover i,
+.dhca-art-context-menu__item:focus-visible i {
+  color: currentColor;
 }
 
 .sheet.dh-compact .dhca-header__adornment {

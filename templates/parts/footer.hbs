@@ -5,74 +5,10 @@
       <span>{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}} &amp; {{localize 'DAGGERHEART.GENERAL.stress'}}</span>
     </div>
 
-    <div class="dhca-thresholds">
-      <div class="dhca-thresholds__label">
-        <span class="dhca-thresholds__name">{{localize 'DAGGERHEART.GENERAL.DamageThresholds.minor'}}</span>
-      </div>
-
-      <span class="dhca-thresholds__value">{{compact.thresholds.major}}</span>
-
-      <div class="dhca-thresholds__label">
-        <span class="dhca-thresholds__name">{{localize 'DAGGERHEART.GENERAL.DamageThresholds.major'}}</span>
-      </div>
-
-      <span class="dhca-thresholds__value">{{compact.thresholds.severe}}</span>
-
-      <div class="dhca-thresholds__label">
-        <span class="dhca-thresholds__name">{{localize 'DAGGERHEART.GENERAL.DamageThresholds.severe'}}</span>
-      </div>
-    </div>
+    {{> 'modules/daggerheart-compact-sheets/templates/parts/thresholds.hbs'}}
 
     {{#if compact.useResourcePips}}
-      <div class="dhca-resources">
-        <div class="dhca-resource-row dhca-resource-row--hp">
-          <span class="dhca-resource-row__label">
-            <span class="dhca-resource-row__label-name">{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}</span>
-            <span class="dhca-resource-row__label-max">{{compact.resources.hitPoints.value}} / {{compact.resources.hitPoints.max}}</span>
-          </span>
-          <button type="button" class="dhca-resource-step" data-dhca-resource-step="hitPoints" data-direction="-1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}">-</button>
-          <div class="dhca-resource-row__track">
-            {{#each compact.resources.hitPoints.slotGroups as |group|}}
-              <div class="dhca-resource-row__group">
-                {{#each group as |slot|}}
-                  <button
-                    type="button"
-                    class="dhca-resource-row__pip {{#if slot.filled}}filled{{/if}}"
-                    data-action="toggleHitPoints"
-                    data-value="{{slot.value}}"
-                    data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}} {{slot.value}}"
-                  ></button>
-                {{/each}}
-              </div>
-            {{/each}}
-          </div>
-          <button type="button" class="dhca-resource-step" data-dhca-resource-step="hitPoints" data-direction="1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}}">+</button>
-        </div>
-
-        <div class="dhca-resource-row dhca-resource-row--stress">
-          <span class="dhca-resource-row__label">
-            <span class="dhca-resource-row__label-name">{{localize 'DAGGERHEART.GENERAL.stress'}}</span>
-            <span class="dhca-resource-row__label-max">{{compact.resources.stress.value}} / {{compact.resources.stress.max}}</span>
-          </span>
-          <button type="button" class="dhca-resource-step" data-dhca-resource-step="stress" data-direction="-1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.stress'}}">-</button>
-          <div class="dhca-resource-row__track">
-            {{#each compact.resources.stress.slotGroups as |group|}}
-              <div class="dhca-resource-row__group">
-                {{#each group as |slot|}}
-                  <button
-                    type="button"
-                    class="dhca-resource-row__pip {{#if slot.filled}}filled{{/if}}"
-                    data-action="toggleStress"
-                    data-value="{{slot.value}}"
-                    data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.stress'}} {{slot.value}}"
-                  ></button>
-                {{/each}}
-              </div>
-            {{/each}}
-          </div>
-          <button type="button" class="dhca-resource-step" data-dhca-resource-step="stress" data-direction="1" data-tooltip-text="{{localize 'DAGGERHEART.GENERAL.stress'}}">+</button>
-        </div>
-      </div>
+      {{> 'modules/daggerheart-compact-sheets/templates/parts/resources.hbs'}}
     {{else}}
       <div class="dhca-resource-row dhca-resource-row--fallback">
         <label class="dhca-resource-field">

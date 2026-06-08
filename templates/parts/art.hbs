@@ -1,18 +1,12 @@
 <div class="dhca-header__art-layer">
   {{#if document.img}}
-    <div class="dhca-header__art">
+    <div
+      class="dhca-header__art"
+      data-dhca-art-menu
+      data-dhca-edit="img"
+      aria-label="{{localize 'DHCS.ContextMenu.ArtMenuLabel'}}"
+    >
       <img class="dhca-header__art-image" src="{{document.img}}" alt="" aria-hidden="true" />
     </div>
-    {{#if compact.canEditImage}}
-      <button
-        type="button"
-        class="dhca-header__art-edit"
-        data-dhca-edit="img"
-        data-tooltip-text="{{localize 'FILES.SelectFile'}}"
-        aria-label="{{localize 'FILES.SelectFile'}}"
-      >
-        <i class="fa-solid fa-image"></i>
-      </button>
-    {{/if}}
   {{/if}}
 </div>

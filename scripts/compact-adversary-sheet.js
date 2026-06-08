@@ -2,14 +2,12 @@ import {
   ADVERSARY_TEMPLATE_PARTIALS,
   DEFAULT_WINDOWS,
   MODULE_ID,
-  RESOURCE_ROW_SELECTOR,
-  RESOURCE_STEP_SELECTOR,
-  RESOURCE_TRACK_MIN_SCALE,
-  RESOURCE_TRACK_SHRINK_START_RATIO,
   SETTING_KEYS
 } from "./constants.js";
 import {
-  bindCompactImageEditButtons,
+  bindCompactArtContextMenu,
+  bindCompactResourceStepButtons,
+  bindResponsiveResourceTracks,
   bindCompactWindowTitleGapDrag,
   buildTabNavContext,
   closeRenderController,
@@ -17,10 +15,9 @@ import {
   createCompactParts,
   createTemplatePart,
   expandFeatureDescriptions,
+  handleCompactResourceStep,
   inlineFeatureDescriptions,
   isCompactSheetEditable,
-  measureCompactTrackContentWidth,
-  openCompactImagePicker,
   refreshRenderController
 } from "./compact-sheet-helpers.js";
 import { buildCompactContext, clampNumber } from "./utils.js";
@@ -75,11 +72,11 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
       expandFeatureDescriptions(this.element);
       inlineFeatureDescriptions(this.element, this.#renderController.signal);
       normalizeAttackSeparators(this.element);
-      this.#bindResourceStepButtons();
+      bindCompactResourceStepButtons(this.element, this.#renderController.signal, this.#onCompactResourceStep);
       this.#bindHeaderResourceEdits();
-      bindCompactImageEditButtons(this.element, this.#renderController.signal, this.#onCompactImageEdit);
+      bindCompactArtContextMenu(this, this.element, this.#renderController.signal);
       bindCompactWindowTitleGapDrag(this, this.element, this.#renderController.signal);
-      this.#bindResponsiveResourceTracks();
+      this.#resourceTrackResizeObserver = bindResponsiveResourceTracks(this.element, this.#resourceTrackResizeObserver);
     }
 
     async close(options = {}) {
@@ -87,16 +84,6 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
       this.#resourceTrackResizeObserver?.disconnect();
       this.#resourceTrackResizeObserver = null;
       return super.close(options);
-    }
-
-    #bindResourceStepButtons() {
-      if (!this.element || !this.#renderController) return;
-
-      const { signal } = this.#renderController;
-
-      for (const button of this.element.querySelectorAll(RESOURCE_STEP_SELECTOR)) {
-        button.addEventListener("click", this.#onCompactResourceStep, { signal });
-      }
     }
 
     #bindHeaderResourceEdits() {
@@ -116,74 +103,11 @@ export function createCompactAdversarySheetClass(BaseAdversarySheet) {
       }
     }
 
-    #bindResponsiveResourceTracks() {
-      if (!this.element) return;
-
-      this.#resourceTrackResizeObserver?.disconnect();
-
-      const updateSizing = () => this.#updateResponsiveResourceTracks();
-      this.#resourceTrackResizeObserver = new ResizeObserver(() => updateSizing());
-
-      for (const row of this.element.querySelectorAll(RESOURCE_ROW_SELECTOR)) {
-        this.#resourceTrackResizeObserver.observe(row);
-      }
-
-      requestAnimationFrame(() => updateSizing());
-    }
-
-    #updateResponsiveResourceTracks() {
-      if (!this.element) return;
-
-      for (const row of this.element.querySelectorAll(RESOURCE_ROW_SELECTOR)) {
-        const track = row.querySelector(".dhca-resource-row__track");
-        if (!track) continue;
-
-        row.style.setProperty("--dhca-resource-scale", "1");
-
-        const availableWidth = track.clientWidth;
-        const contentWidth = measureCompactTrackContentWidth(track);
-        const targetWidth = availableWidth * RESOURCE_TRACK_SHRINK_START_RATIO;
-
-        if (!availableWidth || !contentWidth || contentWidth <= targetWidth) continue;
-
-        const scale = Math.max(Math.min(targetWidth / contentWidth, 1), RESOURCE_TRACK_MIN_SCALE);
-        row.style.setProperty("--dhca-resource-scale", scale.toFixed(3));
-      }
-    }
-
     #isSheetEditable() {
       return isCompactSheetEditable(this);
     }
 
-    #onCompactResourceStep = async (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (!this.#isSheetEditable()) return;
-
-      const button = event.currentTarget;
-      const resourceKey = button.dataset.dhcaResourceStep;
-      const direction = Number(button.dataset.direction ?? 0);
-      const resource = this.document.system.resources?.[resourceKey];
-
-      if (!resourceKey || !Number.isFinite(direction) || direction === 0 || !resource) return;
-
-      const current = Number(resource.value ?? 0);
-      const max = Math.max(Number(resource.max ?? current), 0);
-      const nextValue = clampNumber(current + direction, 0, max);
-
-      if (nextValue === current) return;
-
-      button.disabled = true;
-
-      try {
-        await this.document.update({ [`system.resources.${resourceKey}.value`]: nextValue });
-      } finally {
-        button.disabled = !this.#isSheetEditable();
-      }
-    };
-
-    #onCompactImageEdit = (event) => openCompactImagePicker(this, event);
+    #onCompactResourceStep = (event) => handleCompactResourceStep(this, event);
 
     #onHeaderResourceFocus = (event) => {
       event.currentTarget.dataset.dhcaOriginalValue = event.currentTarget.textContent.trim();

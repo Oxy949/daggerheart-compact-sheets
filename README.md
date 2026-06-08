@@ -24,6 +24,11 @@ Compact adaptive sheets for Daggerheart (Foundryborne) system.
 - Keeps the system item/effect partials, so core sheet actions still work
 - Supports Carolingian UI theme (https://foundryvtt.com/packages/crlngn-ui)
 
+## Usage Tips
+
+- Hover the small strip under the sheet header to reveal tabs and sheet actions.
+- Right-click the actor artwork to change the image or open sheet settings.
+
 ## Settings
 
 Module settings are available in Foundry VTT under **Configure Settings > Module Settings > Daggerheart Compact Sheets**.

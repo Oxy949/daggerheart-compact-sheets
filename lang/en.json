@@ -7,6 +7,11 @@
       "Filter": "Filter",
       "Thresholds": "Thresholds"
     },
+    "ContextMenu": {
+      "ArtMenuLabel": "Artwork menu",
+      "ChangeImage": "Change Image",
+      "OpenSheetSettings": "Open Sheet Settings"
+    },
     "Settings": {
       "MakeCharacterDefault": {
         "Name": "Use compact sheet as the default character sheet",

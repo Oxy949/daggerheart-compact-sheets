@@ -1,0 +1,42 @@
+<div class="dhca-resource-row {{rowClass}}">
+  {{#if labelAction}}
+    <button
+      type="button"
+      class="dhca-resource-row__label dhca-resource-row__label--button"
+      data-action="{{labelAction}}"
+      {{disabled (not @root.editable)}}
+    >
+      <span class="dhca-resource-row__label-name">{{label}}</span>
+      <span class="dhca-resource-row__label-max">{{resource.value}} / {{resource.max}}</span>
+    </button>
+  {{else}}
+    <span class="dhca-resource-row__label">
+      <span class="dhca-resource-row__label-name">{{label}}</span>
+      <span class="dhca-resource-row__label-max">{{resource.value}} / {{resource.max}}</span>
+    </span>
+  {{/if}}
+
+  <button type="button" class="dhca-resource-step" data-dhca-resource-step="{{resource.key}}" data-direction="-1" data-tooltip-text="{{label}}">-</button>
+
+  <div class="dhca-resource-row__track">
+    {{#each resource.slotGroups as |group|}}
+      <div class="dhca-resource-row__group">
+        {{#each group as |slot|}}
+          <button
+            type="button"
+            class="dhca-resource-row__pip{{#if ../../pipClass}} {{../../pipClass}}{{/if}}{{#if slot.filled}} filled{{/if}}"
+            data-action="{{slot.action}}"
+            data-value="{{slot.value}}"
+            data-tooltip-text="{{../../label}} {{slot.value}}"
+          >
+            {{#if ../../filledIcon}}
+              <i class="{{#if slot.filled}}{{../../filledIcon}}{{else}}{{../../emptyIcon}}{{/if}}"></i>
+            {{/if}}
+          </button>
+        {{/each}}
+      </div>
+    {{/each}}
+  </div>
+
+  <button type="button" class="dhca-resource-step" data-dhca-resource-step="{{resource.key}}" data-direction="1" data-tooltip-text="{{label}}">+</button>
+</div>

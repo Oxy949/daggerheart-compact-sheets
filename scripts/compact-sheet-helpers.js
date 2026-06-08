@@ -1,8 +1,13 @@
 import {
-  ART_EDIT_SELECTOR,
+  ART_CONTEXT_MENU_SELECTOR,
   FEATURE_DESCRIPTION_SELECTOR,
+  RESOURCE_ROW_SELECTOR,
+  RESOURCE_STEP_SELECTOR,
+  RESOURCE_TRACK_MIN_SCALE,
+  RESOURCE_TRACK_SHRINK_START_RATIO,
   SCROLLABLE_PANEL_SELECTOR
 } from "./constants.js";
+import { clampNumber } from "./utils.js";
 
 const FEATURE_TOGGLE_ACTION = "toggleExtended";
 const FEATURE_TOGGLE_TARGET_SELECTOR = ":scope > .inventory-item-header .item-name, :scope > .inventory-item-header .feature-form";
@@ -24,9 +29,33 @@ const COMPACT_WINDOW_DRAG_EXCLUDE_SELECTOR = [
   "select",
   "[contenteditable]",
   "[data-action]",
-  ".dhca-header__toolbar",
-  ".dhca-header__art-edit"
+  ".dhca-header__toolbar"
 ].join(", ");
+const ART_CONTEXT_MENU_CLASS = "dhca-art-context-menu";
+const ART_CONTEXT_MENU_EXCLUDE_SELECTOR = [
+  "button",
+  "a",
+  "input",
+  "textarea",
+  "select",
+  "[contenteditable]",
+  "[data-action]",
+  ".dhca-header__toolbar",
+  ".window-header"
+].join(", ");
+const ART_CONTEXT_MENU_ITEM_CLASS = "dhca-art-context-menu__item";
+const ART_CONTEXT_MENU_SETTINGS_SELECTOR = '[data-action="openSettings"]';
+const ART_CONTEXT_MENU_THEME_VARS = Object.freeze([
+  ["--dhca-menu-bg", "--dhca-surface"],
+  ["--dhca-menu-border", "--dhca-line"],
+  ["--dhca-menu-text", "--dhca-text"],
+  ["--dhca-menu-text-soft", "--dhca-text-soft"],
+  ["--dhca-menu-hover-bg", "--dhca-button-bg-hover"],
+  ["--dhca-menu-accent", "--dhca-accent-strong"],
+  ["--dhca-menu-font", "--dhca-font-family"]
+]);
+
+let activeCompactArtContextMenuCleanup = null;
 
 export function createCompactDefaultOptions(BaseSheet, position = {}) {
   return foundry.utils.mergeObject(
@@ -76,6 +105,76 @@ export function measureCompactTrackContentWidth(track) {
   const childWidth = children.reduce((total, child) => total + child.getBoundingClientRect().width, 0);
 
   return padding + childWidth + gap * Math.max(children.length - 1, 0);
+}
+
+export function bindCompactResourceStepButtons(element, signal, handler) {
+  if (!element || !signal || typeof handler !== "function") return;
+
+  for (const button of element.querySelectorAll(RESOURCE_STEP_SELECTOR)) {
+    button.addEventListener("click", handler, { signal });
+  }
+}
+
+export function bindResponsiveResourceTracks(element, observer = null) {
+  observer?.disconnect();
+
+  if (!element) return null;
+
+  const nextObserver = new ResizeObserver(() => updateResponsiveResourceTracks(element));
+
+  for (const row of element.querySelectorAll(RESOURCE_ROW_SELECTOR)) {
+    nextObserver.observe(row);
+  }
+
+  requestAnimationFrame(() => updateResponsiveResourceTracks(element));
+  return nextObserver;
+}
+
+export function updateResponsiveResourceTracks(element) {
+  if (!element) return;
+
+  for (const row of element.querySelectorAll(RESOURCE_ROW_SELECTOR)) {
+    const track = row.querySelector(".dhca-resource-row__track");
+    if (!track) continue;
+
+    row.style.setProperty("--dhca-resource-scale", "1");
+
+    const availableWidth = track.clientWidth;
+    const contentWidth = measureCompactTrackContentWidth(track);
+    const targetWidth = availableWidth * RESOURCE_TRACK_SHRINK_START_RATIO;
+
+    if (!availableWidth || !contentWidth || contentWidth <= targetWidth) continue;
+
+    const scale = Math.max(Math.min(targetWidth / contentWidth, 1), RESOURCE_TRACK_MIN_SCALE);
+    row.style.setProperty("--dhca-resource-scale", scale.toFixed(3));
+  }
+}
+
+export async function handleCompactResourceStep(sheet, event) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  if (!isCompactSheetEditable(sheet)) return;
+
+  const button = event.currentTarget;
+  const resourceKey = button.dataset.dhcaResourceStep;
+  const direction = Number(button.dataset.direction ?? 0);
+
+  if (!resourceKey || !Number.isFinite(direction) || direction === 0) return;
+
+  const current = getCompactResourceStepValue(sheet.document, resourceKey);
+  if (!current) return;
+
+  const nextValue = clampNumber(current.value + direction, 0, current.max);
+  if (nextValue === current.value) return;
+
+  button.disabled = true;
+
+  try {
+    await updateCompactResourceStepValue(sheet.document, resourceKey, nextValue, current.value);
+  } finally {
+    button.disabled = !isCompactSheetEditable(sheet);
+  }
 }
 
 export function expandFeatureDescriptions(element) {
@@ -191,12 +290,17 @@ function removeEmptyTextNodes(element) {
   }
 }
 
-export function bindCompactImageEditButtons(element, signal, handler) {
-  if (!element || !signal) return;
+export function bindCompactArtContextMenu(sheet, element, signal) {
+  if (!sheet || !element || !signal) return;
 
-  for (const button of element.querySelectorAll(ART_EDIT_SELECTOR)) {
-    button.addEventListener("click", handler, { signal });
-  }
+  element.addEventListener("contextmenu", (event) => {
+    const art = getCompactArtContextMenuTarget(element, event);
+    if (!art) return;
+
+    openCompactArtContextMenu(sheet, event, signal, art);
+  }, { capture: true, signal });
+
+  signal.addEventListener("abort", closeCompactArtContextMenu, { once: true });
 }
 
 export function bindCompactWindowTitleGapDrag(sheet, element, signal) {
@@ -241,13 +345,13 @@ export function isCompactSheetEditable(sheet) {
 }
 
 export function openCompactImagePicker(sheet, event) {
-  event.preventDefault();
-  event.stopPropagation();
+  event?.preventDefault();
+  event?.stopPropagation();
 
   if (!isCompactSheetEditable(sheet)) return null;
 
-  const target = event.currentTarget;
-  const attr = target.dataset.dhcaEdit ?? "img";
+  const target = event?.currentTarget;
+  const attr = target?.dataset?.dhcaEdit ?? "img";
   const current = foundry.utils.getProperty(sheet.document, attr);
   const { img } = sheet.document.constructor.getDefaultArtwork?.(sheet.document.toObject()) ?? {};
 
@@ -263,6 +367,177 @@ export function openCompactImagePicker(sheet, event) {
   });
 
   return picker.browse();
+}
+
+function openCompactArtContextMenu(sheet, event, signal, art) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  const actions = buildCompactArtContextMenuActions(sheet, art);
+  if (!actions.length) return;
+
+  closeCompactArtContextMenu();
+
+  const menu = document.createElement("div");
+  menu.className = ART_CONTEXT_MENU_CLASS;
+  menu.setAttribute("role", "menu");
+  menu.tabIndex = -1;
+  syncCompactArtContextMenuTheme(menu, sheet.element);
+
+  for (const action of actions) {
+    menu.append(createCompactArtContextMenuItem(action));
+  }
+
+  document.body.append(menu);
+  positionCompactArtContextMenu(menu, event.clientX, event.clientY);
+
+  const controller = new AbortController();
+  const cleanup = () => {
+    controller.abort();
+    signal?.removeEventListener("abort", closeCompactArtContextMenu);
+    menu.remove();
+  };
+
+  activeCompactArtContextMenuCleanup = cleanup;
+  signal?.addEventListener("abort", closeCompactArtContextMenu, { once: true });
+
+  requestAnimationFrame(() => {
+    document.addEventListener("pointerdown", closeCompactArtContextMenuOnOutsidePointer, {
+      capture: true,
+      signal: controller.signal
+    });
+    document.addEventListener("contextmenu", closeCompactArtContextMenuOnOutsidePointer, {
+      capture: true,
+      signal: controller.signal
+    });
+  });
+
+  document.addEventListener("keydown", closeCompactArtContextMenuOnEscape, { signal: controller.signal });
+  window.addEventListener("resize", closeCompactArtContextMenu, { signal: controller.signal });
+  document.addEventListener("scroll", closeCompactArtContextMenu, {
+    capture: true,
+    signal: controller.signal
+  });
+  menu.focus({ preventScroll: true });
+}
+
+function getCompactArtContextMenuTarget(element, event) {
+  if (!(event.target instanceof Element)) return null;
+  if (event.target.closest(ART_CONTEXT_MENU_EXCLUDE_SELECTOR)) return null;
+
+  for (const art of element.querySelectorAll(ART_CONTEXT_MENU_SELECTOR)) {
+    if (!(art instanceof HTMLElement)) continue;
+    if (!isPointInsideElement(event.clientX, event.clientY, art)) continue;
+    return art;
+  }
+
+  return null;
+}
+
+function buildCompactArtContextMenuActions(sheet, art) {
+  const actions = [];
+  const editAttribute = art.dataset.dhcaEdit ?? "img";
+
+  if (isCompactSheetEditable(sheet)) {
+    actions.push({
+      attr: editAttribute,
+      icon: "fa-solid fa-image",
+      label: localizeCompactFallback("DHCS.ContextMenu.ChangeImage", "Change Image"),
+      onSelect: (event) => openCompactImagePicker(sheet, event)
+    });
+  }
+
+  actions.push({
+    icon: "fa-solid fa-wrench",
+    label: localizeCompactFallback("DHCS.ContextMenu.OpenSheetSettings", "Open Sheet Settings"),
+    onSelect: () => openCompactSheetSettings(sheet)
+  });
+
+  return actions;
+}
+
+function createCompactArtContextMenuItem(action) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = ART_CONTEXT_MENU_ITEM_CLASS;
+  button.setAttribute("role", "menuitem");
+  if (action.attr) button.dataset.dhcaEdit = action.attr;
+
+  const icon = document.createElement("i");
+  icon.className = action.icon;
+  icon.setAttribute("aria-hidden", "true");
+
+  const label = document.createElement("span");
+  label.textContent = action.label;
+
+  button.append(icon, label);
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    closeCompactArtContextMenu();
+    action.onSelect(event);
+  });
+
+  return button;
+}
+
+function openCompactSheetSettings(sheet) {
+  const settingsButton = sheet.element?.querySelector(ART_CONTEXT_MENU_SETTINGS_SELECTOR);
+  if (!(settingsButton instanceof HTMLElement)) return;
+
+  settingsButton.click();
+}
+
+function closeCompactArtContextMenu() {
+  const cleanup = activeCompactArtContextMenuCleanup;
+  activeCompactArtContextMenuCleanup = null;
+  cleanup?.();
+}
+
+function closeCompactArtContextMenuOnOutsidePointer(event) {
+  if (event.target instanceof Element && event.target.closest(`.${ART_CONTEXT_MENU_CLASS}`)) return;
+  closeCompactArtContextMenu();
+}
+
+function closeCompactArtContextMenuOnEscape(event) {
+  if (event.key !== "Escape") return;
+
+  event.preventDefault();
+  closeCompactArtContextMenu();
+}
+
+function positionCompactArtContextMenu(menu, clientX, clientY) {
+  const margin = 8;
+  const rect = menu.getBoundingClientRect();
+  const left = Math.min(clientX, window.innerWidth - rect.width - margin);
+  const top = Math.min(clientY, window.innerHeight - rect.height - margin);
+
+  menu.style.left = `${Math.max(margin, left)}px`;
+  menu.style.top = `${Math.max(margin, top)}px`;
+}
+
+function isPointInsideElement(clientX, clientY, element) {
+  const rect = element.getBoundingClientRect();
+  return clientX >= rect.left
+    && clientX <= rect.right
+    && clientY >= rect.top
+    && clientY <= rect.bottom;
+}
+
+function syncCompactArtContextMenuTheme(menu, element) {
+  if (!element) return;
+
+  const styles = getComputedStyle(element);
+
+  for (const [menuVariable, sheetVariable] of ART_CONTEXT_MENU_THEME_VARS) {
+    const value = styles.getPropertyValue(sheetVariable).trim();
+    if (value) menu.style.setProperty(menuVariable, value);
+  }
+}
+
+function localizeCompactFallback(key, fallback) {
+  const localized = game.i18n.localize(key);
+  return localized === key ? fallback : localized;
 }
 
 function isCompactTitleGapDragStart(sheet, header, event, { requirePrimaryButton = true } = {}) {
@@ -301,6 +576,38 @@ function getCompactWindowControlsLeft(element) {
 function parseCssPixelValue(value) {
   const parsed = Number.parseFloat(value);
   return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function getCompactResourceStepValue(document, resourceKey) {
+  const resource = getCompactResource(document, resourceKey);
+  if (!resource) return null;
+
+  const value = Number(resource.value ?? 0);
+  const max = Math.max(Number(resource.max ?? value), 0);
+
+  if (!Number.isFinite(value) || !Number.isFinite(max)) return null;
+
+  return {
+    max,
+    value: clampNumber(value, 0, max)
+  };
+}
+
+function getCompactResource(document, resourceKey) {
+  return resourceKey === "armor"
+    ? document.system?.armorScore
+    : document.system?.resources?.[resourceKey];
+}
+
+async function updateCompactResourceStepValue(document, resourceKey, nextValue, currentValue) {
+  if (resourceKey === "armor") {
+    if (typeof document.system?.updateArmorValue !== "function") return;
+
+    await document.system.updateArmorValue({ value: nextValue - currentValue });
+    return;
+  }
+
+  await document.update({ [`system.resources.${resourceKey}.value`]: nextValue });
 }
 
 function blurCompactActiveEditable(element) {

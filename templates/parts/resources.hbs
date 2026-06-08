@@ -1,0 +1,27 @@
+<div class="dhca-resources{{#if className}} {{className}}{{/if}}">
+  {{> 'modules/daggerheart-compact-sheets/templates/parts/resource-row.hbs'
+    rowClass='dhca-resource-row--hp'
+    resource=compact.resources.hitPoints
+    label=(localize 'DAGGERHEART.GENERAL.HitPoints.short')
+  }}
+
+  {{> 'modules/daggerheart-compact-sheets/templates/parts/resource-row.hbs'
+    rowClass='dhca-resource-row--stress'
+    resource=compact.resources.stress
+    label=(localize 'DAGGERHEART.GENERAL.stress')
+  }}
+
+  {{#if includeArmor}}
+    {{#if compact.resources.armor.max}}
+      {{> 'modules/daggerheart-compact-sheets/templates/parts/resource-row.hbs'
+        rowClass='dhca-resource-row--armor'
+        resource=compact.resources.armor
+        label=(localize 'DAGGERHEART.GENERAL.armorSlots')
+        labelAction='toggleArmorMangement'
+        pipClass='dhca-resource-row__pip--shield'
+        filledIcon='fa-solid fa-shield'
+        emptyIcon='fa-solid fa-shield-halved'
+      }}
+    {{/if}}
+  {{/if}}
+</div>

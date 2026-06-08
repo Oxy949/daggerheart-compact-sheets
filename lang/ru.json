@@ -7,6 +7,11 @@
       "Filter": "Фильтр",
       "Thresholds": "Пороги"
     },
+    "ContextMenu": {
+      "ArtMenuLabel": "Меню арта",
+      "ChangeImage": "Изменить изображение",
+      "OpenSheetSettings": "Открыть настройки листа"
+    },
     "Settings": {
       "MakeCharacterDefault": {
         "Name": "Использовать компактный лист персонажа по умолчанию",

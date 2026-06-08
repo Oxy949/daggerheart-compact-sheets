@@ -21,6 +21,9 @@ export const SHARED_TEMPLATE_PARTIALS = Object.freeze({
   effects: `${TEMPLATE_ROOT}/parts/effects.hbs`,
   features: `${TEMPLATE_ROOT}/parts/features.hbs`,
   notes: `${TEMPLATE_ROOT}/parts/notes.hbs`,
+  resourceRow: `${TEMPLATE_ROOT}/parts/resource-row.hbs`,
+  resources: `${TEMPLATE_ROOT}/parts/resources.hbs`,
+  thresholds: `${TEMPLATE_ROOT}/parts/thresholds.hbs`,
   tabNav: `${TEMPLATE_ROOT}/parts/tab-nav.hbs`
 });
 
@@ -57,6 +60,7 @@ export const ENVIRONMENT_TEMPLATE_PARTIALS = Object.freeze({
 
 export const PRELOAD_TEMPLATE_PATHS = Object.freeze(
   Array.from(new Set([
+    ...Object.values(SHARED_TEMPLATE_PARTIALS),
     ...Object.values(ADVERSARY_TEMPLATE_PARTIALS),
     ...Object.values(CHARACTER_TEMPLATE_PARTIALS),
     ...Object.values(ENVIRONMENT_TEMPLATE_PARTIALS)
@@ -79,7 +83,7 @@ export const DEFAULT_WINDOWS = Object.freeze({
 });
 
 export const FEATURE_DESCRIPTION_SELECTOR = ".dhca-tab-panel--features .inventory-item .extensible";
-export const ART_EDIT_SELECTOR = ".dhca-header__art-edit";
+export const ART_CONTEXT_MENU_SELECTOR = ".dhca-header__art[data-dhca-art-menu]";
 export const RESOURCE_ROW_SELECTOR = ".dhca-resource-row:not(.dhca-resource-row--fallback)";
 export const RESOURCE_STEP_SELECTOR = ".dhca-resource-step";
 export const RESOURCE_TRACK_MIN_SCALE = 0.6;
