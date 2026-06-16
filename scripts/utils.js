@@ -1,16 +1,19 @@
 import { I18N_KEYS, RESOURCE_ACTIONS, RESOURCE_GROUP_SIZE } from "./constants.js";
 
-const DEFAULT_ART_IMAGE = "icons/svg/mystery-man.svg";
+export const DEFAULT_ART_IMAGE = "icons/svg/mystery-man.svg";
 
 export function buildCompactContext(document) {
   const hitPoints = buildResourceTrack("hitPoints", document.system.resources?.hitPoints);
   const stress = buildResourceTrack("stress", document.system.resources?.stress);
   const thresholds = buildThresholds(document.system.damageThresholds);
   const hordeHp = buildHordeHpContext(document.system);
+  const art = getCompactDocumentArt(document);
 
   return {
     attackBonus: toOptionalNumber(document.system.attack?.roll?.bonus),
-    artImg: getDocumentArtImage(document),
+    artDefaultImg: art.defaultImg,
+    artImg: art.img,
+    artImgIsFallback: art.isFallback,
     canEditImage: document.isOwner ?? false,
     criticalThreshold: toNumber(document.system.criticalThreshold, 20),
     hasExperiences: !foundry.utils.isEmpty(document.system.experiences),
@@ -27,6 +30,7 @@ export function buildCompactContext(document) {
 }
 
 export async function buildCompactEnvironmentContext(document) {
+  const art = getCompactDocumentArt(document);
   const typeKey = document.system.type
     ? `DAGGERHEART.CONFIG.EnvironmentType.${document.system.type}.label`
     : null;
@@ -50,7 +54,9 @@ export async function buildCompactEnvironmentContext(document) {
     .filter((category) => category.adversaries.length > 0);
 
   return {
-    artImg: getDocumentArtImage(document),
+    artDefaultImg: art.defaultImg,
+    artImg: art.img,
+    artImgIsFallback: art.isFallback,
     canEditImage: document.isOwner ?? false,
     hasImpulses: hasRenderableRichText(document.system.impulses),
     hasPotentialAdversaries: potentialAdversaryCategories.length > 0,
@@ -69,9 +75,12 @@ export function buildCompactCharacterContext(document) {
   const hope = buildResourceTrack("hope", system.resources?.hope);
   const armor = buildResourceTrack("armor", system.armorScore);
   const thresholds = buildThresholds(system.damageThresholds);
+  const art = getCompactDocumentArt(document);
 
   return {
-    artImg: getDocumentArtImage(document),
+    artDefaultImg: art.defaultImg,
+    artImg: art.img,
+    artImgIsFallback: art.isFallback,
     canEditImage: document.isOwner ?? false,
     domains: buildCharacterDomains(system.domainData),
     hasExperiences: !foundry.utils.isEmpty(system.experiences),
@@ -207,16 +216,39 @@ function isDifficultyTag(tag) {
 
 function getActorDefaultImage(adversary) {
   const source = adversary?.toObject?.() ?? adversary ?? {};
-  const artwork = adversary?.constructor?.getDefaultArtwork?.(source);
 
-  return artwork?.img ?? DEFAULT_ART_IMAGE;
+  return getDocumentDefaultArtImage(adversary, source);
 }
 
-function getDocumentArtImage(document) {
+export function getCompactDocumentArt(document) {
   const source = document?.toObject?.() ?? document ?? {};
-  const artwork = document?.constructor?.getDefaultArtwork?.(source);
+  const img = normalizeImagePath(source?.img) ?? normalizeImagePath(document?.img);
+  const defaultImg = getDocumentDefaultArtImage(document, source);
 
-  return source?.img || artwork?.img || DEFAULT_ART_IMAGE;
+  return {
+    defaultImg,
+    img: img || defaultImg,
+    isFallback: !img
+  };
+}
+
+function getDocumentDefaultArtImage(document, source = null) {
+  const data = source ?? document?.toObject?.() ?? document ?? {};
+  const artwork = document?.constructor?.getDefaultArtwork?.(data);
+
+  return normalizeImagePath(artwork?.img)
+    ?? normalizeImagePath(document?.system?.constructor?.DEFAULT_ICON)
+    ?? normalizeImagePath(document?.constructor?.DEFAULT_ICON)
+    ?? DEFAULT_ART_IMAGE;
+}
+
+function normalizeImagePath(value) {
+  if (typeof value !== "string") return null;
+
+  const path = value.trim();
+  if (!path || path === "null" || path === "undefined") return null;
+
+  return path;
 }
 
 function normalizeLabelList(labels) {

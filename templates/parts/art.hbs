@@ -1,10 +1,16 @@
 <div class="dhca-header__art-layer">
   <div
-    class="dhca-header__art"
+    class="dhca-header__art{{#if compact.artImgIsFallback}} dhca-header__art--fallback{{/if}}"
     data-dhca-art-menu
     data-dhca-edit="img"
+    data-dhca-default-art="{{compact.artDefaultImg}}"
     aria-label="{{localize 'DHCS.ContextMenu.ArtMenuLabel'}}"
   >
-    <img class="dhca-header__art-image" src="{{compact.artImg}}" alt="" aria-hidden="true" />
+    <img
+      class="dhca-header__art-image"
+      src="{{#if compact.artImg}}{{compact.artImg}}{{else}}icons/svg/mystery-man.svg{{/if}}"
+      alt=""
+      aria-hidden="true"
+    />
   </div>
 </div>

@@ -7,7 +7,7 @@ import {
   RESOURCE_TRACK_SHRINK_START_RATIO,
   SCROLLABLE_PANEL_SELECTOR
 } from "./constants.js";
-import { clampNumber } from "./utils.js";
+import { clampNumber, DEFAULT_ART_IMAGE, getCompactDocumentArt } from "./utils.js";
 
 const FEATURE_TOGGLE_ACTION = "toggleExtended";
 const FEATURE_TOGGLE_TARGET_SELECTOR = ":scope > .inventory-item-header .item-name, :scope > .inventory-item-header .feature-form";
@@ -293,6 +293,8 @@ function removeEmptyTextNodes(element) {
 export function bindCompactArtContextMenu(sheet, element, signal) {
   if (!sheet || !element || !signal) return;
 
+  syncCompactArtImage(sheet, element, signal);
+
   element.addEventListener("contextmenu", (event) => {
     const art = getCompactArtContextMenuTarget(element, event);
     if (!art) return;
@@ -301,6 +303,28 @@ export function bindCompactArtContextMenu(sheet, element, signal) {
   }, { capture: true, signal });
 
   signal.addEventListener("abort", closeCompactArtContextMenu, { once: true });
+}
+
+function syncCompactArtImage(sheet, element, signal) {
+  const art = getCompactDocumentArt(sheet.document);
+
+  for (const artElement of element.querySelectorAll(ART_CONTEXT_MENU_SELECTOR)) {
+    if (!(artElement instanceof HTMLElement)) continue;
+
+    artElement.classList.toggle("dhca-header__art--fallback", art.isFallback);
+    artElement.dataset.dhcaDefaultArt = art.defaultImg;
+
+    const image = artElement.querySelector(".dhca-header__art-image");
+    if (!(image instanceof HTMLImageElement)) continue;
+
+    if (image.getAttribute("src") !== art.img) image.src = art.img;
+
+    image.addEventListener("error", () => {
+      if (image.getAttribute("src") === DEFAULT_ART_IMAGE) return;
+      artElement.classList.add("dhca-header__art--fallback");
+      image.src = DEFAULT_ART_IMAGE;
+    }, { signal });
+  }
 }
 
 export function bindCompactWindowTitleGapDrag(sheet, element, signal) {
