@@ -1,5 +1,7 @@
 import { I18N_KEYS, RESOURCE_ACTIONS, RESOURCE_GROUP_SIZE } from "./constants.js";
 
+const DEFAULT_ART_IMAGE = "icons/svg/mystery-man.svg";
+
 export function buildCompactContext(document) {
   const hitPoints = buildResourceTrack("hitPoints", document.system.resources?.hitPoints);
   const stress = buildResourceTrack("stress", document.system.resources?.stress);
@@ -8,6 +10,7 @@ export function buildCompactContext(document) {
 
   return {
     attackBonus: toOptionalNumber(document.system.attack?.roll?.bonus),
+    artImg: getDocumentArtImage(document),
     canEditImage: document.isOwner ?? false,
     criticalThreshold: toNumber(document.system.criticalThreshold, 20),
     hasExperiences: !foundry.utils.isEmpty(document.system.experiences),
@@ -47,6 +50,7 @@ export async function buildCompactEnvironmentContext(document) {
     .filter((category) => category.adversaries.length > 0);
 
   return {
+    artImg: getDocumentArtImage(document),
     canEditImage: document.isOwner ?? false,
     hasImpulses: hasRenderableRichText(document.system.impulses),
     hasPotentialAdversaries: potentialAdversaryCategories.length > 0,
@@ -67,6 +71,7 @@ export function buildCompactCharacterContext(document) {
   const thresholds = buildThresholds(system.damageThresholds);
 
   return {
+    artImg: getDocumentArtImage(document),
     canEditImage: document.isOwner ?? false,
     domains: buildCharacterDomains(system.domainData),
     hasExperiences: !foundry.utils.isEmpty(system.experiences),
@@ -204,7 +209,14 @@ function getActorDefaultImage(adversary) {
   const source = adversary?.toObject?.() ?? adversary ?? {};
   const artwork = adversary?.constructor?.getDefaultArtwork?.(source);
 
-  return artwork?.img ?? "icons/svg/mystery-man.svg";
+  return artwork?.img ?? DEFAULT_ART_IMAGE;
+}
+
+function getDocumentArtImage(document) {
+  const source = document?.toObject?.() ?? document ?? {};
+  const artwork = document?.constructor?.getDefaultArtwork?.(source);
+
+  return source?.img || artwork?.img || DEFAULT_ART_IMAGE;
 }
 
 function normalizeLabelList(labels) {
