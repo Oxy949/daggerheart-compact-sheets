@@ -26,8 +26,8 @@
         "Hint": "When enabled, environment actors open with the compact sheet by default. Reload after changing this setting."
       },
       "ShowAdversaryInteractionButtons": {
-        "Name": "Show interaction buttons on compact adversary sheets",
-        "Hint": "When enabled, compact adversary sheets show attack, chat, item action, and similar interaction buttons."
+        "Name": "Show interaction buttons on compact adversary and environment sheets",
+        "Hint": "When enabled, compact adversary and environment sheets show attack, chat, item action, resource, and similar interaction controls."
       },
       "ShowAdversaryResourceBlock": {
         "Name": "Show a separate HP and stress block on compact adversary sheets",

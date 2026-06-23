@@ -52,6 +52,7 @@ export const CHARACTER_TEMPLATE_PARTIALS = Object.freeze({
 export const ENVIRONMENT_TEMPLATE_PARTIALS = Object.freeze({
   art: SHARED_TEMPLATE_PARTIALS.art,
   header: `${TEMPLATE_ROOT}/environment/parts/header.hbs`,
+  footer: `${TEMPLATE_ROOT}/environment/parts/footer.hbs`,
   features: SHARED_TEMPLATE_PARTIALS.features,
   potentialAdversaries: `${TEMPLATE_ROOT}/environment/parts/potential-adversaries.hbs`,
   notes: SHARED_TEMPLATE_PARTIALS.notes,

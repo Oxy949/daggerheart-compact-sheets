@@ -57,7 +57,7 @@ function registerSettings() {
     config: true,
     type: Boolean,
     default: true,
-    onChange: rerenderOpenCompactAdversarySheets
+    onChange: rerenderOpenCompactNpcSheets
   });
 
   game.settings.register(MODULE_ID, SETTING_KEYS.showAdversaryResourceBlock, {
@@ -67,18 +67,18 @@ function registerSettings() {
     config: true,
     type: Boolean,
     default: true,
-    onChange: rerenderOpenCompactAdversarySheets
+    onChange: rerenderOpenCompactNpcSheets
   });
 }
 
-function rerenderOpenCompactAdversarySheets() {
+function rerenderOpenCompactNpcSheets() {
   const applications = new Set([
     ...Object.values(ui.windows ?? {}),
     ...getApplicationInstances()
   ]);
 
   for (const application of applications) {
-    if (application?.document?.type !== "adversary") continue;
+    if (!["adversary", "environment"].includes(application?.document?.type)) continue;
 
     const element = application.element instanceof HTMLElement
       ? application.element

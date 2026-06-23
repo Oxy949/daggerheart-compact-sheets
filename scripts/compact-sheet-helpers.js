@@ -41,6 +41,7 @@ const ART_CONTEXT_MENU_EXCLUDE_SELECTOR = [
   "[contenteditable]",
   "[data-action]",
   ".dhca-header__toolbar",
+  ".dhca-section--body",
   ".window-header"
 ].join(", ");
 const ART_CONTEXT_MENU_ITEM_CLASS = "dhca-art-context-menu__item";

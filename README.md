@@ -20,7 +20,7 @@ Compact adaptive sheets for Daggerheart (Foundryborne) system.
 - Responsive and adaptive layout
 - Dark and Light color sheme support
 - Minimal player character layout with quick traits, Hope, HP, Stress, Armor, Loadout, Inventory, Biography, and Effects
-- Quick pip controls for character and adversary resources
+- Quick pip controls for character, adversary, and environment resources
 - Keeps the system item/effect partials, so core sheet actions still work
 - Supports Carolingian UI theme (https://foundryvtt.com/packages/crlngn-ui)
 
@@ -36,8 +36,8 @@ Module settings are available in Foundry VTT under **Configure Settings > Module
 - **Use compact sheet as the default character sheet** - enabled by default. This is a world setting and requires a world reload after changing.
 - **Use compact sheet as the default adversary sheet** - enabled by default. This is a world setting and requires a world reload after changing.
 - **Use compact sheet as the default environment sheet** - enabled by default. This is a world setting and requires a world reload after changing.
-- **Show interaction buttons on compact adversary sheets** - enabled by default. This is a client setting that shows attack, chat, item action, and similar controls on compact adversary sheets.
-- **Show a separate HP and stress block on compact adversary sheets** - enabled by default. This is a client setting that shows HP, stress, and damage thresholds in a footer block. When disabled, the footer is hidden and those values move into the header summary.
+- **Show interaction buttons on compact adversary and environment sheets** - enabled by default. This is a world setting that shows attack, chat, item action, resource, and similar controls on compact adversary and environment sheets.
+- **Show a separate HP and stress block on compact adversary sheets** - enabled by default. This is a world setting that shows HP, stress, and damage thresholds in a footer block. When disabled, the footer is hidden and those values move into the header summary.
   
 ## Credits
 - [Oxy949](https://boosty.to/oxy949)

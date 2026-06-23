@@ -126,6 +126,88 @@
   display: none;
 }
 
+.sheet.dh-compact.environment.dhca-show-interactions p:has(button.measured-template-button) {
+  display: block;
+}
+
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .controls {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .controls a,
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .controls a[data-action="toChat"],
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-inline-action {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: var(--dhca-inline-text);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .controls a:hover,
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .controls a:focus-visible,
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-inline-action:hover,
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-inline-action:focus-visible {
+  border-color: var(--dhca-accent);
+  background: var(--dhca-button-bg-hover);
+  color: var(--dhca-accent-strong);
+}
+
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .item-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .item-button {
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .item-button button {
+  appearance: none;
+  width: auto;
+  min-width: 0;
+  min-height: 22px;
+  padding: 2px 7px;
+  border: 1px solid var(--dhca-line);
+  border-radius: 3px;
+  background: var(--dhca-button-bg);
+  color: var(--dhca-text);
+  box-shadow: none;
+  font-size: 11px !important;
+  line-height: 1.2;
+  text-align: center;
+  white-space: normal;
+}
+
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .item-button button:hover,
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .item-button button:focus-visible {
+  border-color: var(--dhca-accent);
+  background: var(--dhca-button-bg-hover);
+  color: var(--dhca-accent-strong);
+}
+
+.sheet.dh-compact.environment.dhca-show-interactions .dhca-tab-panel--features .inventory-item .item-button .action-uses-button {
+  min-width: 42px;
+  padding-inline: 7px;
+}
+
 .sheet.dh-compact.environment .dhca-tab-panel .inventory-item .invetory-description ul {
   margin: 4px 0px;
 }

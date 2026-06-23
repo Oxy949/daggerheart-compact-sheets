@@ -30,13 +30,17 @@ export function buildCompactContext(document) {
 }
 
 export async function buildCompactEnvironmentContext(document) {
+  const system = document.system ?? {};
+  const hitPoints = buildResourceTrack("hitPoints", system.resources?.hitPoints);
+  const stress = buildResourceTrack("stress", system.resources?.stress);
+  const thresholds = buildThresholds(system.damageThresholds);
   const art = getCompactDocumentArt(document);
-  const typeKey = document.system.type
-    ? `DAGGERHEART.CONFIG.EnvironmentType.${document.system.type}.label`
+  const typeKey = system.type
+    ? `DAGGERHEART.CONFIG.EnvironmentType.${system.type}.label`
     : null;
 
   const potentialAdversaryCategories = (await Promise.all(
-    Object.entries(document.system.potentialAdversaries ?? {})
+    Object.entries(system.potentialAdversaries ?? {})
       .map(async ([id, category]) => {
         const adversaries = await Promise.all(
           Array.from(category?.adversaries ?? [])
@@ -58,13 +62,18 @@ export async function buildCompactEnvironmentContext(document) {
     artImg: art.img,
     artImgIsFallback: art.isFallback,
     canEditImage: document.isOwner ?? false,
-    hasImpulses: hasRenderableRichText(document.system.impulses),
+    hasImpulses: hasRenderableRichText(system.impulses),
     hasPotentialAdversaries: potentialAdversaryCategories.length > 0,
     identity: {
       tierLabel: localizeFallback(I18N_KEYS.tier, "Tier"),
-      typeLabel: typeKey ? localizeFallback(typeKey, document.system.type) : null
+      typeLabel: typeKey ? localizeFallback(typeKey, system.type) : null
     },
-    potentialAdversaryCategories
+    potentialAdversaryCategories,
+    resources: {
+      hitPoints,
+      stress
+    },
+    thresholds
   };
 }
 
