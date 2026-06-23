@@ -59,6 +59,7 @@ export function createCompactCharacterSheetClass(BaseCharacterSheet) {
     async _onRender(context, options) {
       await super._onRender(context, options);
       this.#renderController = refreshRenderController(this.#renderController);
+      this.element?.classList.toggle("dhca-show-interactions", context.compact?.showInteractionButtons === true);
       expandFeatureDescriptions(this.element);
       inlineFeatureDescriptions(this.element, this.#renderController.signal);
       normalizeCompactItemSeparators(this.element);

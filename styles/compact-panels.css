@@ -370,6 +370,85 @@
   display: none;
 }
 
+.sheet.dh-compact .dhca-tab-panel--features .inventory-item .dhca-feature-actions {
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions {
+  display: flex;
+}
+
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions > .item-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: 0 !important;
+}
+
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions > .item-resource,
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions > .item-resources {
+  display: flex !important;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 4px;
+  min-height: 22px;
+  color: var(--dhca-inline-text);
+  font-family: var(--dhca-font-family);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions > .item-resource {
+  max-width: 76px;
+}
+
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions > .item-resources {
+  flex-wrap: wrap;
+}
+
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions .item-resource {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions .item-resource i {
+  flex: 0 0 auto;
+  color: var(--dhca-inline-text);
+  font-size: 12px !important;
+}
+
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions .item-resource input {
+  width: 34px;
+  min-width: 0;
+  height: 22px;
+  padding: 0 4px;
+  border: 1px solid var(--dhca-line);
+  border-radius: 3px;
+  background: var(--dhca-input-bg);
+  color: var(--dhca-text);
+  box-shadow: none;
+  font-family: var(--dhca-font-family);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+}
+
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions .item-resource input:hover,
+.sheet.dh-compact.dhca-show-interactions .dhca-tab-panel--features .inventory-item .dhca-feature-actions .item-resource input:focus {
+  border-color: var(--dhca-accent);
+  outline: 0;
+}
+
 .sheet.dh-compact .dhca-tab-panel .inventory-item .item-button .spacer {
   display: none;
 }

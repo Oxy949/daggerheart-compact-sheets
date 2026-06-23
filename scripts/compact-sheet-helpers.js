@@ -10,6 +10,7 @@ import {
 import { clampNumber, DEFAULT_ART_IMAGE, getCompactDocumentArt } from "./utils.js";
 
 const FEATURE_TOGGLE_ACTION = "toggleExtended";
+const FEATURE_ACTION_ROW_CLASS = "dhca-feature-actions";
 const FEATURE_TOGGLE_TARGET_SELECTOR = ":scope > .inventory-item-header .item-name, :scope > .inventory-item-header .feature-form";
 const COMPACT_HEADER_SELECTOR = ".dhca-section--header";
 const COMPACT_HEADER_NAME_SELECTOR = ".dhca-header__name";
@@ -192,6 +193,7 @@ export function inlineFeatureDescriptions(element, signal = null) {
   const inlineDescriptions = () => {
     for (const item of element.querySelectorAll(".dhca-tab-panel--features .inventory-item")) {
       inlineFeatureDescription(item);
+      moveFeatureResourcesToActions(item);
       scopeFeatureDescriptionToggle(item);
     }
   };
@@ -264,6 +266,60 @@ function inlineFeatureDescription(item) {
   firstParagraph.remove();
   item.classList.toggle("dhca-feature-inline-only", !description.textContent.trim());
   label.append(document.createTextNode(" "), inlineDescription);
+}
+
+function moveFeatureResourcesToActions(item) {
+  const resources = getFeatureResourceControls(item);
+  if (!resources.length) return;
+
+  const itemButtons = item.querySelector(":scope > .item-buttons");
+  const actionRow = getOrCreateFeatureActionRow(item, itemButtons);
+  if (!actionRow) return;
+
+  for (const resource of resources) {
+    if (resource.parentElement === actionRow) continue;
+    actionRow.insertBefore(resource, itemButtons?.parentElement === actionRow ? itemButtons : null);
+  }
+
+  if (itemButtons && itemButtons.parentElement !== actionRow) {
+    actionRow.append(itemButtons);
+  }
+}
+
+function getFeatureResourceControls(item) {
+  return [
+    ...item.querySelectorAll(":scope > .inventory-item-header .item-resource"),
+    ...item.querySelectorAll(":scope > .item-resources"),
+    ...item.querySelectorAll(":scope > .item-resource")
+  ].filter(isFeatureResourceControl);
+}
+
+function isFeatureResourceControl(element) {
+  return element.classList.contains("item-resources")
+    || element.classList.contains("die")
+    || Boolean(element.querySelector(".inventory-item-resource, .item-dice-resource"));
+}
+
+function getOrCreateFeatureActionRow(item, itemButtons) {
+  const existing = item.querySelector(`:scope > .${FEATURE_ACTION_ROW_CLASS}`);
+  if (existing) return existing;
+
+  const actionRow = document.createElement("div");
+  actionRow.className = FEATURE_ACTION_ROW_CLASS;
+
+  if (itemButtons) {
+    itemButtons.before(actionRow);
+    return actionRow;
+  }
+
+  const content = item.querySelector(":scope > .inventory-item-content");
+  if (content) {
+    content.after(actionRow);
+    return actionRow;
+  }
+
+  item.append(actionRow);
+  return actionRow;
 }
 
 function scopeFeatureDescriptionToggle(item) {
