@@ -220,6 +220,11 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
   grid-area: header;
 }
 
+.application.sheet.daggerheart.actor.dh-style.adversary.dh-compact .adversary-header-sheet > *:not(line-div, .tab-navigation) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .sheet.dh-compact.character .character-header-sheet {
   position: relative;
   z-index: 1;
