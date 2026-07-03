@@ -10,7 +10,8 @@
 .sheet.dh-compact .dhca-tab-panel__scroll {
   height: 100%;
   min-height: 0;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--dhca-scrollbar) transparent;
 }
@@ -26,6 +27,7 @@
 
 .sheet.dh-compact .dhca-panel {
   position: relative;
+  min-width: 0;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -117,15 +119,17 @@
 
 .sheet.dh-compact .dhca-feature-list {
   display: block !important;
-  column-fill: balance;
-  column-gap: var(--dhca-feature-column-gap);
-  column-width: var(--dhca-feature-column-width);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .sheet.dh-compact .dhca-feature-list > .inventory-item {
-  display: inline-block;
+  display: block;
   margin: 0 0 14px !important;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   break-inside: avoid;
   page-break-inside: avoid;
   -webkit-column-break-inside: avoid;
@@ -136,6 +140,8 @@
 }
 
 .sheet.dh-compact .dhca-tab-panel .inventory-item {
+  min-width: 0;
+  max-width: 100%;
   margin: 0 0 14px;
   padding: 0;
   border: 0;
@@ -152,6 +158,8 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
   align-items: start;
+  min-width: 0;
+  max-width: 100%;
   padding: 0;
   background: transparent;
 }
@@ -167,6 +175,7 @@
 .sheet.dh-compact .dhca-tab-panel .inventory-item .item-label,
 .sheet.dh-compact .dhca-tab-panel .inventory-item .item-labels {
   min-width: 0;
+  max-width: 100%;
 }
 
 .sheet.dh-compact .dhca-tab-panel .inventory-item .item-name {
@@ -296,6 +305,8 @@
 
 .sheet.dh-compact .dhca-tab-panel .inventory-item-content.extensible,
 .sheet.dh-compact .dhca-tab-panel .inventory-item-content.extensible.extended {
+  min-width: 0;
+  max-width: 100%;
   max-height: none;
   overflow: visible;
   padding-top: 0;
@@ -303,11 +314,15 @@
 
 .sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description,
 .sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description p {
+  min-width: 0;
+  max-width: 100%;
   margin: 0;
   color: var(--dhca-content-text);
   font-size: 14px !important;
   font-family: var(--dhca-font-family);
   line-height: 1.5;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .sheet.dh-compact .dhca-tab-panel .inventory-item .invetory-description p + p {
@@ -477,6 +492,18 @@
 .sheet.dh-compact.adversary .dhca-panel--notes .prosemirror,
 .sheet.dh-compact.adversary .dhca-panel--notes textarea {
   min-height: 240px;
+}
+
+@container (min-width: 690px) {
+  .sheet.dh-compact .dhca-feature-list {
+    column-fill: balance;
+    column-gap: var(--dhca-feature-column-gap);
+    column-width: var(--dhca-feature-column-width);
+  }
+
+  .sheet.dh-compact .dhca-feature-list > .inventory-item {
+    display: inline-block;
+  }
 }
 
 .sheet.dh-compact.adversary .dhca-notes__attribution,

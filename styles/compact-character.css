@@ -1091,9 +1091,8 @@ body.theme-light.sheet.dh-compact.character .dhca-character__domains img {
 .sheet.dh-compact.character .dhca-tab-panel .dhca-tab-panel__scroll > .items-section.dhca-character__section-stack,
 .sheet.dh-compact.character .dhca-tab-panel--effects .dhca-effects__section-stack {
   display: block !important;
-  column-fill: balance;
-  column-gap: var(--dhca-feature-column-gap);
-  column-width: var(--dhca-feature-column-width);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .sheet.dh-compact.character .dhca-tab-panel--effects .dhca-effects__section-stack {
@@ -1297,5 +1296,15 @@ body.theme-light.sheet.dh-compact.character .dhca-character__domains img {
 
   .sheet.dh-compact.character .dhca-resource-row__label {
     min-width: 0;
+  }
+}
+
+@container (min-width: 690px) {
+  .sheet.dh-compact.character .dhca-tab-panel .dhca-character__section-stack,
+  .sheet.dh-compact.character .dhca-tab-panel .dhca-tab-panel__scroll > .items-section.dhca-character__section-stack,
+  .sheet.dh-compact.character .dhca-tab-panel--effects .dhca-effects__section-stack {
+    column-fill: balance;
+    column-gap: var(--dhca-feature-column-gap);
+    column-width: var(--dhca-feature-column-width);
   }
 }
