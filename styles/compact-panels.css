@@ -277,6 +277,11 @@
   transition: grid-template-rows 0.3s ease-in-out;
 }
 
+.sheet.dh-compact.dhca-suppress-feature-transition .dhca-tab-panel--features .inventory-item-content.extensible,
+.sheet.dh-compact.dhca-suppress-feature-transition .dhca-tab-panel--features .inventory-item-content.extensible.extended {
+  transition: none !important;
+}
+
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item .invetory-description {
   margin-top: 0 !important;
 }

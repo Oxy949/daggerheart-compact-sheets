@@ -11,6 +11,7 @@ import { clampNumber, DEFAULT_ART_IMAGE, getCompactDocumentArt } from "./utils.j
 
 const FEATURE_TOGGLE_ACTION = "toggleExtended";
 const FEATURE_ACTION_ROW_CLASS = "dhca-feature-actions";
+const SUPPRESS_FEATURE_TRANSITION_CLASS = "dhca-suppress-feature-transition";
 const FEATURE_TOGGLE_TARGET_SELECTOR = ":scope > .inventory-item-header .item-name, :scope > .inventory-item-header .feature-form";
 const COMPACT_HEADER_SELECTOR = ".dhca-section--header";
 const COMPACT_HEADER_NAME_SELECTOR = ".dhca-header__name";
@@ -171,20 +172,85 @@ export async function handleCompactResourceStep(sheet, event) {
   if (nextValue === current.value) return;
 
   button.disabled = true;
+  const scrollSnapshot = captureCompactScrollPositions(sheet.element);
 
   try {
     await updateCompactResourceStepValue(sheet.document, resourceKey, nextValue, current.value);
+    scheduleCompactScrollRestore(sheet, scrollSnapshot);
   } finally {
     button.disabled = !isCompactSheetEditable(sheet);
+  }
+}
+
+function captureCompactScrollPositions(element) {
+  if (!element) return [];
+
+  return Array.from(element.querySelectorAll(SCROLLABLE_PANEL_SELECTOR))
+    .map((scrollArea, index) => {
+      const panel = scrollArea.closest(".dhca-tab-panel");
+
+      return {
+        group: panel?.dataset.group ?? "",
+        index,
+        left: scrollArea.scrollLeft,
+        tab: panel?.dataset.tab ?? "",
+        top: scrollArea.scrollTop
+      };
+    })
+    .filter((position) => position.top || position.left);
+}
+
+function scheduleCompactScrollRestore(sheet, snapshot) {
+  if (!sheet || !snapshot.length) return;
+
+  let frames = 0;
+  const restore = () => {
+    restoreCompactScrollPositions(sheet.element, snapshot);
+    frames += 1;
+
+    if (frames < 8) requestAnimationFrame(restore);
+  };
+
+  requestAnimationFrame(restore);
+}
+
+function restoreCompactScrollPositions(element, snapshot) {
+  if (!element || !snapshot.length) return;
+
+  const scrollAreas = Array.from(element.querySelectorAll(SCROLLABLE_PANEL_SELECTOR));
+
+  for (const position of snapshot) {
+    const scrollArea = scrollAreas.find((candidate, index) => {
+      const panel = candidate.closest(".dhca-tab-panel");
+
+      return (
+        panel?.dataset.tab === position.tab
+        && panel?.dataset.group === position.group
+      ) || index === position.index;
+    });
+
+    if (!scrollArea) continue;
+
+    scrollArea.scrollTop = position.top;
+    scrollArea.scrollLeft = position.left;
   }
 }
 
 export function expandFeatureDescriptions(element) {
   if (!element) return;
 
-  for (const description of element.querySelectorAll(FEATURE_DESCRIPTION_SELECTOR)) {
+  const descriptions = element.querySelectorAll(FEATURE_DESCRIPTION_SELECTOR);
+  if (!descriptions.length) return;
+
+  element.classList.add(SUPPRESS_FEATURE_TRANSITION_CLASS);
+
+  for (const description of descriptions) {
     description.classList.add("extended");
   }
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => element.classList.remove(SUPPRESS_FEATURE_TRANSITION_CLASS));
+  });
 }
 
 export function inlineFeatureDescriptions(element, signal = null) {
