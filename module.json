@@ -14,8 +14,7 @@
         "type": "system",
         "compatibility": {
           "minimum": "2.0.0",
-          "verified": "2.4.2",
-          "maximum": "2.4.9"
+          "verified": "2.5.0"
         }
       }
     ],
