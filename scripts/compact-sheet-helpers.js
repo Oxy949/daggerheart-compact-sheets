@@ -88,14 +88,39 @@ export function createTemplatePart(template, { scrollable = false } = {}) {
     : { template };
 }
 
-export function refreshRenderController(controller) {
+function refreshRenderController(controller) {
   controller?.abort();
   return new AbortController();
 }
 
-export function closeRenderController(controller) {
+function closeRenderController(controller) {
   controller?.abort();
   return null;
+}
+
+export function prepareCompactRender(sheet, controller, context) {
+  const nextController = refreshRenderController(controller);
+  sheet.element?.classList.toggle("dhca-show-interactions", context.compact?.showInteractionButtons === true);
+  return nextController;
+}
+
+export function bindCompactSheetChrome(sheet, signal) {
+  bindCompactArtContextMenu(sheet, sheet.element, signal);
+  bindCompactWindowTitleGapDrag(sheet, sheet.element, signal);
+}
+
+export function closeCompactRenderState(controller, resourceTrackResizeObserver = null) {
+  resourceTrackResizeObserver?.disconnect();
+
+  return {
+    renderController: closeRenderController(controller),
+    resourceTrackResizeObserver: null
+  };
+}
+
+export function normalizeCompactFeatureRows(element, signal) {
+  expandFeatureDescriptions(element);
+  inlineFeatureDescriptions(element, signal);
 }
 
 export function measureCompactTrackContentWidth(track) {

@@ -3,19 +3,17 @@ import {
   DEFAULT_WINDOWS
 } from "./constants.js";
 import {
-  bindCompactArtContextMenu,
   bindCompactResourceStepButtons,
   bindResponsiveResourceTracks,
-  bindCompactWindowTitleGapDrag,
+  bindCompactSheetChrome,
   buildTabNavContext,
-  closeRenderController,
+  closeCompactRenderState,
   createCompactDefaultOptions,
   createCompactParts,
   createTemplatePart,
-  expandFeatureDescriptions,
   handleCompactResourceStep,
-  inlineFeatureDescriptions,
-  refreshRenderController
+  normalizeCompactFeatureRows,
+  prepareCompactRender
 } from "./compact-sheet-helpers.js";
 import { buildCompactCharacterContext } from "./utils.js";
 
@@ -58,21 +56,18 @@ export function createCompactCharacterSheetClass(BaseCharacterSheet) {
 
     async _onRender(context, options) {
       await super._onRender(context, options);
-      this.#renderController = refreshRenderController(this.#renderController);
-      this.element?.classList.toggle("dhca-show-interactions", context.compact?.showInteractionButtons === true);
-      expandFeatureDescriptions(this.element);
-      inlineFeatureDescriptions(this.element, this.#renderController.signal);
+      this.#renderController = prepareCompactRender(this, this.#renderController, context);
+      normalizeCompactFeatureRows(this.element, this.#renderController.signal);
       normalizeCompactItemSeparators(this.element);
       bindCompactResourceStepButtons(this.element, this.#renderController.signal, this.#onCompactResourceStep);
-      bindCompactArtContextMenu(this, this.element, this.#renderController.signal);
-      bindCompactWindowTitleGapDrag(this, this.element, this.#renderController.signal);
+      bindCompactSheetChrome(this, this.#renderController.signal);
       this.#resourceTrackResizeObserver = bindResponsiveResourceTracks(this.element, this.#resourceTrackResizeObserver);
     }
 
     async close(options = {}) {
-      this.#renderController = closeRenderController(this.#renderController);
-      this.#resourceTrackResizeObserver?.disconnect();
-      this.#resourceTrackResizeObserver = null;
+      const renderState = closeCompactRenderState(this.#renderController, this.#resourceTrackResizeObserver);
+      this.#renderController = renderState.renderController;
+      this.#resourceTrackResizeObserver = renderState.resourceTrackResizeObserver;
       return super.close(options);
     }
     #onCompactResourceStep = (event) => handleCompactResourceStep(this, event);

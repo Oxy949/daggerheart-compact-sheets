@@ -231,6 +231,19 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
   grid-area: header;
 }
 
+.application.sheet.daggerheart.actor.dh-style.character.dh-compact .window-content .character-header-sheet {
+  grid-area: header !important;
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+  width: 100% !important;
+  padding: 12px 12px 0 12px !important;
+}
+
+.application.sheet.daggerheart.actor.dh-style.character.dh-compact .character-header-sheet > *:not(line-div, .tab-navigation) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .sheet.dh-compact .tab {
   position: relative;
   z-index: 1;
@@ -250,6 +263,18 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
   position: relative;
   z-index: 1;
   grid-area: footer;
+}
+
+.application.sheet.daggerheart.actor.dh-style.character.dh-compact .window-content .character-sidebar-sheet {
+  grid-area: footer !important;
+  grid-row: 3 !important;
+  grid-column: 1 !important;
+}
+
+.application.sheet.daggerheart.actor.dh-style.character.dh-compact .window-content .tab {
+  grid-area: body !important;
+  grid-row: 2 !important;
+  grid-column: 1 !important;
 }
 
 .sheet.dh-compact.environment .environment-sidebar-sheet {

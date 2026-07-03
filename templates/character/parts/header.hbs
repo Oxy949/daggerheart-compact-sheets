@@ -49,28 +49,42 @@
   </div>
 
   <div class="dhca-character__lineage" aria-label="{{localize 'DAGGERHEART.GENERAL.details'}}">
-    {{#if document.system.class.subclass}}
-      <span data-action="editDoc" data-item-uuid="{{document.system.class.subclass.uuid}}">{{document.system.class.subclass.name}}</span>
+    {{#if compact.identity.class}}
+      <span data-action="editDoc" data-item-uuid="{{compact.identity.class.uuid}}">{{compact.identity.class.name}}</span>
+    {{else}}
+      <span class="missing-header-feature" data-action="openPack" data-key="classes">{{localize 'TYPES.Item.class'}}</span>
+    {{/if}}
+    <span class="dhca-summary__separator">|</span>
+    {{#if compact.identity.subclass}}
+      <span data-action="editDoc" data-item-uuid="{{compact.identity.subclass.uuid}}">{{compact.identity.subclass.name}}</span>
     {{else}}
       <span class="missing-header-feature" data-action="openPack" data-key="subclasses">{{localize 'TYPES.Item.subclass'}}</span>
     {{/if}}
-    {{#if document.system.multiclass.subclass}}
-      <span class="dhca-summary__separator">,</span>
-      <span data-action="editDoc" data-item-uuid="{{document.system.multiclass.subclass.uuid}}">{{document.system.multiclass.subclass.name}}</span>
-    {{/if}}
     <span class="dhca-summary__separator">|</span>
-    {{#if document.system.community}}
-      <span data-action="editDoc" data-item-uuid="{{document.system.community.uuid}}">{{document.system.community.name}}</span>
+    {{#if compact.identity.community}}
+      <span data-action="editDoc" data-item-uuid="{{compact.identity.community.uuid}}">{{compact.identity.community.name}}</span>
     {{else}}
       <span class="missing-header-feature" data-action="openPack" data-key="communities">{{localize 'TYPES.Item.community'}}</span>
     {{/if}}
-    <span class="dhca-summary__separator">-</span>
-    {{#if document.system.ancestry}}
-      <span data-action="editDoc" data-item-uuid="{{document.system.ancestry.uuid}}">{{document.system.ancestry.name}}</span>
+    <span class="dhca-summary__separator">|</span>
+    {{#if compact.identity.ancestry}}
+      <span data-action="editDoc" data-item-uuid="{{compact.identity.ancestry.uuid}}">{{compact.identity.ancestry.name}}</span>
     {{else}}
       <span class="missing-header-feature" data-action="openPack" data-key="ancestries">{{localize 'TYPES.Item.ancestry'}}</span>
     {{/if}}
   </div>
+
+  {{#if compact.identity.multiclass}}
+    <div class="dhca-character__lineage dhca-character__lineage--secondary" aria-label="{{localize 'DAGGERHEART.GENERAL.multiclass'}}">
+      <span data-action="editDoc" data-item-uuid="{{compact.identity.multiclass.uuid}}">{{compact.identity.multiclass.name}}</span>
+      <span class="dhca-summary__separator">|</span>
+      {{#if compact.identity.multiclassSubclass}}
+        <span data-action="editDoc" data-item-uuid="{{compact.identity.multiclassSubclass.uuid}}">{{compact.identity.multiclassSubclass.name}}</span>
+      {{else}}
+        <span class="missing-header-feature" data-action="openPack" data-key="subclasses">{{localize 'TYPES.Item.subclass'}}</span>
+      {{/if}}
+    </div>
+  {{/if}}
 
   {{#if compact.hasExperiences}}
     <section class="dhca-detail-panel dhca-detail-panel--experience dhca-character__experiences">
