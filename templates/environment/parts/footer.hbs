@@ -1,12 +1,1 @@
-<aside class="environment-sidebar-sheet dhca-section dhca-section--footer dhca-footer dhca-footer--environment{{#unless compact.showInteractionButtons}} dhca-footer--hidden{{/unless}}" {{#unless compact.showInteractionButtons}}hidden{{/unless}}>
-  {{#if compact.showInteractionButtons}}
-  <div class="dhca-footer__inner">
-    <div class="dhca-footer__title">
-      <span>{{localize 'DAGGERHEART.GENERAL.HitPoints.short'}} &amp; {{localize 'DAGGERHEART.GENERAL.stress'}}</span>
-    </div>
-
-    {{> 'modules/daggerheart-compact-sheets/templates/parts/thresholds.hbs'}}
-    {{> 'modules/daggerheart-compact-sheets/templates/parts/resources.hbs'}}
-  </div>
-  {{/if}}
-</aside>
+{{!-- Environment actors do not have HP/stress resources. --}}

@@ -31,9 +31,6 @@ export function buildCompactContext(document) {
 
 export async function buildCompactEnvironmentContext(document) {
   const system = document.system ?? {};
-  const hitPoints = buildResourceTrack("hitPoints", system.resources?.hitPoints);
-  const stress = buildResourceTrack("stress", system.resources?.stress);
-  const thresholds = buildThresholds(system.damageThresholds);
   const art = getCompactDocumentArt(document);
   const typeKey = system.type
     ? `DAGGERHEART.CONFIG.EnvironmentType.${system.type}.label`
@@ -68,12 +65,7 @@ export async function buildCompactEnvironmentContext(document) {
       tierLabel: localizeFallback(I18N_KEYS.tier, "Tier"),
       typeLabel: typeKey ? localizeFallback(typeKey, system.type) : null
     },
-    potentialAdversaryCategories,
-    resources: {
-      hitPoints,
-      stress
-    },
-    thresholds
+    potentialAdversaryCategories
   };
 }
 

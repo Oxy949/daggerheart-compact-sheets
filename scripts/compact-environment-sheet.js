@@ -6,8 +6,6 @@ import {
 } from "./constants.js";
 import {
   bindCompactArtContextMenu,
-  bindCompactResourceStepButtons,
-  bindResponsiveResourceTracks,
   bindCompactWindowTitleGapDrag,
   buildTabNavContext,
   closeRenderController,
@@ -15,7 +13,6 @@ import {
   createCompactParts,
   createTemplatePart,
   expandFeatureDescriptions,
-  handleCompactResourceStep,
   inlineFeatureDescriptions,
   refreshRenderController
 } from "./compact-sheet-helpers.js";
@@ -30,7 +27,6 @@ const TAB_NAV_ENTRIES = Object.freeze([
 export function createCompactEnvironmentSheetClass(BaseEnvironmentSheet) {
   return class CompactEnvironmentSheet extends BaseEnvironmentSheet {
     #renderController = null;
-    #resourceTrackResizeObserver = null;
 
     static DEFAULT_OPTIONS = createCompactDefaultOptions(BaseEnvironmentSheet, DEFAULT_WINDOWS.environment);
 
@@ -49,8 +45,7 @@ export function createCompactEnvironmentSheetClass(BaseEnvironmentSheet) {
       context.compact = {
         ...compactEnvironment,
         showInteractionButtons: game.settings.get(MODULE_ID, SETTING_KEYS.showAdversaryInteractionButtons),
-        tabNav: buildTabNavContext(context.tabs, TAB_NAV_ENTRIES),
-        useResourcePips: true
+        tabNav: buildTabNavContext(context.tabs, TAB_NAV_ENTRIES)
       };
       return context;
     }
@@ -61,19 +56,13 @@ export function createCompactEnvironmentSheetClass(BaseEnvironmentSheet) {
       this.element?.classList.toggle("dhca-show-interactions", context.compact?.showInteractionButtons === true);
       expandFeatureDescriptions(this.element);
       inlineFeatureDescriptions(this.element, this.#renderController.signal);
-      bindCompactResourceStepButtons(this.element, this.#renderController.signal, this.#onCompactResourceStep);
       bindCompactArtContextMenu(this, this.element, this.#renderController.signal);
       bindCompactWindowTitleGapDrag(this, this.element, this.#renderController.signal);
-      this.#resourceTrackResizeObserver = bindResponsiveResourceTracks(this.element, this.#resourceTrackResizeObserver);
     }
 
     async close(options = {}) {
       this.#renderController = closeRenderController(this.#renderController);
-      this.#resourceTrackResizeObserver?.disconnect();
-      this.#resourceTrackResizeObserver = null;
       return super.close(options);
     }
-
-    #onCompactResourceStep = (event) => handleCompactResourceStep(this, event);
   };
 }
