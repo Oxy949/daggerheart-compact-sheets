@@ -231,6 +231,9 @@
 
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item .item-label {
   display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
 }
 
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item:not(.single-img):hover:has(.inventory-item-content.extensible) .inventory-item-header,
@@ -264,11 +267,18 @@
 }
 
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item .dhca-feature-inline-description {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
   color: var(--dhca-content-text);
   font-size: 14px !important;
   font-family: var(--dhca-font-family);
   font-weight: 400;
-  line-height: inherit;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  word-break: normal;
+  white-space: normal;
 }
 
 .sheet.dh-compact .dhca-tab-panel--features .inventory-item-content.extensible,
