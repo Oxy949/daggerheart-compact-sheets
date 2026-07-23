@@ -298,3 +298,12 @@ body.theme-dark .sheet.dh-compact:not(.theme-light),
   padding: 0px 10px 12px 10px;
   border-top: 1px dashed var(--dhca-line);
 }
+
+.sheet.dh-compact secret-block {
+    padding-top: 2px;
+    margin-top: -16px;
+}
+
+.sheet.dh-compact section.secret p:last-child {
+    margin-bottom: 0;
+}
