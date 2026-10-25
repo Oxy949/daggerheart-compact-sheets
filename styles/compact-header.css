@@ -424,7 +424,7 @@ body.theme-dark.sheet.dh-compact .dhca-header__art--fallback .dhca-header__art-i
   font: inherit !important;
 }
 
-.sheet.dh-compact.adversary .dhca-header__attack-list .img-portait {
+.sheet.dh-compact.adversary .dhca-header__attack-list :is(.img-portait, .img-portrait) {
   display: none !important;
 }
 

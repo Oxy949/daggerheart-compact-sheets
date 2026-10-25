@@ -314,10 +314,11 @@ export function inlineFeatureDescriptions(element, signal = null) {
 }
 
 function inlineFeatureDescription(item) {
-  if (item.querySelector(":scope > .inventory-item-header .dhca-feature-inline-description")) return;
+  const main = getFeatureMainElement(item);
+  if (main.querySelector(":scope > .inventory-item-header .dhca-feature-inline-description")) return;
 
-  const label = item.querySelector(":scope > .inventory-item-header .item-label");
-  const description = item.querySelector(
+  const label = main.querySelector(":scope > .inventory-item-header .item-label");
+  const description = main.querySelector(
     ":scope > .inventory-item-content.extensible > :is(.inventory-description, .invetory-description)"
   );
   const firstParagraph = description?.querySelector(":scope > p");
@@ -406,7 +407,7 @@ function getOrCreateFeatureActionRow(item, itemButtons) {
     return actionRow;
   }
 
-  const content = item.querySelector(":scope > .inventory-item-content");
+  const content = item.querySelector(":scope > .item-main, :scope > .inventory-item-content");
   if (content) {
     content.after(actionRow);
     return actionRow;
@@ -417,18 +418,24 @@ function getOrCreateFeatureActionRow(item, itemButtons) {
 }
 
 function scopeFeatureDescriptionToggle(item) {
-  const description = item.querySelector(":scope > .inventory-item-content.extensible");
+  const main = getFeatureMainElement(item);
+  const description = main.querySelector(":scope > .inventory-item-content.extensible");
   if (!description) return;
 
-  const header = item.querySelector(":scope > .inventory-item-header");
+  const header = main.querySelector(":scope > .inventory-item-header");
   if (header?.dataset.action === FEATURE_TOGGLE_ACTION) {
     delete header.dataset.action;
   }
 
-  for (const target of item.querySelectorAll(FEATURE_TOGGLE_TARGET_SELECTOR)) {
+  for (const target of main.querySelectorAll(FEATURE_TOGGLE_TARGET_SELECTOR)) {
     if (!target.dataset.action) target.dataset.action = FEATURE_TOGGLE_ACTION;
     target.classList.add("dhca-feature-toggle-target");
   }
+}
+
+function getFeatureMainElement(item) {
+  // Daggerheart 2.11 wraps the header and description; older versions do not.
+  return item.querySelector(":scope > .item-main") ?? item;
 }
 
 function removeEmptyTextNodes(element) {
